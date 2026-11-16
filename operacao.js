@@ -155,6 +155,8 @@
 
   /* ---------- Onboarding do cliente ---------- */
   const ETAPAS=[
+    ["diagnostico","Diagnóstico: negócio, objetivos e necessidades"],
+    ["proposta","Proposta comercial aprovada (escopo, cronograma e investimento)"],
     ["contrato","Contrato assinado e anexado"],
     ["briefing","Briefing inicial (objetivos, público, tom de voz)"],
     ["acessos","Acessos às redes (Instagram, Facebook, Meta Business)"],

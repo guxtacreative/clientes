@@ -26,6 +26,8 @@
   const totais=(itens,desconto)=>{let sub=0,custo=0;(itens||[]).forEach(i=>{sub+=r2(N(i.qtd)*N(i.preco));custo+=r2(N(i.qtd)*N(i.custo))});
     sub=r2(sub);custo=r2(custo);const total=Math.max(r2(sub-N(desconto)),0);return {sub,custo,total,lucro:r2(total-custo)}};
 
+  /* propostas da calculadora: itens marcados como mensais ficam separados do projeto único */
+  const partes=itens=>{let m=0,u=0,tem=false;(itens||[]).forEach(i=>{const v=r2(N(i.qtd)*N(i.preco));if(i.mensal){m+=v;tem=true}else u+=v});return {tem,mensal:Math.max(0,r2(m)),unico:Math.max(0,r2(u))}};
   function criar(el,sb,ctx){
     const LOJA=ctx.modo==="loja";
     let orcs=[], produtos=[], empresa={}, pedidos=null, lancOrc=[], cupons=null, nOfertas=0, cupEd=null, filtroL="todos", filtroP=LOJA?"loja":"todos", sub=LOJA?"produtos":"lista", filtro="abertos", busca="", buscaP="", atual=null, salvarCatalogo=true, sujo=false;
@@ -190,7 +192,7 @@
 
 
     /* ---------- loja online ---------- */
-    const linkLoja=()=>"https://loja.guxta.com.br/";
+    const linkLoja=()=>new URL("loja.html",location.href).href;
     const STL={carrinho:["Carrinho aberto","pend"],abandonado:["Abandonou","adj"],fechado:["Aguardando pagamento","pend"],pago:["Pago","ok"],cancelado:["Cancelado","prod"]};
     function lojaHTML(){
       if(!pedidos)return `<div class="empty">Rode o arquivo 19 do banco no Supabase para ligar a loja online.</div>`;
@@ -285,7 +287,7 @@
       return `<form class="card orc-emp" id="emp-form">
         <div class="head"><div><h2>Dados que aparecem no PDF</h2><p class="note" style="margin:4px 0 0">O logo do PDF é o mesmo do painel.</p></div></div>
         <div class="grid2">
-          ${f("nome","Nome da empresa",e.nome,"GUXTA")}${f("doc","CNPJ ou CPF",e.documento,"00.000.000/0001-00")}
+          ${f("nome","Nome da empresa",e.nome,"GLARA")}${f("doc","CNPJ ou CPF",e.documento,"00.000.000/0001-00")}
           ${f("tel","WhatsApp / telefone",e.telefone,"(21) 90000-0000")}${f("email","E-mail",e.email,"contato@guxta.com.br")}
           ${f("site","Site ou Instagram",e.site,"@guxta")}${f("end","Cidade / endereço",e.endereco,"Duque de Caxias · RJ")}
           ${f("pix","Chave Pix",e.pix,"")}${f("val","Validade padrão (dias)",e.validade_dias??15,"15",'inputmode="numeric"')}
@@ -310,9 +312,10 @@
     const itemVazio=()=>({nome:"",descricao:"",unidade:"un",qtd:1,custo:0,lucro_tipo:"pct",lucro:N(empresa.lucro_padrao)||40,preco:0});
     function novo(pf){
       pf=pf&&pf.nome?pf:null;
-      atual={status:"rascunho",contato_id:pf?pf.id:null,contato_nome:pf?pf.nome:"",cliente_id:pf&&pf.cliente_id||null,cliente_nome:pf?(pf.empresa||pf.nome):"",cliente_contato:pf?(pf.telefone||pf.email||""):"",titulo:pf&&pf.interesse||"",itens:[itemVazio()],desconto:0,
-        validade:somaDias(hojeISO(),N(empresa.validade_dias)||15),prazo_entrega:"",condicoes:empresa.condicoes||"",observacoes:empresa.observacoes||""};
-      sub="editor";sujo=false;render();setTimeout(()=>{const i=el.querySelector("#oe-cli");i&&i.focus()},30);
+      atual={status:"rascunho",contato_id:pf?pf.id:null,contato_nome:pf?pf.nome:"",cliente_id:pf&&pf.cliente_id||null,cliente_nome:pf?(pf.empresa||pf.nome):"",cliente_contato:pf?(pf.telefone||pf.email||""):"",titulo:pf&&pf.interesse||"",itens:pf&&Array.isArray(pf.itens)&&pf.itens.length?JSON.parse(JSON.stringify(pf.itens)):[itemVazio()],desconto:0,
+        validade:somaDias(hojeISO(),N(empresa.validade_dias)||15),prazo_entrega:"",condicoes:empresa.condicoes||"",observacoes:pf&&pf.observacoes?[pf.observacoes,empresa.observacoes||""].filter(Boolean).join("\n\n"):(empresa.observacoes||"")};
+      if(pf&&pf.tem_entrega===false)atual.tem_entrega=false;if(pf&&pf.ocultar_valores)atual.ocultar_valores=true;
+      sub="editor";sujo=!!(pf&&pf.itens);render();setTimeout(()=>{const i=el.querySelector("#oe-cli");i&&i.focus()},30);
     }
     function abrir(o){atual=JSON.parse(JSON.stringify(o));atual.itens=atual.itens&&atual.itens.length?atual.itens:[itemVazio()];sub="editor";sujo=false;render();window.scrollTo({top:0})}
     // troca entre "por unidade" e "por m²" sem redesenhar o item (o cursor continua onde estava)
@@ -353,6 +356,7 @@
       return `<div class="orc-resumo" id="orc-resumo">
         <h3>Resumo</h3>
         <dl>
+          ${(()=>{const p=partes(atual.itens);return p.tem?`<div><dt>Mensal</dt><dd>${brl(p.mensal)}/mês</dd></div>${p.unico?`<div><dt>Projeto único</dt><dd>${brl(p.unico)}</dd></div>`:""}`:""})()}
           <div><dt>Subtotal</dt><dd>${brl(t.sub)}</dd></div>
           <div class="orc-desc"><dt><label for="oe-desc">Desconto (R$)</label></dt><dd><input type="text" id="oe-desc" inputmode="decimal" value="${num(atual.desconto)}"></dd></div>
           <div class="orc-total"><dt>Total para o cliente</dt><dd>${brl(t.total)}</dd></div>
@@ -397,6 +401,7 @@
                 <div><label class="label" for="oe-prazo">Prazo de entrega</label><input type="text" id="oe-prazo" value="${esc(o.prazo_entrega||"")}" placeholder="Ex.: 5 dias úteis após a aprovação da arte"></div>
               </div>
               <label class="check"><input type="checkbox" id="oe-entrega" ${o.tem_entrega!==false?"checked":""}> Tem material para retirar ou entregar (o cliente escolhe na proposta)</label>
+              <label class="check"><input type="checkbox" id="oe-oculta" ${o.ocultar_valores?"checked":""}> Mostrar ao cliente só o valor final (sem o preço de cada item)</label>
               ${o.entrega_tipo?`<p class="note orc-entrega">${o.entrega_tipo==="retirada"?"📦 O cliente vai <b>retirar</b> no seu endereço.":`🚚 <b>Entrega</b> (${brl(o.entrega_valor)}): ${esc(endTxt(o.entrega_endereco))}`}</p>`:""}
               <div><label class="label" for="oe-cond">Condições de pagamento</label><textarea id="oe-cond" style="min-height:64px">${esc(o.condicoes||"")}</textarea></div>
               <div><label class="label" for="oe-obs">Observações</label><textarea id="oe-obs" style="min-height:64px">${esc(o.observacoes||"")}</textarea></div>
@@ -476,7 +481,7 @@
     function lerCabecalho(){
       const v=s=>{const x=el.querySelector(s);return x?x.value:""};
       Object.assign(atual,{cliente_id:v("#oe-cli")||null,cliente_nome:v("#oe-nome").trim(),cliente_contato:v("#oe-cont").trim(),titulo:v("#oe-tit").trim(),
-        validade:v("#oe-val")||null,prazo_entrega:v("#oe-prazo").trim(),condicoes:v("#oe-cond").trim(),observacoes:v("#oe-obs").trim(),desconto:r2(parseNum(v("#oe-desc"))),tem_entrega:!!(el.querySelector("#oe-entrega")||{checked:true}).checked});
+        validade:v("#oe-val")||null,prazo_entrega:v("#oe-prazo").trim(),condicoes:v("#oe-cond").trim(),observacoes:v("#oe-obs").trim(),desconto:r2(parseNum(v("#oe-desc"))),tem_entrega:!!(el.querySelector("#oe-entrega")||{checked:true}).checked,ocultar_valores:!!(el.querySelector("#oe-oculta")||{checked:!!atual.ocultar_valores}).checked});
       if(atual.cliente_id&&!atual.cliente_nome){const c=clientes().find(x=>x.id===atual.cliente_id);if(c)atual.cliente_nome=c.nome}
     }
     async function guardarCatalogo(itens){
@@ -506,9 +511,11 @@
       if(salvarCatalogo)cat=await guardarCatalogo(itens);
       atual.itens=itens.map(i=>({produto_id:i.produto_id||null,nome:String(i.nome||"").trim(),descricao:i.descricao||"",unidade:i.unidade||"un",qtd:N(i.qtd),custo:r2(i.custo),lucro_tipo:i.lucro_tipo==="valor"?"valor":"pct",lucro:r2(i.lucro),preco:r2(i.preco)}));
       const campos={contato_id:atual.contato_id||null,cliente_id:atual.cliente_id,cliente_nome:atual.cliente_nome,cliente_contato:atual.cliente_contato,titulo:atual.titulo,itens:atual.itens.map(({_modo,...x})=>x),desconto:atual.desconto,
-        validade:atual.validade,prazo_entrega:atual.prazo_entrega,condicoes:atual.condicoes,observacoes:atual.observacoes,status:atual.status,tem_entrega:atual.tem_entrega!==false};
-      const q=atual.id?sb.from("orcamentos").update(campos).eq("id",atual.id):sb.from("orcamentos").insert(campos);
-      const {data,error}=await q.select().single();
+        validade:atual.validade,prazo_entrega:atual.prazo_entrega,condicoes:atual.condicoes,observacoes:atual.observacoes,status:atual.status,tem_entrega:atual.tem_entrega!==false};campos.ocultar_valores=!!atual.ocultar_valores;
+      const gravar=c=>(atual.id?sb.from("orcamentos").update(c).eq("id",atual.id):sb.from("orcamentos").insert(c)).select().single();
+      let {data,error}=await gravar(campos);
+      if(error&&/ocultar_valores/.test(String(error.message||""))){const {ocultar_valores,...resto}=campos;({data,error}=await gravar(resto));
+        if(!error&&ocultar_valores)toast("Salvo, mas o cliente ainda vê o preço de cada item: falta rodar o arquivo 28 no Supabase.")}
       if(error){falha("salvar o orçamento",error);return null}
       const i=orcs.findIndex(x=>x.id===data.id);if(i>=0)orcs[i]=data;else orcs.unshift(data);
       atual=JSON.parse(JSON.stringify(data));sujo=false;render();
@@ -683,7 +690,7 @@
     el.addEventListener("submit",async e=>{
       e.preventDefault();
       if(e.target.id==="emp-form"){const v=s=>el.querySelector(s).value.trim();
-        const campos={id:1,nome:v("#em-nome")||"GUXTA",documento:v("#em-doc"),telefone:v("#em-tel"),email:v("#em-email"),site:v("#em-site"),endereco:v("#em-end"),pix:v("#em-pix"),
+        const campos={id:1,nome:v("#em-nome")||"GLARA",documento:v("#em-doc"),telefone:v("#em-tel"),email:v("#em-email"),site:v("#em-site"),endereco:v("#em-end"),pix:v("#em-pix"),
           validade_dias:Math.max(1,parseInt(v("#em-val"))||15),orcamento_expira_dias:Math.max(0,parseInt(v("#em-exp"))||0),lucro_padrao:r2(parseNum(v("#em-lucro"))),condicoes:v("#em-cond"),observacoes:v("#em-obs"),
           retirada_endereco:v("#em-ret"),retirada_info:v("#em-reti"),entrega_ativa:el.querySelector("#em-entr").checked,entrega_valor:Math.max(0,r2(parseNum(v("#em-entv")))),entrega_custo:v("#em-entc")?Math.max(0,r2(parseNum(v("#em-entc")))):null,entrega_info:v("#em-enti")};
         const {data,error}=await sb.from("empresa").upsert(campos).select().single();if(error)return falha("salvar os dados",error);
@@ -710,5 +717,5 @@
     carregar();
     return {recarregar:carregar,novo:()=>{if(orcs)novo()}};
   }
-  window.GlaraOrcamentos={criar,totais,precoDe};
+  window.GlaraOrcamentos={criar,totais,precoDe,partes};
 })();

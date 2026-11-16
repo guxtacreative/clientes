@@ -3,64 +3,232 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Planos</title>
-<meta name="description" content="Planos de assessoria de marketing e gestão de redes sociais.">
+<title>Estratégia, marketing e vendas para o varejo</title>
+<meta name="description" content="Marketing e vendas para lojas físicas, online e marketplace: tráfego pago, redes sociais, vídeo, marca e análise de vendas. Peça o diagnóstico gratuito da sua loja.">
 <link rel="icon" type="image/png" href="icone.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
 <style>
-  :root{--red:#FF6B2C;--red-d:#FF6B2C;--ink:#111111;--muted:#6B6B6B;--line:#E6E6E6;--soft:#F5F5F5;--ok:#19A33B;--bg:#F2F2F2;
+  :root{--red:#D4973B;--red-d:#A87527;--green:#D4973B;--green-d:#B87F28;--ink:#1F201C;--muted:#6B6B6B;--line:#ECE7E0;--soft:#F6F4F2;--bg:#fff;
     --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--font);-webkit-text-size-adjust:100%}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;background:#1F201C;color:var(--ink);font:400 16px/1.55 var(--font);-webkit-text-size-adjust:100%}
   [hidden]{display:none!important}
-  .topo{background:linear-gradient(135deg,#0A0A0A 0%,#1A0003 55%,#E85A1E 100%);color:#fff;padding:20px 16px 76px}
-  .topo-in{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
-  .topo img{height:42px;width:auto;display:block}
-  .nome-emp{font:900 22px var(--font)}
-  .eyebrow{font:800 11px var(--font);letter-spacing:.16em;text-transform:uppercase;color:#FF6B2C;margin:0}
-  .topo h1{margin:4px 0 0;font:900 clamp(28px,5vw,42px)/1.06 var(--font);letter-spacing:-.02em}
-  .topo p.lead{margin:8px 0 0;color:#D6D6D6;max-width:640px}
-  main{max-width:1152px;margin:-50px auto 0;padding:0 16px 60px;display:flex;flex-direction:column;gap:16px}
-  .planos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:stretch}
-  .plano{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 18px 40px -28px rgba(0,0,0,.35)}
-  .plano.destaque{border:2px solid var(--red);box-shadow:0 24px 50px -28px rgba(255,107,44,.55)}
-  .plano.foco{outline:4px solid rgba(255,107,44,.25);outline-offset:4px}
-  .selo{position:absolute;top:-12px;left:22px;background:var(--red);color:#fff;font:800 11px var(--font);letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
-  .plano h2{margin:0;font:900 22px/1.15 var(--font);letter-spacing:-.01em}
-  .plano .desc{margin:0;color:var(--muted);font-size:14px;min-height:1.5em}
-  .preco{display:flex;align-items:baseline;gap:6px}
-  .preco b{font:900 34px var(--font);letter-spacing:-.02em}
-  .preco span{color:var(--muted);font-weight:600}
-  .itens{list-style:none;margin:0;padding:14px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px;flex:1}
-  .itens li{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;font-size:14.5px}
-  .itens .ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900}
-  .itens .sim .ic{background:#E8F7EC;color:#0E7A2A}
-  .itens .nao{color:#A3A3A3}
-  .itens .nao .ic{background:var(--soft);color:#B5B5B5}
-  .itens .nao span:last-child{text-decoration:line-through}
-  .itens b{font-weight:800}
-  .b{appearance:none;border:1.5px solid #D4D4D4;background:#fff;color:var(--ink);font:700 15px var(--font);padding:13px 20px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
-  .b.pri{background:var(--red);border-color:var(--red);color:#fff}
-  .b.pri:hover{background:var(--red-d)}
-  .card{background:#fff;border-radius:18px;padding:20px;border:1px solid var(--line)}
-  .obs{color:var(--muted);font-size:13px;margin:0}
-  .vazio{text-align:center;color:var(--muted)}
-  .rodape{text-align:center;color:var(--muted);font-size:12.5px;padding:10px 16px 30px}
-  .extra{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
-  .extra p{margin:0}
-  @media (max-width:600px){.plano{padding:22px 18px}}
+  h1,h2,h3,p{margin:0}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+  .eyebrow{font:800 12px var(--font);letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+  .b{appearance:none;border:0;background:var(--green);color:#1B1C19;font:800 16px var(--font);padding:15px 24px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;text-align:center}
+  .b:hover{background:var(--green-d);color:#1B1C19}
+  .b.out{background:transparent;color:inherit;border:1.5px solid currentColor}
+  .b.out:hover{background:rgba(127,127,127,.15);color:inherit}
+  .b.red{background:var(--red);color:#1B1C19}.b.red:hover{background:var(--red-d)}
+  .b:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #7FB2FF;outline-offset:2px}
+  .b[disabled]{opacity:.6;cursor:default}
+
+  /* topo */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);border-bottom:1px solid #222}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:14px;height:68px}
+  .nav img{height:36px;width:auto;display:block}
+  .nav .nome{color:#fff;font:900 22px var(--font)}
+  .nav nav{display:flex;gap:22px}
+  .nav nav a{color:#D0D0D0;text-decoration:none;font:600 14px var(--font)}
+  .nav nav a:hover{color:#fff}
+  .nav .b{min-height:42px;padding:10px 16px;font-size:14px}
+  .hero{background:radial-gradient(900px 500px at 85% 0%,#35250C 0%,transparent 60%),#1F201C;color:#fff;padding:56px 0 84px}
+  .hero-in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px;align-items:center}
+  .hero h1{font:900 clamp(34px,5.2vw,58px)/1.04 var(--font);letter-spacing:-.03em;margin-top:12px}
+  .hero h1 em{font-style:normal;color:var(--red)}
+  .hero .lead{color:#CFCFCF;font-size:18px;margin-top:16px;max-width:560px}
+  .hero .pts{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:8px;color:#ECE7E0;font-weight:600}
+  .hero .pts li{display:flex;gap:10px;align-items:center}
+  .hero .pts li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);flex:none}
+  .hero .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .diag{background:#EEEAE4;color:var(--ink);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:12px}
+  .diag h2{font:900 22px/1.15 var(--font);letter-spacing:-.01em}
+  .diag p{color:#4a4a4a;font-size:14px}
+  label.l{font:700 13px var(--font);display:block;margin-bottom:5px}
+  input.i,select.i{width:100%;font:500 16px var(--font);padding:13px 14px;border-radius:10px;border:1.5px solid #CFCFCF;background:#fff;color:var(--ink);min-height:50px}
+
+  /* bloco branco */
+  .branco{background:#fff;border-radius:36px 36px 0 0;margin-top:-34px;position:relative;padding:64px 0 10px}
+  section.s{padding:0 0 76px}
+  .branco+.fundo{margin-top:-1px}
+  .sh{display:flex;flex-direction:column;gap:8px;margin-bottom:26px;max-width:760px}
+  .sh h2{font:900 clamp(26px,3.8vw,40px)/1.08 var(--font);letter-spacing:-.025em}
+  .sh p{color:var(--muted);font-size:17px}
+  .quem{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px;align-items:center}
+  .quem-card{background:var(--red);border-radius:28px;color:#1B1C19;padding:30px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;position:relative;overflow:hidden}
+  .quem-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .quem-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(70,30,0,.88))}
+  .quem-card>*:not(img){position:relative;z-index:1}
+  .quem-card b{font:900 26px/1.1 var(--font)}
+  .quem-card .g{position:absolute;top:18px;left:26px;font:900 150px/1 var(--font);opacity:.16;z-index:0}
+  .nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:26px}
+  .nums b{display:block;font:900 clamp(34px,4.6vw,52px)/1 var(--font);color:var(--red);letter-spacing:-.03em}
+  .nums span{color:var(--muted);font-size:14px;font-weight:600}
+
+  /* serviços (abas) */
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:none;appearance:none;border:1.5px solid var(--line);background:#fff;font:700 15px var(--font);padding:11px 18px;border-radius:999px;cursor:pointer;color:var(--ink);min-height:46px}
+  .tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .tabp{margin-top:14px;background:var(--soft);border-radius:24px;padding:30px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
+  .tabp h3{font:900 clamp(22px,3vw,30px)/1.12 var(--font);letter-spacing:-.02em}
+  .tabp p{color:#444;margin-top:10px}
+  .tabp ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .tabp li{background:#fff;border-radius:14px;padding:13px 16px;font-weight:600;display:flex;gap:10px;align-items:flex-start}
+  .tabp li::before{content:"✓";color:var(--green-d);font-weight:900}
+  .tabp .b{margin-top:18px}
+
+  /* cases */
+  .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .case{background:var(--ink);color:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:8px}
+  .case small{color:#E2BB81;font:800 12px var(--font);letter-spacing:.12em;text-transform:uppercase}
+  .case b{font:900 26px/1.1 var(--font)}
+  .case p{color:#CFCFCF}
+
+  .meses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .meses article{background:var(--soft);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:6px}
+  .meses small{font:800 12px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--red-d)}
+  .meses b{font:900 24px/1.1 var(--font);letter-spacing:-.02em}
+  .meses p{color:#444;font-size:15px}
+  @media (max-width:900px){.meses{grid-template-columns:1fr}}
+  /* como funciona */
+  .fluxo{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;counter-reset:f}
+  .fluxo li{border:1.5px solid var(--line);border-radius:20px;padding:22px;counter-increment:f;display:flex;flex-direction:column;gap:6px}
+  .fluxo li::before{content:counter(f,decimal-leading-zero);font:900 30px/1 var(--font);color:var(--red);letter-spacing:-.02em}
+  .fluxo b{font:800 18px var(--font)}
+  .fluxo span{color:var(--muted);font-size:15px}
+
+  .obs{color:var(--muted);font-size:13.5px}
+  .erro{color:var(--red-d);font-weight:700;font-size:14px}
+  /* planos prontos, condições, faq */
+  .planos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .plano{border:1.5px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:12px}
+  .plano.destaque{border:2px solid var(--red)}
+  .plano h3{font:900 21px var(--font)}
+  .plano .pr{font:900 28px var(--font);letter-spacing:-.02em}.plano .pr small{font:600 14px var(--font);color:var(--muted)}
+  .plano ul{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;flex:1;font-size:14.5px}
+  .plano li.nao{color:#A3A3A3;text-decoration:line-through}
+  .plano li::before{content:"✓ ";color:var(--green-d);font-weight:900}.plano li.nao::before{content:"✕ ";color:#B5B5B5}
+  .regras{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px 24px}
+  .regras li{display:grid;grid-template-columns:18px 1fr;gap:8px;color:#333}
+  .regras li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);margin:9px 0 0 3px}
+  .faq{display:flex;flex-direction:column;gap:10px;max-width:860px}
+  .faq details{border:1.5px solid var(--line);border-radius:16px;padding:0 20px}
+  .faq summary{cursor:pointer;font:800 17px var(--font);padding:18px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--red);font-weight:900;font-size:22px;line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{color:#444;padding:0 0 18px}
+  .fim{background:var(--red);color:#1B1C19;border-radius:28px;padding:40px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+  .fim h2{font:900 clamp(24px,3.6vw,36px)/1.1 var(--font);letter-spacing:-.02em}
+  .fim p{opacity:.9;margin-top:6px}
+  .fim .b{background:#fff;color:var(--ink)}.fim .b:hover{background:#111;color:#fff}
+  .fim .b.out{background:transparent;color:#1B1C19;border-color:#1B1C19}.fim .b.out:hover{background:rgba(0,0,0,.1);color:#1B1C19}
+  .fundo{background:#fff;padding-bottom:40px}
+  footer{background:#1F201C;color:#9A9A9A;font-size:13.5px;padding:28px 0 36px;text-align:center}
+  footer b{color:#fff}
+  footer a{color:#CFCFCF}
+  .zap{position:fixed;right:16px;bottom:16px;z-index:30;width:58px;height:58px;border-radius:50%;background:var(--green);display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.35)}
+  @media (max-width:900px){
+    .nav nav{display:none}
+    .hero{padding:36px 0 70px}.hero-in,.quem,.tabp{grid-template-columns:1fr}
+    .quem-card{min-height:240px}
+    .branco{border-radius:26px 26px 0 0;padding-top:48px}
+    .fim{padding:28px}
+    .nums{gap:10px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-<link rel="stylesheet" href="japy-tema.css">
 </head>
 <body>
-<header class="topo"><div class="topo-in">
-  <div id="logo"><img src="logo-escuro.png" alt="" onerror="this.parentNode.innerHTML='<span class=nome-emp>GUXTA</span>'"></div>
-  <div><p class="eyebrow" id="eyebrow">Planos</p><h1>Assessoria de marketing e gestão de redes sociais</h1><p class="lead">Escolha o plano que combina com o momento da sua marca. Todos com planejamento mensal, aprovação dos conteúdos pelo portal e relatório.</p></div>
+<header class="nav"><div class="wrap nav-in">
+  <a href="#topo" id="logo" aria-label="Início"><img src="logo-escuro.png" alt="GLARA Hub" onerror="this.parentNode.innerHTML='<span class=nome>GLARA</span>'"></a>
+  <nav aria-label="Seções"><a href="#servicos">Serviços</a><a href="#cases">Cases</a><a href="#como">Como funciona</a><a href="#faq">Dúvidas</a></nav>
+  <a class="b" href="#diag" data-foco>Diagnóstico gratuito</a>
 </div></header>
-<main id="main"><section class="card vazio">Carregando os planos…</section></main>
-<p class="rodape" id="rodape"></p>
+
+<main id="topo">
+<section class="hero"><div class="wrap hero-in">
+  <div>
+    <span class="eyebrow" style="color:#E2BB81">Estratégia, marketing e vendas para o varejo</span>
+    <h1 id="h1">Marketing e vendas para a sua loja <em>vender mais</em></h1>
+    <p class="lead" id="lead">Anúncios, conteúdo, marketplace e vídeo trabalhando juntos para trazer cliente para a loja física, o site e os marketplaces.</p>
+    <ul class="pts"><li>Diagnóstico antes de qualquer ação</li><li>Estratégia ligada à execução e à venda</li><li>Loja física, loja online e marketplace</li></ul>
+    <div class="acts"><a class="b" href="#diag" data-foco>Quero meu diagnóstico</a><a class="b out" href="#servicos">Ver os serviços</a></div>
+  </div>
+  <form class="diag" id="diag" novalidate>
+    <h2>Diagnóstico gratuito da sua loja</h2>
+    <p>Conte o básico e receba no WhatsApp uma análise de onde dá para vender mais.</p>
+    <div><label class="l" for="d-nome">Seu nome</label><input class="i" id="d-nome" autocomplete="name" maxlength="80" required></div>
+    <div><label class="l" for="d-loja">Nome da loja</label><input class="i" id="d-loja" autocomplete="organization" maxlength="120"></div>
+    <div><label class="l" for="d-onde">Onde você vende hoje?</label><select class="i" id="d-onde"><option>Loja física</option><option>Loja online</option><option>Marketplace (Shopee, Mercado Livre)</option><option>Mais de um canal</option></select></div>
+    <p class="erro" id="d-erro" role="alert" hidden></p>
+    <button class="b" type="submit">Quero meu diagnóstico</button>
+  </form>
+</div></section>
+
+<div class="branco"><div class="wrap">
+  <section class="s quem">
+    <div class="quem-card"><span class="g" aria-hidden="true">G</span><img src="img/gustavo.jpg" alt="" onerror="this.remove()"><small style="font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85">Quem pensa a estratégia da sua loja</small><b>Gustavo Lara</b><span>Estrategista de negócios e comunicação</span></div>
+    <div>
+      <span class="eyebrow">Por que a GLARA</span>
+      <div class="sh" style="margin:8px 0 0"><h2>Quem já esteve atrás do balcão sabe o que faz vender</h2>
+        <p>Além de planejar e criar, eu já vendi, atendi cliente e cuidei dos anúncios dentro da loja. Por isso o marketing aqui começa pela venda: o que anunciar, para quem e em qual canal.</p>
+        <p>E você não precisa coordenar um profissional para cada coisa: uma pessoa só pensa, direciona, executa e acompanha.</p></div>
+      <div class="nums"><div><b>17</b><span>anos de experiência em comunicação</span></div><div><b>7</b><span>frentes de marketing e vendas num só lugar</span></div><div><b>1</b><span>portal para aprovar e acompanhar tudo</span></div></div>
+    </div>
+  </section>
+
+  <section class="s" id="servicos">
+    <div class="sh"><span class="eyebrow">Serviços</span><h2>Tudo o que a loja precisa para vender, no mesmo lugar</h2></div>
+    <div class="tabs" role="tablist" aria-label="Serviços" id="tabs"></div>
+    <div class="tabp" id="tabp" role="tabpanel" tabindex="0"></div>
+  </section>
+
+  <section class="s" id="cases">
+    <div class="sh"><span class="eyebrow">Cases</span><h2>Lojas que já passaram por aqui</h2></div>
+    <div class="cases" id="cases-l"></div>
+  </section>
+
+  <section class="s" id="como">
+    <div class="sh"><span class="eyebrow">Como funciona</span><h2>Primeiro entender o problema, depois propor a solução</h2></div>
+    <ol class="fluxo" id="fluxo"></ol>
+  </section>
+
+  <section class="s" id="noventa">
+    <div class="sh"><span class="eyebrow">Primeiros 90 dias</span><h2>Três meses para estruturar, executar e medir</h2><p>É por isso que o plano começa com um período mínimo: dá tempo de arrumar a casa, colocar as ações no ar e ter números reais para decidir.</p></div>
+    <div class="meses">
+      <article><small>Mês 1</small><b>Estrutura</b><p>Diagnóstico da loja, planejamento, organização dos canais e definição das prioridades.</p></article>
+      <article><small>Mês 2</small><b>Execução</b><p>Conteúdo, campanhas, marketplace, vídeos e as ações prioritárias rodando.</p></article>
+      <article><small>Mês 3</small><b>Otimização</b><p>Análise dos números de venda, ajustes e planejamento da próxima etapa.</p></article>
+    </div>
+  </section>
+</div>
+
+<div class="fundo"><div class="wrap">
+  <section class="s" id="planos-sec" hidden style="padding-top:36px">
+    <div class="sh"><span class="eyebrow">Planos prontos</span><h2>Prefere um pacote fechado?</h2></div>
+    <div class="planos" id="planos-l"></div>
+  </section>
+  <section class="s" id="cond-sec" hidden style="padding-top:36px">
+    <div class="sh"><span class="eyebrow">Condições</span><h2>Combinado desde o início</h2></div>
+    <ul class="regras" id="regras"></ul>
+  </section>
+  <section class="s" id="faq">
+    <div class="sh"><span class="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div>
+    <div class="faq" id="faq-l"></div>
+  </section>
+  <section class="fim"><div><h2>Vamos colocar a sua loja para vender mais?</h2><p>Comece pelo diagnóstico gratuito: é rápido e sem compromisso.</p></div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="b" href="#diag" data-foco>Quero meu diagnóstico</a><a class="b out" id="fim-wa" href="#topo">Falar no WhatsApp</a></div></section>
+</div></div>
+</main>
+<footer><div class="wrap" id="rodape"><b>GLARA</b></div></footer>
+<a class="zap" id="zap" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" hidden><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B1C19" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5A8.5 8.5 0 1 1 21 11.5Z"/></svg></a>
+
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
@@ -69,34 +237,68 @@
   const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const N=v=>Number(v)||0;
   const brl=v=>N(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:N(v)%1?2:0});
+  const pc=v=>N(v).toLocaleString("pt-BR",{maximumFractionDigits:2});
   const cfg=window.GLARA_CONFIG||{};
   const urlSupabase=u=>{u=String(u||"").trim();let m=u.match(/supabase\.com\/dashboard\/project\/([a-z0-9]+)/i);if(m)return "https://"+m[1]+".supabase.co";m=u.match(/^(?:https?:\/\/)?([a-z0-9-]+\.supabase\.(?:co|in))/i);if(m)return "https://"+m[1].toLowerCase();return u.replace(/\/+$/,"")};
-  const main=$("#main");
-  if(!window.supabase||!cfg.supabaseUrl){main.innerHTML=`<section class="card vazio">Não foi possível carregar agora.</section>`;return}
+
+  /* serviços em abas: texto fixo do posicionamento */
+  const ABAS=[
+    ["Tráfego pago","Anúncio que leva cliente até a loja","Campanhas no Instagram, Facebook e Google pensadas para gerar venda: no balcão, no WhatsApp, no site ou no marketplace.",["Campanhas de oferta e de produto","Público da sua região ou do seu nicho","Criativos feitos para vender","Relatório simples do que voltou em venda"]],
+    ["Redes sociais","Conteúdo que mostra o produto e chama para comprar","Planejamento, artes, legendas e agendamento. Você aprova tudo pelo portal antes de publicar.",["Calendário mensal de conteúdo","Posts, carrosséis e stories","Chamadas para o WhatsApp e para a loja","Aprovação pelo portal GLARA Hub"]],
+    ["Marketplace","Sua loja vendendo na Shopee e no Mercado Livre","Cuidamos dos anúncios, títulos, fotos, preços e campanhas para o produto aparecer e vender.",["Abertura e organização da loja","Títulos, fotos e descrições que vendem","Campanhas e promoções da plataforma","Acompanhamento das vendas"]],
+    ["Vídeo","Vídeos curtos que mostram o produto na prática","Gravação na loja com celular e edição rápida para Reels, anúncios e marketplace.",["Captação na loja","Edição de vídeos curtos","Vídeos de produto e de oferta","Formatos para cada canal"]],
+    ["Marca e site","Uma loja que o cliente reconhece e lembra","Identidade visual, landing pages e site para a loja se diferenciar de quem vende o mesmo produto.",["Identidade visual da loja","Landing page de oferta","Site com catálogo e contato","Google Meu Negócio organizado"]],
+    ["Atendimento","O cliente chegou. Agora é fechar a venda","De nada adianta anunciar se a mensagem fica sem resposta. Organizamos o WhatsApp da loja e treinamos quem atende.",["WhatsApp comercial com catálogo","Mensagens prontas e etiquetas","Roteiro de atendimento e de fechamento","Treinamento da equipe, presencial ou remoto"]],
+    ["Análise de vendas","Marketing ligado ao caixa","Todo mês olhamos os números de venda junto com os do marketing e decidimos o próximo passo.",["Relatório mensal no portal","O que vendeu e por qual canal","Onde investir mais e onde cortar","Próximos passos combinados"]]];
+  let aba=0;
+  function abas(){$("#tabs").innerHTML=ABAS.map((a,i)=>`<button type="button" role="tab" id="tab-${i}" aria-controls="tabp" aria-selected="${i===aba}" tabindex="${i===aba?0:-1}" data-aba="${i}">${esc(a[0])}</button>`).join("");
+    const a=ABAS[aba];const p=$("#tabp");p.setAttribute("aria-labelledby","tab-"+aba);
+    p.innerHTML=`<div><h3>${esc(a[1])}</h3><p>${esc(a[2])}</p><a class="b" href="#diag" data-foco>Quero isso na minha loja</a></div><ul>${a[3].map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`}
+  abas();
+  $("#tabs").addEventListener("click",e=>{const b=e.target.closest("[data-aba]");if(!b)return;aba=+b.dataset.aba;abas();$("#tab-"+aba).focus()});
+  $("#tabs").addEventListener("keydown",e=>{if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;aba=(aba+(e.key==="ArrowRight"?1:-1)+ABAS.length)%ABAS.length;abas();const t=$("#tab-"+aba);t.focus();t.scrollIntoView({inline:"center",block:"nearest"})});
+
+  document.addEventListener("click",e=>{const a=e.target.closest("[data-foco]");if(!a)return;e.preventDefault();$("#diag").scrollIntoView({block:"center"});$("#d-nome").focus({preventScroll:true})});
+  let fone="";const wa=t=>fone?`https://wa.me/${fone}?text=${encodeURIComponent(t)}`:"";
+  const semDados=()=>{};
+  $("#diag").addEventListener("submit",e=>{e.preventDefault();const n=$("#d-nome").value.trim(), er=$("#d-erro");
+    if(n.length<2){er.textContent="Escreva o seu nome para continuar.";er.hidden=false;$("#d-nome").focus();return}
+    if(!fone){er.textContent="O WhatsApp não está disponível agora. Tente de novo em instantes.";er.hidden=false;return}
+    er.hidden=true;const loja=$("#d-loja").value.trim();
+    window.open(wa(`Olá! Sou ${n}${loja?", da "+loja:""}. Vendo em: ${$("#d-onde").value}. Quero o diagnóstico gratuito da minha loja.`),"_blank","noopener")});
+
+  if(!window.supabase||!cfg.supabaseUrl){semDados();return}
   const sb=window.supabase.createClient(urlSupabase(cfg.supabaseUrl),String(cfg.supabaseAnonKey||"").trim(),{auth:{persistSession:false}});
-  const {data:D,error}=await sb.rpc("planos_ver");
-  if(error||!D){main.innerHTML=`<section class="card vazio">Não foi possível carregar os planos agora.</section>`;return}
-  const emp=D.empresa||cfg.marca||"GUXTA";document.title="Planos · "+emp;$("#eyebrow").textContent="Planos · "+emp;
-  $("#rodape").innerHTML=[`<b>${esc(emp)}</b>`,D.documento,D.telefone,D.email,D.site].filter(Boolean).map(x=>x.startsWith("<b>")?x:esc(x)).join(" · ");
-  const f=String(D.telefone||"").replace(/\D/g,""), fone=f?(f.length<=11?"55"+f:f):"";
-  const wa=t=>fone?`https://wa.me/${fone}?text=${encodeURIComponent(t)}`:"";
-  const foco=new URLSearchParams(location.search).get("p");
-  const lista=D.planos||[], itens=D.itens||[];
-  if(!lista.length){main.innerHTML=`<section class="card vazio">Os planos estão sendo atualizados. ${fone?`<a href="${wa("Olá! Quero saber mais sobre os planos de assessoria.")}">Fale com a gente no WhatsApp</a>.`:""}</section>`;return}
-  const linha=(it,v)=>{const tem=v===true||(typeof v==="string"&&v.trim()&&v.trim()!=="0");
-    return `<li class="${tem?"sim":"nao"}"><span class="ic" aria-hidden="true">${tem?"✓":"✕"}</span><span>${typeof v==="string"&&v.trim()?`<b>${esc(v.trim())}</b> `:""}${esc(it.nome)}<span class="sr" hidden>${tem?" (incluso)":" (não incluso)"}</span></span></li>`};
-  main.innerHTML=`<section class="planos">${lista.map(p=>{const v=p.valores||{};
-      return `<article class="plano${p.destaque?" destaque":""}${foco===p.id?" foco":""}" id="pl-${p.id}">${p.destaque?`<span class="selo">Mais escolhido</span>`:""}
-        <h2>${esc(p.nome)}</h2><p class="desc">${esc(p.descricao)}</p>
-        <div class="preco"><b>${brl(p.preco)}</b><span>/${esc(p.periodo||"mês")}</span></div>
-        <ul class="itens">${itens.filter(it=>v[it.id]!==undefined&&v[it.id]!==null&&v[it.id]!=="").map(it=>linha(it,v[it.id])).join("")}</ul>
-        ${p.obs?`<p class="obs">${esc(p.obs)}</p>`:""}
-        ${fone?`<a class="b${p.destaque?" pri":""}" href="${wa(`Olá! Tenho interesse no plano ${p.nome} (${brl(p.preco)}/${p.periodo||"mês"}). Pode me explicar como funciona?`)}" target="_blank" rel="noopener">Quero o plano ${esc(p.nome)}</a>`:""}
-      </article>`}).join("")}</section>
-    <section class="card extra"><p>Precisa de algo avulso? Pacotes de posts, captação e edição de vídeo, sites e material gráfico estão na loja.</p><a class="b" href="loja.html">Ver a loja →</a></section>`;
-  if(foco){const el=document.getElementById("pl-"+foco);el&&el.scrollIntoView({block:"center"})}
+  const {data:D,error}=await sb.rpc("vitrine_ver");
+  if(error||!D){semDados();return}
+  const emp=D.empresa||cfg.marca||"GLARA";document.title="Estratégia, marketing e vendas para o varejo · "+emp;
+  const f=String(D.telefone||"").replace(/\D/g,"");fone=f?(f.length<=11?"55"+f:f):"";
+  if(D.titulo){const h=$("#h1"), t=String(D.titulo), m=t.match(/^(.*\s)(\S+\s+\S+)$/);h.innerHTML=m?`${esc(m[1])}<em>${esc(m[2])}</em>`:esc(t)}
+  if(D.texto)$("#lead").textContent=D.texto;
+  $("#rodape").innerHTML=[`<b>${esc(emp)}</b>`,D.documento,D.telefone,D.email,D.site].filter(Boolean).map(x=>x.startsWith("<b>")?x:esc(x)).join(" · ")+`<br><a href="index.html">Já é cliente? Entrar no portal</a> · <a href="loja.html">Loja de materiais gráficos</a>`;
+  if(fone){const z=$("#zap");z.href=wa("Olá! Vim pelo site e quero vender mais na minha loja.");z.hidden=false;const fw=$("#fim-wa");fw.href=z.href;fw.target="_blank";fw.rel="noopener"}
+
+  const cases=(Array.isArray(D.cases)?D.cases:[]).filter(x=>x&&x[0]);
+  if(cases.length)$("#cases-l").innerHTML=cases.map(c=>`<article class="case"><small>${esc(c[1]||"")}</small><b>${esc(c[0])}</b><p>${esc(c[2]||"")}</p></article>`).join("");else $("#cases").hidden=true;
+  const fluxo=(Array.isArray(D.fluxo)?D.fluxo:[]).filter(x=>x&&x[0]);
+  if(fluxo.length)$("#fluxo").innerHTML=fluxo.map(x=>`<li><b>${esc(x[0])}</b><span>${esc(x[1]||"")}</span></li>`).join("");else $("#como").hidden=true;
+  const faq=(Array.isArray(D.faq)?D.faq:[]).filter(x=>x&&x[0]);
+  if(faq.length)$("#faq-l").innerHTML=faq.map(x=>`<details><summary>${esc(x[0])}</summary><p>${esc(x[1]||"")}</p></details>`).join("");else $("#faq").hidden=true;
+  const regras=(Array.isArray(D.regras)?D.regras:[]).filter(Boolean);
+  if(regras.length){$("#regras").innerHTML=regras.map(x=>`<li>${esc(x)}</li>`).join("");$("#cond-sec").hidden=false}
+
+  /* planos prontos (opcional) */
+  const planos=D.planos||[], itensP=D.itens||[];
+  if(planos.length){const tem=v=>v===true||(typeof v==="string"&&v.trim()&&v.trim()!=="0");
+    const preco=p=>N(p.preco_ate)>N(p.preco)?`${brl(p.preco)} a ${brl(p.preco_ate)}`:N(p.preco)?`${p.a_partir?`<small>a partir de </small>`:""}${brl(p.preco)}${p.periodo?`<small> /${esc(p.periodo)}</small>`:""}`:"Sob orçamento";
+    $("#planos-l").innerHTML=planos.map(p=>{const v=p.valores||{};
+      const li=[...itensP.filter(it=>v[it.id]!==undefined&&v[it.id]!==null&&v[it.id]!=="").map(it=>`<li class="${tem(v[it.id])?"":"nao"}">${typeof v[it.id]==="string"&&v[it.id].trim()?`<b>${esc(v[it.id].trim())}</b> `:""}${esc(it.nome)}</li>`),...(p.lista||[]).map(x=>`<li>${esc(x)}</li>`)].join("");
+      return `<article class="plano${p.destaque?" destaque":""}" id="pl-${p.id}"><h3>${esc(p.nome)}</h3>${p.descricao?`<p class="obs">${esc(p.descricao)}</p>`:""}<div class="pr">${preco(p)}</div>${li?`<ul>${li}</ul>`:""}
+        ${p.nao_inclui?`<p class="obs"><b>Não inclui:</b> ${esc(p.nao_inclui)}</p>`:""}${p.obs?`<p class="obs">${esc(p.obs)}</p>`:""}
+        ${fone?`<a class="b" href="${wa(`Olá! Tenho interesse no ${p.nome}. Pode me explicar como funciona?`)}" target="_blank" rel="noopener">Quero o ${esc(p.nome)}</a>`:""}</article>`}).join("");
+    $("#planos-sec").hidden=false}
+
 })();
 </script>
-<script src="ajuste-cores.js"></script>
 </body>
 </html>
