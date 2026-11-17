@@ -9,9 +9,9 @@
   --accent:#0071E3; --accent-dark:#0058B0; --accent-2:#2997FF; --accent-soft:#EAF3FF; --accent-soft2:#CFE3FB;
   --azul:#0071E3; --azul-hover:#0077ED; --azul-sombra:rgba(0,113,227,.55);
   --alerta:#FF3B30; --ok:#34C759; --ok-txt:#248A3D; --verde-cta:#0071E3; --verde-cta-2:#0077ED;
-  --rosa:#F5F5F7; --warn-bg:#F8EFE2; --warn:#8D6221;
-  --navy:#2E2F2A; --navy-2:#2C2C2E; --chumbo:#2E2F2A; --brand:#2E2F2A;
-  --ink:#2E2F2A; --muted:#6E6E73; --line:#E3E3E8; --soft:#F5F5F7; --bg:#F5F5F7; --surface:#FFFFFF;
+  --rosa:#F5F5F7; --warn-bg:#F8E2E4; --warn:#7E0A16;
+  --navy:#28252B; --navy-2:#2C2C2E; --chumbo:#28252B; --brand:#28252B;
+  --ink:#28252B; --muted:#6E6E73; --line:#E3E3E8; --soft:#F5F5F7; --bg:#F5F5F7; --surface:#FFFFFF;
   --caixa:#F5F5F7;
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
   --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif;
@@ -24,12 +24,12 @@ html[data-tema="escuro"]{
   --accent:#0A84FF; --accent-dark:#0A6FD6; --accent-2:#409CFF; --accent-soft:#0A2540; --accent-soft2:#123A63;
   --azul:#0A84FF; --azul-hover:#2E96FF; --azul-sombra:rgba(10,132,255,.5);
   --alerta:#FF453A; --ok:#30D158; --ok-txt:#30D158; --verde-cta:#0A84FF; --verde-cta-2:#2E96FF;
-  --rosa:#2D2E29; --warn-bg:#272015; --warn:#D9A95F;
+  --rosa:#27242A; --warn-bg:#2E0509; --warn:#E11227;
   --navy:#F5F5F7; --brand:#F5F5F7; --chumbo:#F5F5F7;
-  --ink:#F5F5F7; --muted:#98989D; --line:#38383A; --soft:#2C2C2E; --bg:#171714; --surface:#2D2E29;
+  --ink:#F5F5F7; --muted:#98989D; --line:#38383A; --soft:#2C2C2E; --bg:#161516; --surface:#27242A;
   --caixa:#2C2C2E;
   --grad:linear-gradient(180deg,#2E96FF 0%,#0A84FF 100%);
-  --grad-hero:#2D2E29;
+  --grad-hero:#27242A;
 }
 html body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}
 html ::selection{background:#B3D7FF}
@@ -44,7 +44,7 @@ html .hero h1{color:var(--ink);font-weight:700}
 html .hero .intro,html .hero .label{color:var(--muted)}
 html .hero .eyebrow{color:var(--ink)}
 html .hero select{background:var(--soft);border:1px solid var(--line);color:var(--ink);backdrop-filter:none}
-html .hero select option{color:#2E2F2A}
+html .hero select option{color:#28252B}
 html .hero-tag{background:var(--ink);color:var(--surface);border-radius:999px;padding:6px 11px;letter-spacing:.04em}
 
 /* nome do cliente (e destaque do título): azul, caixa cinza, borda azul */
@@ -58,7 +58,7 @@ html .btn.primary,html .btn.primary:not(.small){background:var(--azul);color:#FF
 html .btn.primary:hover{background:var(--azul-hover);box-shadow:0 10px 24px -8px var(--azul-sombra)}
 html .btn.primary:active{transform:translateY(1px);box-shadow:0 4px 12px -6px var(--azul-sombra)}
 html .btn.primary:not(.small)::after{background-color:rgba(255,255,255,.22)}
-html .btn:not(.primary):not(.outline):not(.danger):not(.ghost){background:#E8E8ED;color:#2E2F2A;border:1px solid transparent}
+html .btn:not(.primary):not(.outline):not(.danger):not(.ghost){background:#E8E8ED;color:#28252B;border:1px solid transparent}
 html .btn:not(.primary):not(.outline):not(.danger):not(.ghost):hover{background:#DCDCE1}
 html .btn.outline{background:var(--surface);border:1px solid #D2D2D7;color:var(--azul)}
 html .btn.outline:hover{border-color:var(--azul);background:var(--accent-soft);color:var(--azul)}
@@ -66,7 +66,7 @@ html .btn.ghost{color:var(--azul)}
 html .btn:focus-visible{outline:3px solid color-mix(in srgb,var(--azul) 45%,transparent);outline-offset:2px}
 html[data-tema="escuro"] .btn:not(.primary):not(.outline):not(.danger):not(.ghost){background:#2C2C2E;color:#F5F5F7}
 html[data-tema="escuro"] .btn:not(.primary):not(.outline):not(.danger):not(.ghost):hover{background:#3A3A3C}
-html[data-tema="escuro"] .btn.outline{background:#2D2E29;border-color:#48484A}
+html[data-tema="escuro"] .btn.outline{background:#27242A;border-color:#48484A}
 
 /* ---------- abas, menu lateral e botões de escolha: azul com borda azul; selecionado = azul cheio ---------- */
 html .tab{background:var(--surface);color:var(--azul);border:1px solid var(--azul);box-shadow:none}
@@ -86,8 +86,8 @@ html input:focus,html select:focus,html textarea:focus{border-color:var(--azul);
 html[data-tema="escuro"] input,html[data-tema="escuro"] select,html[data-tema="escuro"] textarea{border-color:#48484A}
 
 /* ícones dos quadros do painel: pretos */
-html .ini-ico{background:#2E2F2A;color:#FFFFFF;box-shadow:none}
-html[data-tema="escuro"] .ini-ico{background:#F5F5F7;color:#2E2F2A}
+html .ini-ico{background:#28252B;color:#FFFFFF;box-shadow:none}
+html[data-tema="escuro"] .ini-ico{background:#F5F5F7;color:#28252B}
 /* realces de passar o mouse: azul em vez de vermelho */
 html .ini-card.clicavel:hover,html .ini-item:hover,html .orc-row:hover{border-color:color-mix(in srgb,var(--azul) 45%,transparent)}
 /* fundo do modo escuro sem brilho vermelho; dicas em cinza */
@@ -99,7 +99,7 @@ html[data-tema="escuro"] body.modo-auth{background:var(--bg)}
 html[data-tema="escuro"] input:focus,html[data-tema="escuro"] select:focus,html[data-tema="escuro"] textarea:focus{border-color:var(--azul)!important;box-shadow:0 0 0 3px rgba(10,132,255,.3)}
 html[data-tema="escuro"] .caption{background:var(--soft)!important;border-left:3px solid var(--azul)!important;color:var(--ink)}
 html body.modo-auth{background:var(--bg)}
-html .aspas figcaption{background:#2E2F2A!important;color:#FFFFFF}
+html .aspas figcaption{background:#28252B!important;color:#FFFFFF}
 html[data-tema="escuro"] .aspas figcaption{background:#2C2C2E!important}
 html .topo-progresso i{background:var(--azul)}
 html[data-tema="escuro"] a{color:var(--azul)}
@@ -119,11 +119,11 @@ html[data-tema="escuro"] .seg{background:var(--surface);border-color:var(--azul)
 /* menu lateral: itens brancos, ícones pretos; selecionado preto (como antes) */
 html .cli{background:var(--surface)!important;color:var(--ink)!important;border:1px solid var(--line)!important;box-shadow:none!important}
 html .cli:hover{border-color:#C7C7CC!important}
-html .cli[aria-current="true"],html #clientes .cli[aria-current="true"]{background:#2E2F2A!important;color:#FFFFFF!important;border-color:#2E2F2A!important;box-shadow:none!important}
+html .cli[aria-current="true"],html #clientes .cli[aria-current="true"]{background:#28252B!important;color:#FFFFFF!important;border-color:#28252B!important;box-shadow:none!important}
 html .cli[aria-current="true"] small{color:#BDBDBD}
-html .cli-tarefas .cli-ico{background:#2E2F2A;color:#FFFFFF}
-html .cli[aria-current="true"] .cli-ico{background:#FFFFFF;color:#2E2F2A}
+html .cli-tarefas .cli-ico{background:#28252B;color:#FFFFFF}
+html .cli[aria-current="true"] .cli-ico{background:#FFFFFF;color:#28252B}
 html[data-tema="escuro"] .cli{background:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important}
-html[data-tema="escuro"] .cli[aria-current="true"],html[data-tema="escuro"] #clientes .cli[aria-current="true"]{background:#F5F5F7!important;color:#2E2F2A!important;border-color:#F5F5F7!important}
-html[data-tema="escuro"] .cli-tarefas .cli-ico{background:#F5F5F7;color:#2E2F2A}
-html[data-tema="escuro"] .cli[aria-current="true"] .cli-ico{background:#2E2F2A;color:#FFFFFF}
+html[data-tema="escuro"] .cli[aria-current="true"],html[data-tema="escuro"] #clientes .cli[aria-current="true"]{background:#F5F5F7!important;color:#28252B!important;border-color:#F5F5F7!important}
+html[data-tema="escuro"] .cli-tarefas .cli-ico{background:#F5F5F7;color:#28252B}
+html[data-tema="escuro"] .cli[aria-current="true"] .cli-ico{background:#28252B;color:#FFFFFF}
