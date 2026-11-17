@@ -22,7 +22,10 @@
   .cta-b{display:flex;flex-wrap:wrap;gap:10px}
   .cta-b .b:not(.pri){background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
   [hidden]{display:none!important}
-  .topo{background:linear-gradient(135deg,#1E1F1C 0%,#181106 55%,#543A14 100%);color:#fff;padding:18px 16px 70px}
+  .topo{background:linear-gradient(135deg,#1E1F1C 0%,#181106 55%,#543A14 100%);color:#fff;padding:18px 16px 70px;position:relative;overflow:hidden}
+  .topo::before{content:"";position:absolute;inset:0;opacity:.45;pointer-events:none;background:repeating-linear-gradient(90deg,#F0C777 0 1px,#7A5318 1px 2px,#D4973B 2px 4px,#3F2A0C 4px 5px,#E9B85A 5px 6px,#241807 6px 9px,#B67A2F 9px 10px,#151008 10px 13px);-webkit-mask:radial-gradient(50% 120% at 92% 0%,#000,transparent 72%);mask:radial-gradient(50% 120% at 92% 0%,#000,transparent 72%)}
+  .topo>*{position:relative;z-index:1}
+  .topo+main{position:relative;z-index:1}
   .topo-in{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
   .topo-bar{display:flex;align-items:center;justify-content:space-between;gap:12px}
   .topo img{height:42px;width:auto;display:block}
