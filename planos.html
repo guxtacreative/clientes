@@ -10,11 +10,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
 <style>
-  :root{--red:#C41022;--red-d:#950C1A;--green:#C41022;--green-d:#A20D1C;--ink:#1B191D;--muted:#6B6B6B;--line:#E8E4E6;--soft:#F5F3F4;--bg:#fff;
+  :root{--red:#864525;--red-d:#67351C;--green:#864525;--green-d:#6F391E;--ink:#1F1D1D;--muted:#6B6B6B;--line:#E7E5E5;--soft:#F4F4F4;--bg:#fff;
     --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  html,body{margin:0;background:#1B191D;color:var(--ink);font:400 16px/1.55 var(--font);-webkit-text-size-adjust:100%}
+  html,body{margin:0;background:#1F1D1D;color:var(--ink);font:400 16px/1.55 var(--font);-webkit-text-size-adjust:100%}
   [hidden]{display:none!important}
   h1,h2,h3,p{margin:0}
   .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
@@ -36,18 +36,18 @@
   .nav nav a{color:#D0D0D0;text-decoration:none;font:600 14px var(--font)}
   .nav nav a:hover{color:#fff}
   .nav .b{min-height:42px;padding:10px 16px;font-size:14px}
-  .hero{background:radial-gradient(900px 500px at 85% 0%,#32060A 0%,transparent 60%),#19171B;color:#fff;padding:56px 0 84px;position:relative;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;opacity:.55;pointer-events:none;background:repeating-linear-gradient(90deg,#ff2020 0 1px,#8a0000 1px 2px,#e00000 2px 4px,#4a0000 4px 5px,#ff0a0a 5px 6px,#2b0307 6px 9px,#c00000 9px 10px,#1a0000 10px 13px);-webkit-mask:radial-gradient(55% 75% at 88% 0%,#000,transparent 72%),radial-gradient(40% 50% at 0% 100%,#000,transparent 75%);mask:radial-gradient(55% 75% at 88% 0%,#000,transparent 72%),radial-gradient(40% 50% at 0% 100%,#000,transparent 75%)}
+  .hero{background:radial-gradient(900px 500px at 85% 0%,#30190E 0%,transparent 60%),#1F1D1D;color:#fff;padding:56px 0 84px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;background:repeating-linear-gradient(90deg,#B25C31 0 1px,#6C381F 1px 2px,#864525 2px 4px,#381D10 4px 5px,#A0532C 5px 6px,#201109 6px 9px,#723B1F 9px 10px,#150B06 10px 13px);-webkit-mask:radial-gradient(55% 75% at 88% 0%,#000,transparent 72%),radial-gradient(40% 50% at 0% 100%,#000,transparent 75%);mask:radial-gradient(55% 75% at 88% 0%,#000,transparent 72%),radial-gradient(40% 50% at 0% 100%,#000,transparent 75%)}
   .hero>*{position:relative;z-index:1}
   .hero-in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px;align-items:center}
   .hero h1{font:900 clamp(34px,5.2vw,58px)/1.04 var(--font);letter-spacing:-.03em;margin-top:12px}
   .hero h1 em{font-style:normal;color:var(--red)}
   .hero .lead{color:#CFCFCF;font-size:18px;margin-top:16px;max-width:560px}
-  .hero .pts{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:8px;color:#E8E4E6;font-weight:600}
+  .hero .pts{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:8px;color:#E7E5E5;font-weight:600}
   .hero .pts li{display:flex;gap:10px;align-items:center}
   .hero .pts li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);flex:none}
   .hero .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-  .diag{background:#EBE8E9;color:var(--ink);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:12px}
+  .diag{background:#EAE8E8;color:var(--ink);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:12px}
   .diag h2{font:900 22px/1.15 var(--font);letter-spacing:-.01em}
   .diag p{color:#4a4a4a;font-size:14px}
   label.l{font:700 13px var(--font);display:block;margin-bottom:5px}
@@ -63,7 +63,7 @@
   .quem{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px;align-items:center}
   .quem-card{background:var(--red);border-radius:28px;color:#FFFFFF;padding:30px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;position:relative;overflow:hidden}
   .quem-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .quem-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(60,0,6,.88))}
+  .quem-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(24,13,7,.92))}
   .quem-card>*:not(img){position:relative;z-index:1}
   .quem-card b{font:900 26px/1.1 var(--font)}
   .quem-card .g{position:absolute;top:18px;left:26px;font:900 150px/1 var(--font);opacity:.16;z-index:0}
@@ -87,7 +87,7 @@
   /* cases */
   .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
   .case{background:var(--ink);color:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:8px}
-  .case small{color:#EE273B;font:800 12px var(--font);letter-spacing:.12em;text-transform:uppercase}
+  .case small{color:#B05B30;font:800 12px var(--font);letter-spacing:.12em;text-transform:uppercase}
   .case b{font:900 26px/1.1 var(--font)}
   .case p{color:#CFCFCF}
 
@@ -131,7 +131,7 @@
   .fim .b{background:#fff;color:var(--ink)}.fim .b:hover{background:#111;color:#fff}
   .fim .b.out{background:transparent;color:#FFFFFF;border-color:#FFFFFF}.fim .b.out:hover{background:rgba(0,0,0,.1);color:#FFFFFF}
   .fundo{background:#fff;padding-bottom:40px}
-  footer{background:#1B191D;color:#9A9A9A;font-size:13.5px;padding:28px 0 36px;text-align:center}
+  footer{background:#1F1D1D;color:#9A9A9A;font-size:13.5px;padding:28px 0 36px;text-align:center}
   footer b{color:#fff}
   footer a{color:#CFCFCF}
   .zap{position:fixed;right:16px;bottom:16px;z-index:30;width:58px;height:58px;border-radius:50%;background:var(--green);display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.35)}
@@ -156,7 +156,7 @@
 <main id="topo">
 <section class="hero"><div class="wrap hero-in">
   <div>
-    <span class="eyebrow" style="color:#EE273B">Estratégia, marketing e vendas para o varejo</span>
+    <span class="eyebrow" style="color:#B05B30">Estratégia, marketing e vendas para o varejo</span>
     <h1 id="h1">Marketing e vendas para a sua loja <em>vender mais</em></h1>
     <p class="lead" id="lead">Anúncios, conteúdo, marketplace e vídeo trabalhando juntos para trazer cliente para a loja física, o site e os marketplaces.</p>
     <ul class="pts"><li>Diagnóstico antes de qualquer ação</li><li>Estratégia ligada à execução e à venda</li><li>Loja física, loja online e marketplace</li></ul>
@@ -229,7 +229,7 @@
 </div></div>
 </main>
 <footer><div class="wrap" id="rodape"><b>GLARA</b></div></footer>
-<a class="zap" id="zap" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" hidden><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#18161A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5A8.5 8.5 0 1 1 21 11.5Z"/></svg></a>
+<a class="zap" id="zap" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" hidden><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B1A1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5A8.5 8.5 0 1 1 21 11.5Z"/></svg></a>
 
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>

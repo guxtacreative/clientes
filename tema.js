@@ -5,7 +5,7 @@
   function salvar(v){try{localStorage.setItem(KEY,v)}catch(e){}}
   function aplicar(t){
     if(t==="escuro")root.setAttribute("data-tema","escuro");else root.removeAttribute("data-tema");
-    var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="escuro"?"#242227":"#F0F2F5");
+    var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="escuro"?"#292828":"#F0F2F5");
     document.querySelectorAll("[data-tema-btn]").forEach(function(b){
       var esc=t==="escuro";b.setAttribute("aria-pressed",String(esc));
       b.setAttribute("aria-label",esc?"Mudar para fundo claro":"Mudar para fundo escuro");

@@ -20,10 +20,10 @@
     "Outro":'<circle cx="12" cy="12" r="9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/>'
   };
   const CATS={
-    "Orçamento":{cor:"#B50F1F",etapas:["Entender o pedido (briefing)","Calcular horas e custos","Montar a proposta","Enviar ao cliente","Fazer follow-up","Resposta: aprovado ou recusado"]},
+    "Orçamento":{cor:"#7D4022",etapas:["Entender o pedido (briefing)","Calcular horas e custos","Montar a proposta","Enviar ao cliente","Fazer follow-up","Resposta: aprovado ou recusado"]},
     "Identidade visual":{cor:"#8B5CF6",etapas:["Briefing e questionário","Pesquisa e moodboard","Rascunhos e conceito","Apresentação ao cliente","Ajustes","Manual da marca","Entrega dos arquivos finais"]},
     "Gráfica":{cor:"#0EA5E9",etapas:["Arte final aprovada pelo cliente","Conferir medidas, sangria e CMYK","Orçar com a gráfica","Enviar o arquivo (PDF de impressão)","Aprovar a prova","Produção","Retirar e entregar"]},
-    "Conteúdo":{cor:"#C41022",etapas:["Pauta","Texto","Design ou edição","Revisão","Agendar"]},
+    "Conteúdo":{cor:"#864525",etapas:["Pauta","Texto","Design ou edição","Revisão","Agendar"]},
     "Site":{cor:"#2563EB",etapas:["Briefing","Estrutura das páginas","Layout","Desenvolvimento","Testes no celular","Publicação"]},
     "Tráfego":{cor:"#16A34A",etapas:["Objetivo e verba","Criativos","Público","Subir a campanha","Acompanhar e otimizar"]},
     "Reunião":{cor:"#DB2777",etapas:["Confirmar horário","Preparar a pauta","Reunião","Enviar o resumo"]},
@@ -32,7 +32,7 @@
   };
   const COLS=[["ideia","Ideias"],["a_fazer","A fazer"],["fazendo","Em produção"],["aguardando","Aprovação / retorno"],["feito","Concluído"]];
   // etiquetas: cada nome sempre ganha a mesma cor
-  const CORES_ET=[["#F6E0E2","#AF0E1E"],["#F5D5D8","#740D17"],["#F6CFD3","#75000C"],["#DCFCE7","#166534"],["#DBEAFE","#1E40AF"],["#EDE9FE","#5B21B6"],["#FCE7F3","#9D174D"],["#E0F2FE","#075985"]];
+  const CORES_ET=[["#F4E8E2","#783E21"],["#F1E1D9","#703A20"],["#EFDED6","#66351D"],["#DCFCE7","#166534"],["#DBEAFE","#1E40AF"],["#EDE9FE","#5B21B6"],["#FCE7F3","#9D174D"],["#E0F2FE","#075985"]];
   const corEt=t=>{let h=0;for(const ch of String(t).toLowerCase())h=(h*31+ch.charCodeAt(0))>>>0;return CORES_ET[h%CORES_ET.length]};
   const etHTML=t=>{const [bg,fg]=corEt(t);return `<span class="tk-et" style="--et-bg:${bg};--et-fg:${fg}">${esc(t)}</span>`};
   const iniciais=n=>String(n||"").trim().split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0].toUpperCase()).join("");
@@ -112,7 +112,7 @@
           <button class="tk-check" data-tk-act="feito" aria-label="${t.status==="feito"?"Reabrir tarefa":"Marcar como feita"}" aria-pressed="${t.status==="feito"}"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
         </div>
         <button class="tk-title" data-tk-act="abrir">${esc(t.titulo)}</button>
-        ${cli?`<span class="tk-cli">${(()=>{const c=clientes().find(x=>x.id===t.cliente_id);const ini=String(cli).trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase();return `<i class="tk-cli-av" style="${c&&/^#[0-9a-f]{3,8}$/i.test(c.cor_destaque||"")?"background:"+c.cor_destaque:""}" aria-hidden="true">${esc(ini)}</i>`})()}${esc(cli)}</span>`:""}
+        ${cli?`<span class="tk-cli">${(()=>{const c=clientes().find(x=>x.id===t.cliente_id);const ini=String(cli).trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase();return `<i class="tk-cli-av" style="${c&&/^#[0-9a-f]{3,8}$/i.test(c.cor_destaque||"")&&String(c.cor_destaque).toUpperCase()!=="#E10600"?"background:"+c.cor_destaque:""}" aria-hidden="true">${esc(ini)}</i>`})()}${esc(cli)}</span>`:""}
         ${(t.etiquetas||[]).length?`<div class="tk-ets">${t.etiquetas.map(etHTML).join("")}</div>`:""}
         ${t.pedido_id?`<button type="button" class="tk-ped" data-tk-act="pedido" data-cli="${esc(t.cliente_id||"")}" title="Abrir o pedido na página do cliente">Pedido do cliente ↗</button>`:""}
         ${g.n?`<div class="tk-prog" title="${g.f} de ${g.n} etapas"><div class="bar"><i style="width:${g.pc}%"></i></div><small>${g.f}/${g.n}</small></div>`:""}

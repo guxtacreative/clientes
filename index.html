@@ -135,6 +135,7 @@
     <nav class="tabs" role="tablist" aria-label="Seções">
       <button class="tab" role="tab" id="tab-inicio" data-tab="inicio" aria-selected="true"><span class="tab-t">Início</span><span class="badge" hidden></span></button>
       <button class="tab" role="tab" id="tab-aprovar" data-tab="aprovar" aria-selected="false"><span class="tab-t">Aprovar posts</span><span class="badge" hidden></span></button>
+      <button class="tab" role="tab" id="tab-publicados" data-tab="publicados" aria-selected="false" hidden><span class="tab-t">Publicados</span><span class="badge calma" hidden></span></button>
       <button class="tab" role="tab" id="tab-plano" data-tab="plano" aria-selected="false" hidden><span class="tab-t">Meu plano</span><span class="badge" hidden></span></button>
       <button class="tab" role="tab" id="tab-roteiros" data-tab="roteiros" aria-selected="false"><span class="tab-t">Roteiros dos Reels</span><span class="badge" hidden></span></button>
       <button class="tab" role="tab" id="tab-stories" data-tab="stories" aria-selected="false"><span class="tab-t">Stories</span><span class="badge" hidden></span></button>
@@ -164,6 +165,10 @@
       <div class="list" id="posts"></div>
     </section>
 
+    <section id="panel-publicados" class="list" role="tabpanel" aria-labelledby="tab-publicados" style="margin-top:22px" hidden>
+      <p class="intro">Posts deste mês que já estão no ar no seu Instagram.</p>
+      <div class="pubs" id="pubs"></div>
+    </section>
     <section id="panel-plano" class="list" role="tabpanel" aria-labelledby="tab-plano" style="margin-top:22px" hidden>
       <div id="plano-dash" class="list"></div>
     </section>
@@ -262,7 +267,7 @@
   const _h=location.hash.replace(/^#/,""), token=new URLSearchParams(location.search).get("c")||(/^[a-f0-9]{32,}$/i.test(_h)?_h:"");
   const urlSupabase=u=>{u=String(u||"").trim();let m=u.match(/supabase\.com\/dashboard\/project\/([a-z0-9]+)/i);if(m)return "https://"+m[1]+".supabase.co";m=u.match(/^(?:https?:\/\/)?([a-z0-9-]+\.supabase\.(?:co|in))/i);if(m)return "https://"+m[1].toLowerCase();return u.replace(/\/+$/,"")};
   const cfg=window.GLARA_CONFIG||{};
-  const corPropria=c=>/^#[0-9a-f]{6}$/i.test(c||"")&&!["#B70F20","#C91023","#C11021","#B10E1F","#3D4BFF","#0F8A4A","#0866FF","#1877F2"].includes(String(c).toUpperCase());
+  const corPropria=c=>/^#[0-9a-f]{6}$/i.test(c||"")&&!["#7E4123","#8A4726","#854524","#7A3F21","#3D4BFF","#0F8A4A","#0866FF","#1877F2","#E10600"].includes(String(c).toUpperCase());
   let sb=null, dados=null, filtro="todos", modo=token?"link":"login", clienteId=null;
   const P=()=>({p_token:modo==="link"?token:null,p_cliente:modo==="login"?clienteId:null});
   const slideIdx={}, editando={}, rasc={};
@@ -292,11 +297,13 @@
   async function copiar(texto,btn){const t=btn.textContent;try{await navigator.clipboard.writeText(texto)}catch(e){const ta=document.createElement("textarea");ta.value=texto;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(_){}ta.remove()}btn.textContent="Legenda copiada";setTimeout(()=>btn.textContent=t,1800)}
   const vigente=p=>p.decisao&&p.decisao.versao===p.versao?p.decisao:null;
   const estado=p=>{const d=vigente(p);return !d?"pend":d.decisao==="aprovado"?"ok":"adj"};
+  const ativos=()=>dados.posts.filter(p=>p.publicacao!=="publicado");
+  const publicadosL=()=>dados.posts.filter(p=>p.publicacao==="publicado").sort((a,b)=>String(b.publicacao_em||b.data||"").localeCompare(String(a.publicacao_em||a.data||"")));
 
   /* ---------- abas ---------- */
   document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
     document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",String(x===t)));
-    ["inicio","aprovar","plano","roteiros","stories","pedidos","resultados","anuncios","relatorio","pagamentos","contrato","loja"].forEach(n=>$("#panel-"+n).hidden=n!==t.dataset.tab);
+    ["inicio","aprovar","publicados","plano","roteiros","stories","pedidos","resultados","anuncios","relatorio","pagamentos","contrato","loja"].forEach(n=>$("#panel-"+n).hidden=n!==t.dataset.tab);
     if(t.dataset.tab==="inicio"&&dados)renderInicio();
     if(t.dataset.tab==="relatorio"&&dados)carregarRelatorio();
     if(t.dataset.tab==="contrato"&&dados)carregarDocumentos();
@@ -367,7 +374,7 @@
       </div>
     </article>`;
   }
-  function contar(){const c={todos:0,pend:0,ok:0,adj:0};dados.posts.forEach(p=>{c.todos++;c[estado(p)]++});for(const k in c)$("#n-"+k).textContent=c[k];const pr=document.getElementById("progresso");if(pr)pr.style.width=(c.todos?c.ok/c.todos*100:0)+"%"}
+  function contar(){const c={todos:0,pend:0,ok:0,adj:0};ativos().forEach(p=>{c.todos++;c[estado(p)]++});for(const k in c)$("#n-"+k).textContent=c[k];const pr=document.getElementById("progresso");if(pr)pr.style.width=(c.todos?c.ok/c.todos*100:0)+"%"}
   /* ---------- prévia do feed (grade como no Instagram) ---------- */
   let vis=(()=>{try{return localStorage.getItem("guxta_vis")||"lista"}catch(_){return "lista"}})();
   function tileHTML(p){const st=estado(p), u=(p.slides||[])[0], n=(p.slides||[]).length;
@@ -383,15 +390,27 @@
       d.innerHTML='<button type="button" class="dlg-x" data-act="feed-fechar" aria-label="Fechar">✕</button><div class="dlg-post"></div>';document.body.appendChild(d);
       d.addEventListener("click",e=>{if(e.target===d)d.close()})}return d}
   function renderPosts(){
-    contar();
-    if(vis==="feed"){const lista=dados.posts.filter(p=>filtro==="todos"||estado(p)===filtro);
-      $("#posts").innerHTML=!dados.posts.length?`<div class="empty">Ainda não há posts para aprovar neste mês.</div>`:lista.length?feedHTML(lista):`<div class="empty">Nenhum post nesta lista.</div>`;return}
-    const lista=dados.posts.filter(p=>filtro==="todos"||estado(p)===filtro);
-    $("#posts").innerHTML=!dados.posts.length?`<div class="empty">Ainda não há posts para aprovar neste mês.</div>`
-      :lista.length?lista.map(postHTML).join(""):`<div class="empty">Nenhum post nesta lista.</div>`;
+    contar();renderPublicados();
+    const vazio=!dados.posts.length?`<div class="empty">Ainda não há posts para aprovar neste mês.</div>`
+      :!ativos().length?`<div class="empty">Tudo deste mês já foi publicado. Os posts estão na aba <b>Publicados</b>.</div>`:"";
+    if(vis==="feed"){const lista=(filtro==="todos"?dados.posts:ativos()).filter(p=>filtro==="todos"||estado(p)===filtro);
+      $("#posts").innerHTML=!dados.posts.length?vazio:lista.length?feedHTML(lista):`<div class="empty">Nenhum post nesta lista.</div>`;return}
+    const lista=ativos().filter(p=>filtro==="todos"||estado(p)===filtro);
+    $("#posts").innerHTML=vazio||(lista.length?lista.map(postHTML).join(""):`<div class="empty">Nenhum post nesta lista.</div>`);
+  }
+  function renderPublicados(){
+    const tab=$("#tab-publicados"),box=$("#pubs");if(!tab||!box)return;const L=publicadosL();
+    tab.hidden=!L.length;const b=tab.querySelector(".badge");if(b){b.hidden=!L.length;b.textContent=L.length;b.setAttribute("aria-label",L.length+" publicado(s)")}
+    if(!L.length){if(tab.getAttribute("aria-selected")==="true")$("#tab-aprovar").click();box.innerHTML="";return}
+    box.innerHTML=L.map(p=>{const u=(p.slides||[])[0];
+      return `<article class="pub-card" id="pb-${p.id}">
+        <button type="button" class="pc-img" data-act="feed-abrir" data-id="${p.id}" aria-label="Ver ${esc(p.titulo||"post")}">${u?(ehVideo(u)?`<video src="${esc(u)}#t=0.5" muted playsinline preload="metadata"></video>`:`<img src="${esc(u)}" alt="" loading="lazy">`):`<span>${esc(p.titulo||"Post")}</span>`}${(p.slides||[]).length>1?`<span class="pc-n">${p.slides.length} telas</span>`:""}</button>
+        <div class="pc-b"><small>${esc(p.formato||"Post")}${p.data?" · "+esc(fmtData(p.data)):""}</small><b>${esc(p.titulo||"Post")}</b>
+          ${p.publicado_url?`<a class="btn small outline" href="${esc(p.publicado_url)}" target="_blank" rel="noopener">Ver no Instagram ↗</a>`:`<span class="status pub-ok">● Publicado</span>`}</div>
+      </article>`}).join("");
   }
   function renderUm(id){if(vis==="feed"){const p=dados.posts.find(x=>x.id===id),d=document.getElementById("post-dlg");if(p&&d&&d.open&&d.dataset.id===id)d.querySelector(".dlg-post").innerHTML=postHTML(p);renderPosts();return}
-    const p=dados.posts.find(x=>x.id===id),el=document.getElementById("p-"+id);if(!p||!el||(filtro!=="todos"&&estado(p)!==filtro&&!editando[id])){renderPosts();return}el.outerHTML=postHTML(p);contar()}
+    const p=dados.posts.find(x=>x.id===id),el=document.getElementById("p-"+id);if(!p||!el||p.publicacao==="publicado"||(filtro!=="todos"&&estado(p)!==filtro&&!editando[id])){renderPosts();return}el.outerHTML=postHTML(p);contar()}
   function passo(id,d){const p=dados.posts.find(x=>x.id===id);slideIdx[id]=Math.max(0,Math.min(p.slides.length-1,(slideIdx[id]||0)+d));renderUm(id)}
 
   async function decidir(id,decisao,comentario){
@@ -529,7 +548,9 @@
   function renderInicio(){if(!dados||!window.GlaraPortalInicio)return;const el=$("#panel-inicio");if(!el)return;el.innerHTML=window.GlaraPortalInicio.html(dados,{serie:piSerie})}
   document.addEventListener("click",e=>{
     const s=e.target.closest("[data-pi-serie]");if(s){piSerie=s.dataset.piSerie;renderInicio();return}
-    const p=e.target.closest("[data-pi-post]");if(p){const id=p.dataset.piPost;$("#tab-aprovar").click();
+    const p=e.target.closest("[data-pi-post]");if(p){const id=p.dataset.piPost;const pp=dados&&dados.posts.find(x=>x.id===id);
+      if(pp&&pp.publicacao==="publicado"){$("#tab-publicados").click();const el=document.getElementById("pb-"+id);if(el)setTimeout(()=>{el.scrollIntoView({block:"start",behavior:"smooth"});el.classList.remove("piscar");void el.offsetWidth;el.classList.add("piscar")},60);return}
+      $("#tab-aprovar").click();
       let el=document.getElementById("p-"+id);if(!el){const t=document.querySelector('[data-f="todos"]');t&&t.click();el=document.getElementById("p-"+id)}
       if(el){setTimeout(()=>{el.scrollIntoView({block:"start",behavior:"smooth"});el.classList.remove("piscar");void el.offsetWidth;el.classList.add("piscar")},60)}}
   });
@@ -544,7 +565,7 @@
   function calcularNovidades(){
     if(!dados)return {};
     const N={}, add=(tab,n,txt)=>{if(n>0)N[tab]={n,txt}};
-    const pend=dados.posts.filter(p=>estado(p)==="pend");
+    const pend=ativos().filter(p=>estado(p)==="pend");
     add("aprovar",pend.filter(p=>depois(p.versao,visto.aprovar)).length,n=>`${n} ${n>1?"posts novos ou atualizados":"post novo ou atualizado"} para aprovar`);
     add("roteiros",dados.roteiros.filter(r=>depois(r.atualizado_em,visto.roteiros)).length,n=>`${n} ${n>1?"roteiros de Reels novos ou atualizados":"roteiro de Reels novo ou atualizado"}`);
     add("stories",dados.stories.filter(r=>depois(r.atualizado_em,visto.stories)).length,n=>`${n} ${n>1?"sequências de Stories novas":"sequência de Stories nova"}`);
@@ -559,8 +580,8 @@
   }
   function novidadesRender(){
     if(!dados)return;
-    const N=calcularNovidades(), pend=dados.posts.filter(p=>estado(p)==="pend").length;
-    document.querySelectorAll("#app .tab").forEach(t=>{const k=t.dataset.tab, b=t.querySelector(".badge");if(!b||k==="pagamentos"||k==="loja")return;
+    const N=calcularNovidades(), pend=ativos().filter(p=>estado(p)==="pend").length;
+    document.querySelectorAll("#app .tab").forEach(t=>{const k=t.dataset.tab, b=t.querySelector(".badge");if(!b||k==="pagamentos"||k==="loja"||k==="publicados")return;
       const n=k==="aprovar"?pend:(N[k]?N[k].n:0);b.hidden=!n;b.textContent=n>99?"99+":n;
       b.setAttribute("aria-label",k==="aprovar"?`${n} aguardando sua decisão`:`${n} novidade(s)`);
       b.classList.toggle("calma",k==="aprovar"&&!(N.aprovar&&N.aprovar.n));});
@@ -581,7 +602,7 @@
   document.addEventListener("keydown",e=>{if(e.key==="Escape")fecharSino()});
 
   /* ---------- painel do plano ---------- */
-  function anel(u,l){if(window.GlaraAnel)return window.GlaraAnel.progresso({pct:l>0?u/l:1,cor:u>l?"#FF3B30":u>=l?"#B40F1F":"var",w:16});const r=42,C=2*Math.PI*r,pc=l>0?Math.min(1,u/l):1,cls=u>l?"over":u>=l?"full":"";
+  function anel(u,l){if(window.GlaraAnel)return window.GlaraAnel.progresso({pct:l>0?u/l:1,cor:u>l?"#FF3B30":u>=l?"#7C4022":"var",w:16});const r=42,C=2*Math.PI*r,pc=l>0?Math.min(1,u/l):1,cls=u>l?"over":u>=l?"full":"";
     return `<svg class="anel ${cls}" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="${r}" class="anel-bg"/><circle cx="50" cy="50" r="${r}" class="anel-fg" stroke-dasharray="${(C*pc).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 50 50)"/></svg>`}
   function renderPlanoDash(){
     const c=dados.cliente||{}, lim=c.limites||{}, tipos=Object.keys(TIPOS).filter(t=>typeof lim[t]==="number"), tab=$("#tab-plano");

@@ -11,7 +11,7 @@
   const dm=iso=>{if(!iso)return"";const [,m,d]=String(iso).slice(0,10).split("-");return d+"/"+m};
   const MESES=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
   const ini=n=>String(n||"").trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase()||"?";
-  const corOk=c=>/^#[0-9a-f]{3,8}$/i.test(c||"")?c:"";
+  const corOk=c=>/^#[0-9a-f]{3,8}$/i.test(c||"")&&String(c).toUpperCase()!=="#E10600"?c:"";
   const av=(c,cls)=>`<span class="op-av${cls?" "+cls:""}" style="${corOk(c&&c.cor_destaque)?"background:"+c.cor_destaque:""}" title="${esc(c&&c.nome||"")}" aria-hidden="true">${esc(ini(c&&c.nome))}</span>`;
   const diasDesde=iso=>{if(!iso)return null;return Math.max(0,Math.floor((Date.now()-new Date(iso).getTime())/86400000))};
   const haTxt=n=>n==null?"":n===0?"hoje":n===1?"há 1 dia":`há ${n} dias`;

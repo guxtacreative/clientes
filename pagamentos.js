@@ -65,7 +65,7 @@
   function svg(texto,{borda=4,titulo="QR Code"}={}){
     const M=qrMatrix(texto), n=M.length, t=n+borda*2;let d="";
     for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(M[y][x])d+=`M${x+borda} ${y+borda}h1v1h-1z`;
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${t} ${t}" shape-rendering="crispEdges" role="img" aria-label="${titulo}"><rect width="${t}" height="${t}" fill="#FFFFFF"/><path d="${d}" fill="#161516"/></svg>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${t} ${t}" shape-rendering="crispEdges" role="img" aria-label="${titulo}"><rect width="${t}" height="${t}" fill="#FFFFFF"/><path d="${d}" fill="#161515"/></svg>`;
   }
   window.GlaraQR={svg,matriz:qrMatrix};
 

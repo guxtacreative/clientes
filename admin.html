@@ -21,7 +21,7 @@
   .status.ativo::before{content:"";width:7px;height:7px;border-radius:50%;background:#1FA750}
   .status.inativo{background:#F1F1F3;color:#6E6E73}
   .icone-lixo{appearance:none;border:1px solid var(--line);background:#FFFFFF;color:#8A8A90;width:36px;height:36px;border-radius:8px;display:grid;place-items:center;cursor:pointer}
-  .icone-lixo:hover{color:#C31022;border-color:#E8CBCE;background:#F8EAEB}
+  .icone-lixo:hover{color:#864525;border-color:#EAD4C9;background:#F7EFEB}
   .aviso-inativo{margin:0;padding:10px 14px;border-radius:8px;background:#F4F4F6;color:#4A4A4F;font-size:14px}
   .cli small{color:#8A8A90;font-weight:500}
   .wrap{max-width:1240px}
@@ -41,15 +41,15 @@
   .row > div{flex:1 1 160px;min-width:0}
   .acessos{display:flex;flex-direction:column;gap:6px}
   .acesso-bts{display:flex;gap:6px;flex-wrap:wrap}
-  .tag-temp{display:inline-block;font-size:11px;font-weight:700;color:#860B17;background:#FAE9EB;border:1px solid #E5BBBF;border-radius:999px;padding:2px 8px;margin-left:4px}
-  html[data-tema="escuro"] .tag-temp{background:rgba(169,5,21,.14);color:#DC041A;border-color:rgba(169,5,21,.35)}
+  .tag-temp{display:inline-block;font-size:11px;font-weight:700;color:#5C3019;background:#F8EFEB;border:1px solid #E5C9BB;border-radius:999px;padding:2px 8px;margin-left:4px}
+  html[data-tema="escuro"] .tag-temp{background:rgba(111,57,30,.14);color:#8E4927;border-color:rgba(111,57,30,.35)}
   .acesso{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
   .linkbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .linkbox code{background:var(--soft);padding:8px 10px;border-radius:8px;font-size:13px;word-break:break-all;flex:1 1 280px}
   .thumbs{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
   .thumb{flex:0 0 auto;width:120px;display:flex;flex-direction:column;gap:6px}
   .thumb img,.thumb video{width:120px;aspect-ratio:4/5;object-fit:cover;border-radius:8px;background:var(--line);display:block}
-  .thumb video{aspect-ratio:9/16;background:#18161A;object-fit:contain}
+  .thumb video{aspect-ratio:9/16;background:#1B1A1A;object-fit:contain}
   .thumb.vid{width:140px}.thumb.vid video{width:140px}
   .thumb .actions{gap:4px;justify-content:center}
   .thumb .btn{padding:4px 8px;font-size:12px}
@@ -137,7 +137,7 @@
   const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const urlSupabase=u=>{u=String(u||"").trim();let m=u.match(/supabase\.com\/dashboard\/project\/([a-z0-9]+)/i);if(m)return "https://"+m[1]+".supabase.co";m=u.match(/^(?:https?:\/\/)?([a-z0-9-]+\.supabase\.(?:co|in))/i);if(m)return "https://"+m[1].toLowerCase();return u.replace(/\/+$/,"")};
   const cfg=window.GLARA_CONFIG||{};
-  const PADRAO_COR=["","#B70F20","#C91023","#C11021","#B10E1F","#3D4BFF","#0F8A4A","#0866FF","#1877F2"];
+  const PADRAO_COR=["","#7E4123","#8A4726","#854524","#7A3F21","#3D4BFF","#0F8A4A","#0866FF","#1877F2","#E10600"];
   $("#hero-sub").textContent=(cfg.plataforma||"Hub de Marketing")+" · clientes, planejamento, aprovações, resultados, anúncios e pedidos num lugar só.";
   let toastT=null;
   const toast=m=>{const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,3200)};
@@ -239,7 +239,7 @@
     return lista.map(c=>{const a=(alertas.clientes||{})[c.id]||{}, n=(a.pedidos||0)+(a.ajustes||0)+(a.alteracoes||0), ini=c.nome.trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase();
       const info=[a.pedidos?`${a.pedidos} pedido${a.pedidos>1?"s":""} novo${a.pedidos>1?"s":""}`:"",a.ajustes?`${a.ajustes} ajuste${a.ajustes>1?"s":""} pedido${a.ajustes>1?"s":""}`:"",a.alteracoes?`${a.alteracoes} alteraç${a.alteracoes>1?"ões":"ão"}`:"",a.aprovados_24h?`${a.aprovados_24h} aprovad${a.aprovados_24h>1?"os":"o"} em 24 h`:""].filter(Boolean);
       return `<button type="button" class="clg-card${c.ativo?"":" off"}" data-cli="${c.id}">
-        <span class="clg-av" style="${c.cor_destaque&&/^#[0-9a-f]{3,8}$/i.test(c.cor_destaque)?`background:${c.cor_destaque}`:""}" aria-hidden="true">${esc(ini)}</span>
+        <span class="clg-av" style="${c.cor_destaque&&/^#[0-9a-f]{3,8}$/i.test(c.cor_destaque)&&!PADRAO_COR.includes(String(c.cor_destaque).toUpperCase())?`background:${c.cor_destaque}`:""}" aria-hidden="true">${esc(ini)}</span>
         <span class="clg-t"><b>${esc(c.nome)}</b><small>${esc(c.plano_nome||(c.ativo?"Cliente ativo":"Desativado"))}</small>${info.length?`<span class="clg-info">${esc(info.join(" · "))}</span>`:""}</span>
         ${bolha(n,info.join(" · "))}</button>`}).join("")}
   function abrirClientesLista(){vista="clientes";renderClientes();
@@ -408,7 +408,7 @@
       <details id="cl-config"><summary>Configurações do cliente</summary>
         <div class="grid2" style="margin-top:12px">
           <div><label class="label" for="cl-nome">Nome</label><input type="text" id="cl-nome" value="${esc(c.nome)}"></div>
-          <div><label class="label" for="cl-cor">Cor de destaque do portal (vazio = azul padrão)</label><input type="text" id="cl-cor" value="${esc(PADRAO_COR.includes(String(c.cor_destaque||"").toUpperCase())?"":c.cor_destaque)}" placeholder="Ex.: #1877F2"></div>
+          <div><label class="label" for="cl-cor">Cor de destaque do portal (vazio = couro, a cor padrão)</label><input type="text" id="cl-cor" value="${esc(PADRAO_COR.includes(String(c.cor_destaque||"").toUpperCase())?"":c.cor_destaque)}" placeholder="Ex.: #1877F2"></div>
           <div><label class="label" for="cl-wa">WhatsApp do cliente (para lembretes e relatório)</label><input type="tel" id="cl-wa" value="${esc(c.whatsapp||"")}" placeholder="Ex.: (21) 99999-9999" inputmode="tel"></div>
         </div>
         <div style="margin-top:16px"><span class="label">Plano mensal (deixe vazio o que não tem limite)</span>
@@ -505,9 +505,9 @@
       <p class="meta" style="margin:0"><span><b>${posts.length} posts</b> no ciclo</span><span>${cont.ok} aprovados</span><span>${cont.adj} com ajuste</span><span>${cont.pend} aguardando</span><span>${roteiros.length} Reels</span><span>${stories.length} Stories</span></p>
     </section>
     <nav class="tabs" role="tablist">
-      ${[["posts","Posts do feed",bolha(cont.adj,cont.adj+" ajuste(s) pedido(s) pelo cliente")],["roteiros","Roteiros dos Reels"],["stories","Stories"],["dicas","Dicas"],["numeros","Números do Instagram"],["anuncios","Anúncios"],["relatorio","Relatório"],["pedidos","Pedidos",bolha(pedidos.filter(x=>x.status==="recebido"||x.status==="alteracao").length,"pedidos novos ou com alteração pedida")]].map(([k,t,bb])=>`<button class="tab" role="tab" data-aba="${k}" aria-selected="${aba===k}">${t}${bb||""}</button>`).join("")}
+      ${[["posts","Posts do feed",bolha(cont.adj,cont.adj+" ajuste(s) pedido(s) pelo cliente")],["publicados","Publicados"+(posts.filter(p=>p.publicacao==="publicado").length?` <span class="tab-n">${posts.filter(p=>p.publicacao==="publicado").length}</span>`:"")],["roteiros","Roteiros dos Reels"],["stories","Stories"],["dicas","Dicas"],["numeros","Números do Instagram"],["anuncios","Anúncios"],["relatorio","Relatório"],["pedidos","Pedidos",bolha(pedidos.filter(x=>x.status==="recebido"||x.status==="alteracao").length,"pedidos novos ou com alteração pedida")]].map(([k,t,bb])=>`<button class="tab" role="tab" data-aba="${k}" aria-selected="${aba===k}">${t}${bb||""}</button>`).join("")}
     </nav>
-    <div class="list" id="aba">${aba==="posts"?postsHTML():aba==="roteiros"?roteirosHTML():aba==="stories"?storiesHTML():aba==="numeros"?numerosHTML():aba==="pedidos"?pedidosHTML():aba==="anuncios"?anunciosHTML():aba==="relatorio"?relatorioHTML():dicasHTML()}</div>`;
+    <div class="list" id="aba">${aba==="posts"?postsHTML():aba==="publicados"?publicadosHTML():aba==="roteiros"?roteirosHTML():aba==="stories"?storiesHTML():aba==="numeros"?numerosHTML():aba==="pedidos"?pedidosHTML():aba==="anuncios"?anunciosHTML():aba==="relatorio"?relatorioHTML():dicasHTML()}</div>`;
   }
   function render(){
     if(!cliAtual){$("#main").innerHTML=`<div class="empty">Escolha um cliente ou adicione um novo.</div>`;return}
@@ -525,7 +525,8 @@
     const nAg=posts.filter(p=>p.publicacao==="agendado").length, nPub=posts.filter(p=>p.publicacao==="publicado").length, nOk=posts.filter(p=>estado(p)==="ok").length;
     return `<div class="actions"><button class="btn primary" data-act="novo-post">+ Novo post</button><button class="btn outline" data-act="novo-reels">+ Novo Reels (vídeo)</button>
       ${posts.length?`<span class="pub-resumo">${nOk} aprovado${nOk===1?"":"s"} · ${nAg} agendado${nAg===1?"":"s"} · ${nPub} publicado${nPub===1?"":"s"} de ${posts.length}</span>`:""}</div>`+
-    (posts.length?posts.map(p=>{
+    (!posts.length?"":!ativosP().length?`<div class="empty">Todos os posts deste mês já foram publicados. Eles estão na aba <b>Publicados</b>.</div>`:"")+
+    (ativosP().length?ativosP().map(p=>{
       const d=decisoes[p.id], v=vigente(p), st=estado(p);
       const pill=st==="ok"?'<span class="status ok">Aprovado</span>':st==="adj"?'<span class="status adj">Ajuste pedido</span>':'<span class="status pend">Aguardando o cliente</span>';
       const pt=v&&v.partes&&v.partes.tema&&v.partes_em===v.em?v.partes:null;
@@ -554,8 +555,24 @@
         <div class="actions"><button class="btn primary small" data-act="salvar-post" data-id="${p.id}">Salvar post</button>
           <button class="btn danger small" data-act="apagar-post" data-id="${p.id}">Apagar post</button>
           <span class="note">Mudar telas, vídeo, título ou legenda faz o cliente aprovar de novo.</span></div>
-      </article>`}).join(""):`<div class="empty">Nenhum post neste mês. Clique em “+ Novo post”.</div>`);
+      </article>`}).join(""):posts.length?"":`<div class="empty">Nenhum post neste mês. Clique em “+ Novo post”.</div>`);
   }
+  const ativosP=()=>posts.filter(p=>p.publicacao!=="publicado");
+  function publicadosHTML(){
+    const pub=posts.filter(p=>p.publicacao==="publicado").sort((a,b)=>String(b.publicacao_em||b.data||"").localeCompare(String(a.publicacao_em||a.data||"")));
+    if(!pub.length)return `<div class="empty">Nenhum post publicado neste mês ainda. Quando você marcar um post como <b>Publicado</b>, ele sai de “Posts do feed” e vem para cá.</div>`;
+    return `<p class="note" style="margin:0">${pub.length} post${pub.length===1?"":"s"} publicado${pub.length===1?"":"s"} neste mês. O cliente vê esta mesma lista na aba Publicados do portal.</p>
+      <div class="pubs">${pub.map(p=>{const u=(p.slides||[])[0];
+      return `<article class="pub-card" id="post-${p.id}">
+        <div class="pc-img">${u?(ehVideo(u)?`<video src="${esc(u)}#t=0.5" muted playsinline preload="metadata"></video>`:`<img src="${esc(u)}" alt="" loading="lazy">`):`<span>${esc(p.titulo||"Post")}</span>`}${(p.slides||[]).length>1?`<span class="pc-n">${p.slides.length} telas</span>`:""}</div>
+        <div class="pc-b"><small>${p.dia!=null?"Post "+String(p.dia).padStart(2,"0")+" · ":""}${esc(p.formato||"")}${p.data?" · "+esc(fmtDataCurta(p.data)):""}</small>
+          <b>${esc(p.titulo||"Post sem título")}</b>
+          <label class="label" for="pu-${p.id}">Link no Instagram</label><input type="url" id="pu-${p.id}" data-pub-in="${p.id}" value="${esc(p.publicado_url||"")}" placeholder="https://www.instagram.com/p/…">
+          <div class="actions">${p.publicado_url?`<a class="btn small outline" href="${esc(p.publicado_url)}" target="_blank" rel="noopener">Ver no Instagram ↗</a>`:""}
+            <button type="button" class="btn small ghost" data-act="pub-st" data-id="${p.id}" data-st="">Voltar para Posts do feed</button></div></div>
+      </article>`}).join("")}</div>`;
+  }
+  const fmtDataCurta=d=>{const [y,m,dd]=String(d).split("-");return dd&&m?dd+"/"+m:d};
   const localDT=ts=>{if(!ts)return"";const d=new Date(ts);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
   function pubHTML(p,st){const pub=p.publicacao||"";
     return `<div class="pub-box ${pub||"nada"}">
@@ -948,7 +965,7 @@
     if(e.target.id==="imp-subst"){impSubst=e.target.checked;return}
     if(e.target.dataset&&e.target.dataset.pubIn){const id=e.target.dataset.pubIn,p=posts.find(x=>x.id===id);if(!p)return;
       const v=e.target.value, campos=e.target.type==="datetime-local"?{agendado_para:v?new Date(v).toISOString():null}:{publicado_url:v.trim()};
-      sb.from("posts").update(campos).eq("id",id).select().single().then(({data,error})=>{if(error)return falha("salvar a publicação",error);Object.assign(p,data);toast(campos.agendado_para!==undefined?"Horário salvo.":"Link salvo.")});return}
+      sb.from("posts").update(campos).eq("id",id).select().single().then(({data,error})=>{if(error)return falha("salvar a publicação",error);Object.assign(p,data);if(aba==="publicados")render();toast(campos.agendado_para!==undefined?"Horário salvo.":"Link salvo.")});return}
     if(e.target.dataset&&e.target.dataset.up){const f=e.target.files;if(f&&f.length)enviarTelas(e.target.dataset.up,f);e.target.value=""}
   });
   document.addEventListener("click",async e=>{
@@ -1074,7 +1091,7 @@
       const campos={publicacao:st,publicacao_em:st?new Date().toISOString():null};
       if(st==="agendado"&&!p.agendado_para&&p.data)campos.agendado_para=new Date(p.data+"T18:00").toISOString();
       const {data,error}=await sb.from("posts").update(campos).eq("id",id).select().single();if(error)return falha("marcar a publicação",error);
-      Object.assign(p,data);render();toast(st==="agendado"?"Marcado como agendado. O cliente vê no portal.":st==="publicado"?"Marcado como publicado.":"Publicação desmarcada.");return}
+      Object.assign(p,data);render();toast(st==="agendado"?"Marcado como agendado. O cliente vê no portal.":st==="publicado"?"Publicado: o post foi para a aba Publicados.":"Publicação desmarcada: o post voltou para Posts do feed.");return}
     if(a==="pub-copiar"){const p=posts.find(x=>x.id===id);try{await navigator.clipboard.writeText(p.legenda||"");toast("Legenda copiada. Cole no Meta Business Suite.")}catch(_){toast("Não deu para copiar: selecione a legenda no campo.")}return}
     if(a==="add-anuncio"){const GA=window.GlaraAnuncios,v=x=>$(x).value;
       const row={ciclo_id:cicloAtual.id,data:v("#ad-data"),campanha:v("#ad-camp").trim(),investimento:GA.parseMoeda(v("#ad-inv")),impressoes:GA.parseInteiro(v("#ad-imp")),alcance:GA.parseInteiro(v("#ad-alc")),cliques:GA.parseInteiro(v("#ad-cli")),resultados:GA.parseInteiro(v("#ad-res")),tipo_resultado:v("#ad-tipo").trim()||"Resultados",receita:GA.parseMoeda(v("#ad-rec"))};
