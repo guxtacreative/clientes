@@ -41,7 +41,7 @@
         sb.from("orcamentos").select("*").order("criado_em",{ascending:false}),
         sb.from("produtos").select("*").order("nome"),
         sb.from("empresa").select("*").eq("id",1).maybeSingle()]);
-      const lo=await sb.from("lancamentos").select("orcamento_id,status,tipo");lancOrc=lo.error?[]:(lo.data||[]).filter(l=>l.orcamento_id);
+      let lo=await sb.from("lancamentos").select("orcamento_id,status,tipo,cliente_pagou_em,mp_pix,mp_boleto");if(lo.error)lo=await sb.from("lancamentos").select("orcamento_id,status,tipo");lancOrc=lo.error?[]:(lo.data||[]).filter(l=>l.orcamento_id);
       const cp=await sb.from("cupons").select("*").order("criado_em",{ascending:false});cupons=cp.error?null:(cp.data||[]);
       const no=await sb.from("contatos").select("id,email,aceita_ofertas").eq("aceita_ofertas",true);nOfertas=no.error?0:(no.data||[]).filter(c=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.email||"")).length;
       const lp=await sb.from("loja_pedidos").select("*").order("atualizado_em",{ascending:false}).limit(300);pedidos=lp.error?null:(lp.data||[]);
@@ -108,12 +108,60 @@
     const diasAte=iso=>Math.round((new Date(iso+"T12:00")-new Date(hojeISO()+"T12:00"))/864e5);
     function expiraTag(o){const e=expiraEm(o);if(!e)return "";const d=diasAte(e);
       return `<span class="orc-exp${d<=3?" perto":""}" title="Sem pagamento, este orçamento é excluído sozinho">${d<=0?"Exclui hoje":d===1?"Exclui amanhã":"Exclui em "+d+" dias"}</span>`}
+
+    /* ---------- orçamentos sem pagamento: alerta e cobrança pelo WhatsApp ---------- */
+    const COB_KEY="glara_orc_cobranca";
+    const lembrados=()=>{try{return JSON.parse(localStorage.getItem(COB_KEY)||"{}")||{}}catch(_){return {}}};
+    const pago=o=>lancOrc.some(l=>l.orcamento_id===o.id&&l.tipo==="entrada"&&l.status==="pago");
+    const semPagamento=()=>orcs.filter(o=>(o.status==="enviado"||o.status==="aprovado")&&N(o.total)>0&&!pago(o))
+      .sort((a,b)=>String(a.enviado_em||a.criado_em).localeCompare(String(b.enviado_em||b.criado_em)));
+    const lancsDe=o=>lancOrc.filter(l=>l.orcamento_id===o.id&&l.tipo==="entrada");
+    const avisouPagou=o=>lancsDe(o).some(l=>l.cliente_pagou_em);
+    const foiPagar=o=>lancsDe(o).some(l=>l.mp_pix||l.mp_boleto);
+    const diasDesde=iso=>iso?Math.max(0,Math.floor((Date.now()-new Date(iso))/864e5)):0;
+    function foneOrc(o){const c=clientes().find(x=>x.id===o.cliente_id)||{};
+      const f=t=>window.GlaraCRM&&window.GlaraCRM.foneWa?window.GlaraCRM.foneWa(t):(d=>d.length===10||d.length===11?"55"+d:d.length>=12?d:"")(String(t||"").replace(/\D/g,""));
+      return f(c.whatsapp)||f(/@/.test(o.cliente_contato||"")?"":o.cliente_contato)}
+    function msgCobranca(o){
+      const nome=String(o.contato_nome||o.cliente_nome||nomeCli(o)||"").trim().split(/\s+/)[0], link=linkProposta(o), exp=expiraEm(o);
+      const ref=`a proposta Nº ${nro(o.numero)}${o.titulo?" ("+o.titulo+")":""}`;
+      const pagar=link?`\nDá para pagar pelo Pix, cartão ou boleto por aqui: ${link}`:"";
+      const prazo=exp?`\nO valor fica garantido até ${dmy(somaDias(exp,-1))}.`:"";
+      if(o.status==="aprovado"&&foiPagar(o))return `Olá${nome?", "+nome:""}! Tudo bem? Vi que você chegou a gerar o pagamento de ${ref} (${brl(o.total)}), mas ele ainda não caiu aqui. Teve alguma dificuldade? Se preferir, o link para pagar continua aqui: ${link||""}${prazo}\nSe já pagou, pode desconsiderar. Obrigado!`;
+      if(o.status==="aprovado")return `Olá${nome?", "+nome:""}! Tudo bem? Obrigado por aprovar ${ref}. Para eu dar início, falta só o pagamento de ${brl(o.total)}.${pagar}${prazo}\nSe já pagou, pode desconsiderar. Obrigado!`;
+      return `Olá${nome?", "+nome:""}! Tudo bem? Passando para saber se você conseguiu ver ${ref}, no valor de ${brl(o.total)}.${link?`\nPara aprovar e pagar (Pix, cartão ou boleto), é só abrir aqui: ${link}`:""}${prazo}\nSe tiver alguma dúvida ou quiser ajustar algo, me fala que eu resolvo.`;
+    }
+    function cobrarHTML(){
+      const l=semPagamento();if(!l.length)return "";const lb=lembrados(), tot=l.reduce((s,o)=>s+N(o.total),0);
+      return `<section class="card orc-cob" aria-label="Orçamentos sem pagamento">
+        <div class="head"><div><span class="eyebrow">Alerta</span><h3>${l.length} orçamento${l.length===1?"":"s"} sem pagamento · ${brl(tot)}</h3></div></div>
+        <ul class="orc-cob-l">${l.map(o=>{const d=diasDesde(o.status==="aprovado"?(o.assinado_em||o.aprovado_em):(o.enviado_em||o.criado_em)), ult=lb[o.id], fone=foneOrc(o);
+          const av=avisouPagou(o), fp=foiPagar(o);
+          const sit=av?"O cliente avisou que pagou: confira no banco e dê baixa no Financeiro":o.status==="aprovado"?(fp?`Aprovado e foi para o pagamento (Pix ou boleto gerado), mas ainda não pagou`:`Aprovado há ${d} dia${d===1?"":"s"}, ainda não foi para o pagamento`):`Enviado há ${d} dia${d===1?"":"s"}${o.visto_em?", o cliente abriu":", o cliente ainda não abriu"}`;
+          return `<li class="${o.status==="aprovado"||d>=3?"urg":""}"><div><b>${esc(nomeCli(o)||"Sem cliente")} · Nº ${nro(o.numero)} · ${brl(o.total)}</b>
+            <small>${sit}${ult?" · cobrado no WhatsApp em "+dmy(String(ult).slice(0,10)):""}${fone?"":" · sem WhatsApp cadastrado"}</small>${expiraTag(o)}</div>
+            <div class="orc-cob-a">${av?`<span class="orc-tag-ass">Avisou que pagou</span>`:`<button type="button" class="btn small primary" data-o="cob-wa" data-id="${o.id}">Cobrar no WhatsApp</button>`}
+            <button type="button" class="btn small ghost" data-o="cob-nao" data-id="${o.id}">Cliente não quer</button></div></li>`}).join("")}</ul>
+        <p class="note">A mensagem já vai com o valor e o link para pagar, e muda conforme a situação (sem resposta, aprovado ou pagamento começado). Quando o cliente recusa pelo link, paga ou você marca "Cliente não quer", ele sai daqui.</p></section>`;
+    }
+    const MOTIVOS=["Achou caro","Fechou com outro","Adiou o projeto","Sem resposta","Não era o momento","Outro"];
+    function recusaDlg(o){
+      abrirDlg(`<form method="dialog" class="orc-cob-dlg"><h3>${esc(nomeCli(o)||"Cliente")} não quer seguir · Nº ${nro(o.numero)}</h3>
+        <p class="note">O orçamento vai para "Recusados" e sai do alerta. Dá para voltar depois, se ele mudar de ideia.</p>
+        <label class="label" for="rec-mot">Motivo</label><select id="rec-mot">${MOTIVOS.map(m=>`<option>${m}</option>`).join("")}</select>
+        <label class="label" for="rec-obs">O que ele disse (opcional)</label><textarea id="rec-obs" rows="3" placeholder="Ex.: vai retomar em março"></textarea>
+        <div class="actions"><button type="button" class="btn ghost" data-o="cob-fechar">Cancelar</button><button type="button" class="btn primary" data-o="cob-recusar" data-id="${o.id}">Marcar como recusado</button></div></form>`)}
+    function cobrarDlg(o){const fone=foneOrc(o);
+      abrirDlg(`<form method="dialog" class="orc-cob-dlg"><h3>Cobrar ${esc(nomeCli(o)||"cliente")} · Nº ${nro(o.numero)}</h3>
+        <label class="label" for="cob-fone">WhatsApp do cliente</label><input id="cob-fone" inputmode="tel" value="${esc(fone)}" placeholder="21 99999-9999">
+        <label class="label" for="cob-msg">Mensagem</label><textarea id="cob-msg" rows="9">${esc(msgCobranca(o))}</textarea>
+        <div class="actions"><button type="button" class="btn ghost" data-o="cob-fechar">Cancelar</button><button type="button" class="btn primary" data-o="cob-enviar" data-id="${o.id}">Abrir no WhatsApp</button></div></form>`)}
     function listaHTML(){
       const cont=f=>orcs.filter(o=>f==="todos"||(f==="abertos"?(o.status==="rascunho"||o.status==="enviado"):o.status===f)).length;
       const q=busca.trim().toLowerCase();
       const vis=orcs.filter(o=>(filtro==="todos"||(filtro==="abertos"?(o.status==="rascunho"||o.status==="enviado"):o.status===filtro))
         &&(!q||(nro(o.numero)+" "+nomeCli(o)+" "+o.titulo+" "+(o.itens||[]).map(i=>i.nome).join(" ")).toLowerCase().includes(q)));
-      return `<div class="tk-bar">
+      return cobrarHTML()+`<div class="tk-bar">
           <div class="summary" role="group" aria-label="Filtrar">
             ${[["abertos","Em aberto"],["aprovado","Aprovados"],["recusado","Recusados"],["todos","Todos"]].map(([k,t])=>`<button class="chip" data-o-f="${k}" aria-pressed="${filtro===k}">${t} <b>${cont(k)}</b></button>`).join("")}
           </div>
@@ -580,6 +628,22 @@
     el.addEventListener("click",async e=>{
       const sb_=e.target.closest("[data-o-sub]");if(sb_){sub=sb_.dataset.oSub;render();return}
       const f=e.target.closest("[data-o-f]");if(f){filtro=f.dataset.oF;render();return}
+      const cb=e.target.closest('[data-o="cob-wa"],[data-o="cob-enviar"],[data-o="cob-fechar"],[data-o="cob-nao"],[data-o="cob-recusar"]');
+      if(cb){const ac=cb.dataset.o;if(ac==="cob-fechar"){fecharDlg();return}
+        const o=orcs.find(x=>String(x.id)===cb.dataset.id);if(!o)return;
+        if(ac==="cob-wa"){cobrarDlg(o);return}
+        if(ac==="cob-nao"){recusaDlg(o);return}
+        if(ac==="cob-recusar"){cb.disabled=true;const mot=el.querySelector("#rec-mot").value, obs=el.querySelector("#rec-obs").value.trim();
+          const ass=Object.assign({},o.assinatura||{},{recusada:true,motivo:mot+(obs?": "+obs:""),em:new Date().toISOString(),por:"painel"});
+          let r=await sb.from("orcamentos").update({status:"recusado",assinatura:ass}).eq("id",o.id).select().single();
+          if(r.error)r=await sb.from("orcamentos").update({status:"recusado"}).eq("id",o.id).select().single();
+          if(r.error){cb.disabled=false;return falha("marcar como recusado",r.error)}
+          const i=orcs.findIndex(x=>x.id===o.id);if(i>=0)orcs[i]=r.data;fecharDlg();render();toast("Marcado como recusado: "+mot+".");ctx.mudou&&ctx.mudou();return}
+        const tel=el.querySelector("#cob-fone").value, msg=el.querySelector("#cob-msg").value;
+        let d=String(tel||"").replace(/\D/g,"");if(d.length===10||d.length===11)d="55"+d;
+        window.open(`https://wa.me/${d.length>=12?d:""}?text=${encodeURIComponent(msg)}`,"_blank","noopener");
+        const lb=lembrados();lb[o.id]=new Date().toISOString();try{localStorage.setItem(COB_KEY,JSON.stringify(lb))}catch(_){}
+        fecharDlg();render();toast("Cobrança aberta no WhatsApp");return}
       if(e.target.closest("#pf-ptipo [data-ptipo]")){const bt=e.target.closest("[data-ptipo]");el.querySelectorAll("#pf-ptipo button").forEach(x=>x.setAttribute("aria-pressed",String(x===bt)));
         if(bt.dataset.ptipo==="m2"){const u=el.querySelector("#pf-un");if(u&&!/m/i.test(u.value))u.value="m²"}pfTipoAplica();calcProdForm();return}
       const tp_=e.target.closest("#pf-tipoprod [data-tp]");if(tp_){el.querySelectorAll("#pf-tipoprod button").forEach(x=>x.setAttribute("aria-pressed",String(x===tp_)));

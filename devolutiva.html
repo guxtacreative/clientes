@@ -148,6 +148,50 @@ footer{padding:24px 0 100px;text-align:center;font-size:13px;color:var(--lb)}
   .e .st{grid-column:1/3;margin-top:0}
   .btn{width:100%}
 }
+
+/* proposta ajustável */
+.pk{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 4px}
+.pk span{background:var(--bg2);border:1px solid var(--bd);border-radius:999px;padding:7px 14px;font-size:14px}
+.pk b{color:var(--r)}
+.sv{border:1px solid var(--bd);border-radius:18px;padding:20px;margin-top:12px;background:var(--card);transition:opacity .3s,background .3s}
+.sv.off{opacity:.55;background:var(--bg2)}
+.sv.off .svb,.sv.off .qt{display:none}
+.svh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.svh h4{margin:0;font-size:18px;line-height:1.25}
+.svh p{margin:4px 0 0;color:var(--mu);font-size:15px}
+.bdg{font:700 12px Arial,sans-serif;color:var(--r);background:#F9ECEC;border-radius:99px;padding:5px 10px;white-space:nowrap}
+.bdg.u{color:#3D3A39;background:var(--bg2);border:1px solid var(--bd)}
+.qt{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 4px;padding:12px 14px;background:var(--bg2);border-radius:12px}
+.qt .st{display:flex;align-items:center;border:1px solid var(--bd);border-radius:999px;background:var(--card);overflow:hidden}
+.qt button{width:40px;height:40px;border:0;background:transparent;font:700 20px Arial;cursor:pointer;color:var(--tx)}
+.qt button:disabled{opacity:.3;cursor:default}
+.qt output{min-width:34px;text-align:center;font-weight:700;font-size:17px}
+.qt small{color:var(--mu);font-size:14px;flex:1 1 200px}
+.svb ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:7px;font-size:15px}
+.svb li{display:flex;gap:9px}.svb li::before{content:"✓";color:var(--ok);font-weight:700;flex:0 0 auto}
+.tg{margin-top:14px;background:none;border:0;padding:0;font:700 14px Arial,sans-serif;color:var(--mu);text-decoration:underline;cursor:pointer}
+.sv.off .tg{color:var(--r)}
+.sv.nv{border-color:var(--ok);box-shadow:0 0 0 3px rgba(31,122,74,.12)}
+.sempre{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.sempre div{background:var(--dk);color:#fff;border-radius:14px;padding:16px;font-size:14px}
+.sempre b{display:block;font-size:16px;margin-bottom:4px}
+.sempre span{color:#CFC9C5}
+details.ex{margin-top:22px;border:1.5px dashed var(--bd);border-radius:18px;padding:18px 20px}
+details.ex summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+details.ex summary::after{content:"+";color:var(--r);font-size:22px;line-height:1}
+details.ex[open] summary::after{content:"−"}
+.exi{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 0;border-top:1px solid var(--bd)}
+.exi:first-of-type{border-top:0}
+.exi b{display:block}.exi span{color:var(--mu);font-size:14px}
+.exi button{flex:0 0 auto;border:1.5px solid var(--r);color:var(--r);background:transparent;border-radius:999px;padding:9px 16px;font:700 14px Arial,sans-serif;cursor:pointer}
+.fz{transition:bottom .4s}.fz.sobe{bottom:100px}
+.ajb{position:fixed;left:50%;bottom:16px;transform:translate(-50%,140%);z-index:20;width:min(720px,calc(100% - 24px));background:var(--dk);color:#fff;border-radius:18px;padding:14px 14px 14px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.ajb.on{transform:translate(-50%,0)}
+.ajb div{flex:1}.ajb small{display:block;color:#CFC9C5;font-size:13px}
+.ajb .btn{min-height:46px;width:auto}
+.ajb .lk{background:none;border:0;color:#CFC9C5;text-decoration:underline;cursor:pointer;font:13px Arial}
+.mudou{background:#FFF7E6;border:1px solid #F0D49A;border-radius:12px;padding:10px 14px;font-size:14px;margin-top:12px}
+@media (max-width:820px){.sempre{grid-template-columns:1fr}.ajb{flex-wrap:wrap}.ajb .btn{width:100%}.fz.sobe{bottom:150px}}
 @media print{body{background:#fff}.fz,.cta .bts{display:none}.rv{opacity:1;transform:none}.sec,.hero{break-inside:avoid}}
 </style></head>
 <body>
@@ -155,9 +199,11 @@ footer{padding:24px 0 100px;text-align:center;font-size:13px;color:var(--lb)}
 <main class="w" id="app"><div class="sec vazio"><p class="mu">Carregando a devolutiva…</p></div></main>
 <footer><div class="w">Gustavo Lara · Assessoria de marketing e vendas · Duque de Caxias/RJ</div></footer>
 <a class="fz" id="fz" href="#" target="_blank" rel="noopener" aria-label="Falar com o Gustavo no WhatsApp" hidden><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></a>
+<script src="catalogo.js"></script>
 <script>
 (async function(){
 const WHATS="5521965165370";
+const CAT=window.GL_CAT||{};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const brl=n=>"R$ "+Math.round(n||0).toLocaleString("pt-BR");
@@ -166,22 +212,23 @@ const ETAPAS={
   vit:{n:"Vitrine",q:"Como a loja aparece e convence",t:"Instagram, fotos, vídeos, site e marca: o que faz a pessoa confiar e querer comprar."},
   ate:{n:"Atendimento",q:"Como o contato vira venda",t:"WhatsApp, tempo de resposta, roteiro e fechamento: quanto do interesse vira compra."},
   vol:{n:"Volta",q:"Cliente que compra de novo e indica",t:"Lista de clientes, datas fortes e pós-venda: o lucro que vem de quem já comprou."}};
+const KET={Movimento:"mov",Vitrine:"vit",Atendimento:"ate",Volta:"vol"};
 const FASE={Estruturar:"Primeiro arrumar a base. Investir em anúncio agora seria trazer gente para uma estrutura que ainda perde vendas.",
   Crescer:"A base já existe. É hora de trazer mais gente e fechar mais das conversas que já chegam.",
   Acelerar:"O processo já funciona. Agora é escalar o que dá resultado, com mais verba e mais canais."};
 const estado=v=>v<4?["Precisa de atenção agora","var(--r)"]:v<7?["Funciona, mas dá para crescer","var(--warn)"]:["Ponto forte","var(--ok)"];
-const SING={visitas:"visita","vídeos":"vídeo",posts:"post","sessões":"sessão"};
-const qtd=x=>{if(!x.u)return x.n;const nm=x.n.replace(/ por mês$/,""),u=x.q==1?(SING[x.u]||x.u):x.u;return `${nm} · ${x.q} ${u}${x.m?" por mês":""}`};
 const wa=t=>`https://wa.me/${WHATS}?text=${encodeURIComponent(t)}`;
+const un=(c,q)=>q==1?c.u:(c.us||c.u);
 
 async function ler(){
   const h=location.hash.slice(1);if(!h)return null;
   const b64=h.replace(/-/g,"+").replace(/_/g,"/");const bin=atob(b64+"===".slice((b64.length+3)%4));
   const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
-  const s=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
-  return JSON.parse(await new Response(s).text());
+  const st=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+  return JSON.parse(await new Response(st).text());
 }
 let d=null;try{d=await ler()}catch(e){}
+if(d&&d.v!==2)d=null;
 if(!d){$("#app").innerHTML=`<div class="sec vazio"><h2>Link <b>incompleto</b></h2><p class="mu">Não consegui abrir esta devolutiva. Confira se o link foi copiado inteiro ou fale comigo.</p><p><a class="btn zap" href="${wa("Olá, Gustavo! Não consegui abrir o link da devolutiva.")}" target="_blank" rel="noopener">Falar no WhatsApp <i>→</i></a></p></div>`;return}
 
 const loja=d.l||"sua loja", nome=(d.re||"").split(" ")[0];
@@ -190,15 +237,25 @@ const ord=d.o, g=ord[0], g2=ord[1];
 const dt=new Date(d.d), dataTxt=dt.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"});
 const validade=new Date(dt.getTime()+(d.val||7)*864e5).toLocaleDateString("pt-BR");
 const bons=Object.keys(ETAPAS).filter(k=>d.sc[k]>=7), ruins=ord.filter(k=>d.sc[k]<6);
-const doEt=k=>d.it.filter(x=>x.e===ETAPAS[k].n);
-const m3=d.tm*(1-d.D3/100), m6=d.tm*(1-d.D6/100), cheio=d.tm*3+d.tp, imp=cheio*(1-d.DV/100), tot1=m3*3+d.tp;
+
+/* proposta: o que veio no link (orig) e o que o cliente está ajustando (it) */
+const orig=d.it.filter(([k])=>CAT[k]).map(([k,q])=>({k,q}));
+let it=orig.map(x=>({k:x.k,q:x.q,on:true,novo:false}));
+const preco=x=>CAT[x.k].p(x.q||1);
+const totais=lst=>{const a=lst.filter(x=>x.on!==false);return {m:a.filter(x=>CAT[x.k].m).reduce((s,x)=>s+preco(x),0),p:a.filter(x=>!CAT[x.k].m).reduce((s,x)=>s+preco(x),0)}};
+/* o valor do link manda: se o Gustavo ajustou algo à mão, a diferença fica guardada e é aplicada nos totais */
+const base=totais(orig), difM=(d.tm||0)-base.m, difP=(d.tp||0)-base.p;
+const atuais=()=>{const t=totais(it);return {m:Math.max(0,t.m+difM),p:Math.max(0,t.p+difP)}};
+const mudancas=()=>{const out=[];
+  orig.forEach(o=>{const x=it.find(y=>y.k===o.k);const c=CAT[o.k];
+    if(!x.on)out.push(`Tirar: ${c.n}`);else if(x.q!==o.q)out.push(`${c.n}: de ${o.q} para ${x.q} ${un(c,x.q)}${c.m?" por mês":""}`)});
+  it.filter(x=>x.novo&&x.on).forEach(x=>{const c=CAT[x.k];out.push(`Incluir: ${c.n}${c.u?` (${x.q} ${un(c,x.q)}${c.m?" por mês":""})`:""}`)});
+  return out};
+
 $("#fz").href=wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e queria conversar.`);$("#fz").hidden=false;
 
 const etapasHTML=["mov","vit","ate","vol"].map(k=>{const v=d.sc[k],[st,c]=estado(v),E=ETAPAS[k];
   return `<div class="e${k===g?" g":""}"><h3>${E.n}${k===g?'<span class="pill">Gargalo</span>':""}<small>${E.q}</small></h3><div class="tr"><i data-w="${v*10}" style="background:${c}"></i></div><div class="n" style="color:${c}">${v.toFixed(1)}</div><p class="st mu"><b style="color:${c}">${st}.</b> ${E.t}</p></div>`}).join("");
-
-const grupos=["mov","vit","ate","vol"].map(k=>{const it=doEt(k);if(!it.length)return"";
-  return `<div class="grp"><h3>${ETAPAS[k].n}${k===g?'<span class="pill">Gargalo</span>':""}</h3>${it.map(x=>`<div class="it"><b>${esc(qtd(x))}</b><span>${esc(x.w)}</span><em>${x.m?"Todo mês":"Feito uma vez"}</em></div>`).join("")}</div>`}).join("");
 
 const temContas=d.c&&d.c.mes&&d.c.tk&&d.c.conv;
 const contas=temContas?`<section class="sec rv"><span class="kk">As contas</span><h2>O que está <b>na mesa</b></h2>
@@ -206,24 +263,9 @@ const contas=temContas?`<section class="sec rv"><span class="kk">As contas</span
   <div class="contas"><div><small>Hoje, vindo desses contatos</small><b>${brl(d.c.hoje)}/mês</b></div><div class="up"><small>Fechando 2 a mais de cada 10</small><b>+${brl(d.c.mais2)}/mês</b></div><div class="up"><small>Com 20% mais contatos</small><b>+${brl(d.c.mais20)}/mês</b></div></div>
   <p class="aviso">Estimativa feita com os números informados por você. Serve para mostrar o tamanho da oportunidade, não é promessa de resultado.</p></section>`:"";
 
-const opcoes=d.tm?`<div class="op">
-  <div class="oc"><small>Opção 1</small><h3>Mensal com fidelidade</h3><div class="v">${brl(m3)}<sub>/mês</sub></div>
-   <p class="mu">por 3 meses${d.tp?` + <b>${brl(d.tp)}</b> de entrada, que cobre o que é feito uma vez`:""}.</p>
-   <ul><li>Total nos 3 meses: ${brl(tot1)}</li><li>Paga mês a mês, sem pesar no caixa</li><li>Com fidelidade de 6 meses: ${brl(m6)}/mês</li><li>Sem fidelidade: ${brl(d.tm)}/mês</li></ul>
-   <a class="btn gh" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero seguir com a Opção 1 (mensal com fidelidade).`)}" target="_blank" rel="noopener">Quero a Opção 1 <i>→</i></a></div>
-  <div class="oc hl"><span class="tag">Menor custo total</span><small>Opção 2</small><h3>Implantação de 90 dias</h3><div class="v">${brl(imp)}</div>
-   <p class="mu">pagamento único à vista, com ${d.DV}% de desconto, pelos 3 meses completos de trabalho.</p>
-   <ul><li>Economia de ${brl(tot1-imp)} em relação à Opção 1</li><li>Tudo o que está na lista acima, durante 90 dias</li><li>Parcelado, vale o valor cheio: ${brl(cheio)}</li></ul>
-   <a class="btn" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero seguir com a Opção 2 (implantação de 90 dias à vista).`)}" target="_blank" rel="noopener">Quero a Opção 2 <i>→</i></a></div></div>
-  <p class="mu" style="margin-top:16px;font-size:15px">Depois dos 90 dias, se fizer sentido continuar, seguimos no mensal: ${brl(m3)}/mês com nova fidelidade de 3 meses, ou ${brl(m6)}/mês com 6 meses. A verba dos anúncios é paga à parte, direto na plataforma (Meta, Google), e fica no seu cartão.</p>`
- :`<div class="op"><div class="oc hl"><small>Projeto</small><h3>Investimento</h3><div class="v">${brl(d.tp)}</div><p class="mu">pagamento do que é feito uma vez.</p>
-   <a class="btn" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero seguir com o projeto.`)}" target="_blank" rel="noopener">Quero seguir <i>→</i></a></div></div>`;
-
-const ajuste=d.b&&(d.tm!==d.b.tm||d.tp!==d.b.tp)?`<div class="ajuste"><b>Ajuste no seu contrato.</b> Hoje: ${brl(d.b.tm)}/mês${d.b.tp?` + ${brl(d.b.tp)} de projeto`:""}. Com esta versão: ${brl(d.tm)}/mês${d.tp?` + ${brl(d.tp)} de projeto`:""}${d.tm!==d.b.tm?` (${d.tm>d.b.tm?"+":"−"}${brl(Math.abs(d.tm-d.b.tm))} por mês)`:""}.</div>`:"";
-
 $("#app").innerHTML=`
 <section class="hero"><span class="kk">Diagnóstico de vendas</span><h1>${esc(loja)}<b>Por onde a loja vai vender mais</b></h1>
- <p>${nome?esc(nome)+", aqui":"Aqui"} está o resultado da nossa conversa: como a loja está hoje em cada etapa da venda, o que mais trava, o plano para os próximos 90 dias e quanto custa fazer.</p>
+ <p>${nome?esc(nome)+", aqui":"Aqui"} está o resultado da nossa conversa: como a loja está hoje em cada etapa da venda, o que mais trava, o plano para os próximos 90 dias e a proposta, com tudo o que está incluso.</p>
  <div class="meta"><span>${dataTxt}</span>${d.pr?`<span>${esc(d.pr)}</span>`:""}<span>Preparado por Gustavo Lara</span></div></section>
 
 <section class="sec rv"><span class="kk">Resumo</span><h2>Em uma <b>frase</b></h2>
@@ -248,23 +290,86 @@ ${d.ob?`<section class="sec rv"><span class="kk">Minha leitura</span><h2>O que e
  <div><h3>${ETAPAS[g2].n}</h3><p class="mu">Atacar a segunda etapa mais fraca: ${ETAPAS[g2].q.toLowerCase()}.</p></div>
  <div><h3>Números</h3><p class="mu">Ler os números de venda do período, ver o que funcionou e ajustar o plano.</p></div></div></section>
 
-${d.it.length?`<section class="sec rv"><span class="kk">O que entra no trabalho</span><h2>Só o que a loja <b>precisa</b></h2>
- <p class="mu">Montei a proposta a partir do diagnóstico: entra o que resolve as etapas fracas, nada de pacote fechado.</p>${grupos}
- <p class="mu" style="margin-top:16px;font-size:15px">Todo mês você recebe um relatório com os números de venda e fala direto comigo, sem intermediários.</p></section>`:""}
+<section class="sec rv" id="pacote"><span class="kk">Seu pacote</span><h2>O que está <b>incluso</b></h2>
+ <p class="mu">Montei o pacote a partir do diagnóstico: entra só o que resolve as etapas fracas da loja. Abaixo está cada serviço, a quantidade e tudo o que ele inclui. Quer tirar algo, mudar uma quantidade ou incluir outro serviço? Ajuste aqui mesmo e me mande pelo WhatsApp.</p>
+ <div class="pk" id="pk"></div>
+ <div id="itens"></div>
+ <div class="sempre"><div><b>Relatório mensal</b><span>Os números de venda e dos canais, explicados de forma simples.</span></div><div><b>Portal do cliente</b><span>Você aprova os conteúdos e acompanha tudo num lugar só.</span></div><div><b>Fala direto comigo</b><span>Sem intermediários, pelo WhatsApp.</span></div></div>
+ <details class="ex" id="extras"><summary>Quer incluir mais alguma coisa?</summary><div id="exl"></div></details></section>
 
 <section class="sec rv" id="investimento"><span class="kk">Investimento</span><h2>Duas formas de <b>começar</b></h2>
- <p class="mu">O trabalho é o mesmo nas duas. Muda só a forma de pagar.</p>${opcoes}${ajuste}
+ <p class="mu">O trabalho é o mesmo nas duas. Muda só a forma de pagar.</p><div id="inv"></div>
  <p class="aviso" style="margin-top:12px">Valores válidos até ${validade}.</p></section>
 
 <section class="sec rv"><span class="kk">Depois do sim</span><h2>Como <b>começa</b></h2>
  <div class="ps"><div><h3>Escolha</h3><p>Você me diz qual opção prefere pelo WhatsApp.</p></div><div><h3>Contrato</h3><p>Envio o contrato com exatamente o que está nesta página.</p></div><div><h3>Acessos</h3><p>Organizamos os acessos (Instagram, anúncios, Google) numa conversa rápida.</p></div><div><h3>Mão na massa</h3><p>Começo pelo gargalo já na primeira semana.</p></div></div></section>
 
 <section class="sec cta rv"><span class="kk" style="color:#F26B73">Próximo passo</span><h2>Vamos <b>começar?</b></h2>
- <p>Ficou alguma dúvida ou quer ajustar alguma coisa na proposta? Me chama no WhatsApp que eu respondo.</p>
- <div class="bts"><a class="btn zap" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero começar.`)}" target="_blank" rel="noopener">Quero começar <i>→</i></a>
- <a class="btn gh" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e tenho uma dúvida.`)}" target="_blank" rel="noopener">Tenho uma dúvida <i>→</i></a></div></section>`;
+ <p>Ficou alguma dúvida ou quer conversar sobre a proposta? Me chama no WhatsApp que eu respondo.</p>
+ <div class="bts" id="ctab"></div></section>
+<div class="ajb" id="ajb" role="status"><div><b id="ajt">Você ajustou a proposta</b><small id="ajs"></small><button type="button" class="lk" id="ajr">Desfazer ajustes</button></div><a class="btn zap" id="aje" href="#" target="_blank" rel="noopener">Enviar ajustes <i>→</i></a></div>`;
 
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}}),{threshold:.12});
+function cartao(x){const c=CAT[x.k],o=orig.find(y=>y.k===x.k);
+  return `<div class="sv${x.on?"":" off"}${x.novo?" nv":""}" data-k="${x.k}">
+   <div class="svh"><div><h4>${esc(c.n)}${c.u&&x.on?` · ${x.q} ${esc(un(c,x.q))}${c.m?" por mês":""}`:""}</h4><p>${esc(c.why)}</p></div><span class="bdg${c.m?"":" u"}">${c.m?"Todo mês":"Feito uma vez"}</span></div>
+   ${c.u?`<div class="qt"><div class="st"><button type="button" data-a="-" aria-label="Diminuir" ${x.q<=1?"disabled":""}>−</button><output>${x.q}</output><button type="button" data-a="+" aria-label="Aumentar" ${x.q>=c.max?"disabled":""}>+</button></div><small>${esc(c.qd||"")}${o&&o.q!==x.q?` <b>Proposta original: ${o.q}.</b>`:""}</small></div>`:""}
+   <div class="svb"><ul>${(c.inc||[]).map(i=>`<li>${esc(i)}</li>`).join("")}</ul></div>
+   <button type="button" class="tg" data-a="t">${x.novo?(x.on?"Tirar o que eu incluí":"Incluir"):(x.on?"Tirar da proposta":"Fora da proposta · colocar de volta")}</button></div>`}
+
+function render(){
+  const ativos=it.filter(x=>x.on),mens=ativos.filter(x=>CAT[x.k].m).length,uma=ativos.length-mens;
+  $("#pk").innerHTML=`<span><b>${mens}</b> ${mens==1?"serviço":"serviços"} todo mês</span><span><b>${uma}</b> ${uma==1?"entrega feita":"entregas feitas"} uma vez</span>`;
+  $("#itens").innerHTML=["mov","vit","ate","vol"].map(k=>{const l=it.filter(x=>KET[CAT[x.k].et]===k);if(!l.length)return"";
+    return `<div class="grp"><h3>${ETAPAS[k].n}${k===g?'<span class="pill">Gargalo</span>':""}</h3>${l.map(cartao).join("")}</div>`}).join("");
+  const fora=Object.keys(CAT).filter(k=>!it.some(x=>x.k===k));
+  $("#extras").hidden=!fora.length;
+  $("#exl").innerHTML=fora.map(k=>`<div class="exi"><div><b>${esc(CAT[k].n)}</b><span>${esc(CAT[k].why)} · ${CAT[k].m?"todo mês":"feito uma vez"}</span></div><button type="button" data-add="${k}">Incluir</button></div>`).join("");
+  invest();barra();
+}
+function invest(){
+  const t=atuais(),{D3,D6,DV}=d, m3=t.m*(1-D3/100), m6=t.m*(1-D6/100), cheio=t.m*3+t.p, imp=cheio*(1-DV/100), tot1=m3*3+t.p;
+  const aj=mudancas().length?`<div class="mudou">Valores já com os seus ajustes. Eu confirmo tudo com você antes do contrato.</div>`:"";
+  const contrato=d.b&&(Math.round(t.m)!==d.b.tm||Math.round(t.p)!==d.b.tp)?`<div class="ajuste"><b>Ajuste no seu contrato.</b> Hoje: ${brl(d.b.tm)}/mês${d.b.tp?` + ${brl(d.b.tp)} de projeto`:""}. Com esta versão: ${brl(t.m)}/mês${t.p?` + ${brl(t.p)} de projeto`:""}${Math.round(t.m)!==d.b.tm?` (${t.m>d.b.tm?"+":"−"}${brl(Math.abs(t.m-d.b.tm))} por mês)`:""}.</div>`:"";
+  const msg=o=>wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero seguir com a ${o}.`+(mudancas().length?`\n\nCom estes ajustes:\n• ${mudancas().join("\n• ")}`:""));
+  $("#inv").innerHTML=aj+(t.m?`<div class="op">
+  <div class="oc"><small>Opção 1</small><h3>Mensal com fidelidade</h3><div class="v">${brl(m3)}<sub>/mês</sub></div>
+   <p class="mu">por 3 meses${t.p?` + <b>${brl(t.p)}</b> de entrada, que cobre o que é feito uma vez`:""}.</p>
+   <ul><li>Total nos 3 meses: ${brl(tot1)}</li><li>Paga mês a mês, sem pesar no caixa</li><li>Com fidelidade de 6 meses: ${brl(m6)}/mês</li><li>Sem fidelidade: ${brl(t.m)}/mês</li></ul>
+   <a class="btn gh" href="${msg("Opção 1 (mensal com fidelidade)")}" target="_blank" rel="noopener">Quero a Opção 1 <i>→</i></a></div>
+  <div class="oc hl"><span class="tag">Menor custo total</span><small>Opção 2</small><h3>Implantação de 90 dias</h3><div class="v">${brl(imp)}</div>
+   <p class="mu">pagamento único à vista, com ${DV}% de desconto, pelos 3 meses completos de trabalho.</p>
+   <ul><li>Economia de ${brl(tot1-imp)} em relação à Opção 1</li><li>Todo o pacote acima, durante 90 dias</li><li>Parcelado, vale o valor cheio: ${brl(cheio)}</li></ul>
+   <a class="btn" href="${msg("Opção 2 (implantação de 90 dias à vista)")}" target="_blank" rel="noopener">Quero a Opção 2 <i>→</i></a></div></div>
+  <p class="mu" style="margin-top:16px;font-size:15px">Depois dos 90 dias, se fizer sentido continuar, seguimos no mensal: ${brl(m3)}/mês com nova fidelidade de 3 meses, ou ${brl(m6)}/mês com 6 meses. A verba dos anúncios é paga à parte, direto na plataforma (Meta, Google), e fica no seu cartão.</p>`
+  :`<div class="op"><div class="oc hl"><small>Projeto</small><h3>Investimento</h3><div class="v">${brl(t.p)}</div><p class="mu">pagamento do que é feito uma vez.</p>
+   <a class="btn" href="${msg("proposta")}" target="_blank" rel="noopener">Quero seguir <i>→</i></a></div></div>`)+contrato;
+  $("#ctab").innerHTML=`<a class="btn zap" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero começar.`+(mudancas().length?`\n\nCom estes ajustes:\n• ${mudancas().join("\n• ")}`:""))}" target="_blank" rel="noopener">Quero começar <i>→</i></a>
+   <a class="btn gh" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e tenho uma dúvida.`)}" target="_blank" rel="noopener">Tenho uma dúvida <i>→</i></a>`;
+}
+function barra(){
+  const mm=mudancas(),t=atuais();
+  $("#ajb").classList.toggle("on",!!mm.length);$("#fz").classList.toggle("sobe",!!mm.length);
+  if(!mm.length)return;
+  $("#ajt").textContent=`Você fez ${mm.length} ${mm.length==1?"ajuste":"ajustes"} na proposta`;
+  $("#ajs").textContent=`Novo valor: ${t.m?brl(t.m*(1-d.D3/100))+"/mês na Opção 1":""}${t.m&&t.p?" + ":""}${t.p?brl(t.p)+" de entrada":""}`;
+  $("#aje").href=wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e queria ajustar a proposta:\n• ${mm.join("\n• ")}\n\nPode me mandar a versão nova?`);
+}
+document.addEventListener("click",e=>{
+  const ad=e.target.closest("[data-add]");
+  if(ad){const k=ad.dataset.add;it.push({k,q:(window.GL_QTD_PADRAO||{})[k]||1,on:true,novo:true});render();
+    setTimeout(()=>{const el=document.querySelector(`.sv[data-k="${k}"]`);el&&el.scrollIntoView({behavior:"smooth",block:"center"})},50);return}
+  if(e.target.id==="ajr"){it=orig.map(x=>({k:x.k,q:x.q,on:true,novo:false}));render();return}
+  const b=e.target.closest(".sv [data-a]");if(!b)return;
+  const k=b.closest(".sv").dataset.k,x=it.find(y=>y.k===k),c=CAT[k];
+  if(b.dataset.a==="+")x.q=Math.min(c.max,x.q+1);
+  else if(b.dataset.a==="-")x.q=Math.max(1,x.q-1);
+  else if(x.novo&&x.on)it=it.filter(y=>y!==x);
+  else x.on=!x.on;
+  render();
+});
+render();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}}),{threshold:.08});
 document.querySelectorAll(".rv").forEach(el=>io.observe(el));
 const ib=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll(".tr i").forEach((i,n)=>setTimeout(()=>i.style.width=i.dataset.w+"%",n*150));ib.unobserve(e.target)}}),{threshold:.3});
 ib.observe($("#et"));

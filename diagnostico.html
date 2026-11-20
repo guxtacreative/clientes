@@ -3,6 +3,13 @@
 <meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Diagnóstico de vendas</title>
 <link rel="icon" type="image/png" href="icone.png">
+<link rel="manifest" href="diagnostico.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#A8141F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Diagnóstico">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <style>
 /* VOICE: ferramenta de trabalho do Gustavo, direta e calma
@@ -123,27 +130,11 @@ table{width:100%;border-collapse:collapse;font-size:15px;margin-top:8px}td,th{pa
 </div>
 <div class="toast" id="toast"></div>
 
+<script src="catalogo.js"></script>
 <script>{
 /* ===== CATÁLOGO E PREÇOS (mesma base da calculadora do Hub) ===== */
-const CAT={
- trafego:{n:"Gestão de anúncios",u:"plataforma",max:2,m:1,et:"Movimento",why:"Trazer gente nova todo mês, com relatório",p:q=>q>=2?1500:900},
- gmnCfg:{n:"Google Meu Negócio: configuração",m:0,et:"Movimento",why:"Aparecer para quem procura na região",p:()=>350},
- gmn:{n:"Google Meu Negócio: gestão",m:1,et:"Movimento",why:"Fotos, posts e avaliações em dia",p:()=>250},
- mkt:{n:"Gestão de marketplace",u:"marketplace",max:3,m:1,et:"Movimento",why:"Anúncios, fotos, preço e reputação",p:q=>800*q},
- post:{n:"Posts por mês",u:"posts",max:40,m:1,et:"Vitrine",why:"Instagram com padrão e frequência",p:q=>90*q},
- video:{n:"Reels editados por mês",u:"vídeos",max:30,m:1,et:"Vitrine",why:"Vídeo de produto vende mais que arte parada",p:q=>(q>=4?125:150)*q},
- capt:{n:"Captação na loja por mês",u:"visitas",max:8,m:1,et:"Vitrine",why:"Material real da loja para os vídeos",p:q=>350*q},
- identE:{n:"Identidade visual Essencial",m:0,et:"Vitrine",why:"Logo, cores e fontes com padrão",p:()=>1500},
- identC:{n:"Identidade visual Completa",m:0,et:"Vitrine",why:"Marca com manual e papelaria",p:()=>2800},
- lp:{n:"Landing page com WhatsApp",m:0,et:"Vitrine",why:"Destino para os anúncios e para o Google",p:()=>1800},
- site5:{n:"Site com até 5 páginas",m:0,et:"Vitrine",why:"Site institucional completo",p:()=>3200},
- ecom:{n:"E-commerce próprio",m:0,et:"Vitrine",why:"Loja virtual com pagamento e frete",p:()=>3800},
- cartao:{n:"Cartão de visita",m:0,et:"Vitrine",why:"Arte pronta para a gráfica",p:()=>250},
- apres:{n:"Apresentação institucional",m:0,et:"Vitrine",why:"Até 12 slides para vender",p:()=>690},
- zap:{n:"Estruturação do atendimento no WhatsApp",m:0,et:"Atendimento",why:"Mensagens prontas, listas e roteiro",p:()=>600},
- trein:{n:"Treinamento de atendimento",u:"sessões",max:6,m:0,et:"Atendimento",why:"Equipe atendendo e fechando do mesmo jeito",p:q=>450*q},
- analise:{n:"Análise de vendas e campanhas de recompra",m:1,et:"Volta",why:"Lista ativa e datas fortes planejadas",p:()=>400}};
-const D3=5,D6=10,DV=10;
+const CAT=window.GL_CAT;
+const {D3,D6,DV}=window.GL_PGTO;
 const ET=[{k:"mov",n:"Movimento",f:["m1","m2","m3"]},{k:"vit",n:"Vitrine",f:["v1","v2","v3"]},{k:"ate",n:"Atendimento",f:["a1","a3"]},{k:"vol",n:"Volta",f:["r1","r3"]}];
 const f=document.getElementById("f"),$=id=>document.getElementById(id);
 const brl=n=>"R$ "+Math.round(n).toLocaleString("pt-BR");
@@ -194,7 +185,7 @@ function render(){
   const nomes=et=>r.it.filter(x=>CAT[x.id].et===et).map(x=>CAT[x.id].n);
   const m1=nomes(g.n),m2=nomes(r.ord[1].n);
   const conta=r.mes&&r.tk&&r.conv?`<div class="calc">Hoje ${esc(loja)} recebe cerca de <b>${Math.round(r.mes)} contatos por mês</b> e fecha <b>${r.conv} de cada 10</b>. Com ticket de <b>${brl(r.tk)}</b>, isso dá perto de <b>${brl(r.hoje)}/mês</b> vindo desses contatos.<br><br>Fechando <b>2 a mais de cada 10</b>, são cerca de <b>${brl(r.mais2)} a mais por mês</b>. Com <b>20% mais contatos</b>, mais <b>${brl(r.mais20)}</b>.${r.tm?` A assessoria mensal proposta é <b>${brl(r.tm)}</b>.`:""}<br><span class="note">Estimativa com os números informados pelo lojista. Não é promessa de resultado.</span></div>`:`<p class="note">Preencha contatos, conversão e ticket para ver as contas.</p>`;
-  const lin=r.it.map((x,i)=>{const c=CAT[x.id];return `<tr><td data-l="Item">${esc(c.n)}</td><td data-l="Etapa"><span class="tag">${c.et}</span></td><td data-l="Qtd">${c.u?`<input class="q" type="number" min="1" max="${c.max}" value="${x.q}" data-i="${i}" aria-label="Quantidade de ${esc(c.u)}"> <span class="note">${c.u}</span>`:"—"}</td><td class="n" data-l="Valor">${brl(val(x))}${c.m?"/mês":""}</td><td data-l=""><button type="button" class="x" data-x="${i}" aria-label="Tirar ${esc(c.n)}">×</button></td></tr>`}).join("");
+  const lin=r.it.map((x,i)=>{const c=CAT[x.id];return `<tr><td data-l="Item">${esc(c.n)}</td><td data-l="Etapa"><span class="tag">${c.et}</span></td><td data-l="Qtd">${c.u?`<input class="q" type="number" min="1" max="${c.max}" value="${x.q}" data-i="${i}" aria-label="Quantidade de ${esc(c.us||c.u)}"> <span class="note">${c.us||c.u}</span>`:"—"}</td><td class="n" data-l="Valor">${brl(val(x))}${c.m?"/mês":""}</td><td data-l=""><button type="button" class="x" data-x="${i}" aria-label="Tirar ${esc(c.n)}">×</button></td></tr>`}).join("");
   const livres=Object.keys(CAT).filter(k=>!r.it.some(x=>x.id===k));
   const base=cur.base,dm=base?r.tm-base.tm:0,dp=base?r.tp-base.tp:0;
   const obs=f.elements.obs.value.trim();
@@ -223,15 +214,15 @@ function render(){
    Os dados vão comprimidos depois do # do link (não passam por servidor).
    O cliente vê só os totais e o que entra no trabalho, sem o preço de cada item. */
 const VALIDADE=7;
-const DEV_URL=(location.protocol==="file:"||/claude\.ai|claudeusercontent/.test(location.hostname))?"https://cliente.guxta.com.br/devolutiva.html":new URL("devolutiva.html",location.href).href;
+const DEV_URL=(location.protocol==="file:"||/claude\.ai|claudeusercontent/.test(location.hostname))?"https://gustavolara.com.br/clientes/devolutiva.html":new URL("devolutiva.html",location.href).href;
 async function comprime(o){const s=new Blob([JSON.stringify(o)]).stream().pipeThrough(new CompressionStream("deflate-raw"));
   const b=new Uint8Array(await new Response(s).arrayBuffer());let t="";b.forEach(c=>t+=String.fromCharCode(c));return btoa(t).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
 async function linkCliente(r,loja){
   if(!r.it.length){toast("Coloque ao menos um item na proposta");return}
-  const p={v:1,l:loja,re:f.elements.resp.value.trim(),pr:f.elements.prod.value.trim(),d:new Date().toISOString(),val:VALIDADE,
+  const p={v:2,l:loja,re:f.elements.resp.value.trim(),pr:f.elements.prod.value.trim(),d:new Date().toISOString(),val:VALIDADE,
     sc:Object.fromEntries(ET.map(e=>[e.k,+r.sc[e.k].toFixed(1)])),me:+r.media.toFixed(1),fa:r.fase,o:r.ord.map(e=>e.k),
     c:r.mes&&r.tk&&r.conv?{mes:Math.round(r.mes),conv:r.conv,tk:r.tk,hoje:Math.round(r.hoje),mais2:Math.round(r.mais2),mais20:Math.round(r.mais20)}:null,
-    ob:f.elements.obs.value.trim(),it:r.it.map(x=>{const c=CAT[x.id];return {n:c.n,w:c.why,e:c.et,q:x.q||1,u:c.u||"",m:c.m}}),
+    ob:f.elements.obs.value.trim(),it:r.it.map(x=>[x.id,x.q||1]),
     tm:Math.round(r.tm),tp:Math.round(r.tp),D3,D6,DV,b:cur.base?{tm:Math.round(cur.base.tm),tp:Math.round(cur.base.tp)}:null};
   let url;try{url=DEV_URL+"#"+await comprime(p)}catch(e){toast("Este navegador não gera o link. Use o Chrome atualizado.");return}
   cur.link=url;guardar(true);
@@ -248,7 +239,7 @@ function editar(fn){if(!cur.prop)cur.prop=calc().it.map(x=>({...x}));fn(cur.prop
 $("devbox").addEventListener("change",e=>{const q=e.target.closest(".q");if(q)editar(p=>{const c=CAT[p[q.dataset.i].id];p[q.dataset.i].q=Math.max(1,Math.min(c.max,+q.value||1))})});
 $("devbox").addEventListener("click",e=>{const t=e.target;
   if(t.dataset.x!==undefined)editar(p=>p.splice(+t.dataset.x,1));
-  else if(t.id==="addbt"){const k=$("addsel").value;if(k)editar(p=>p.push({id:k,q:k==="post"?8:k==="video"?4:1}))}
+  else if(t.id==="addbt"){const k=$("addsel").value;if(k)editar(p=>p.push({id:k,q:(window.GL_QTD_PADRAO||{})[k]||1}))}
   else if(t.id==="rst"){cur.prop=null;render()}
   else if(t.id==="ct"){const r=calc();cur.base={tm:r.tm,tp:r.tp,data:new Date().toLocaleDateString("pt-BR"),it:r.it.map(x=>({...x}))};render();toast("Valor do contrato registrado")}});
 function copiar(r,loja,bons,ruins,g){
@@ -256,7 +247,7 @@ function copiar(r,loja,bons,ruins,g){
   const t=[`*Diagnóstico de vendas: ${loja}*`,``,`Média geral: ${r.media.toFixed(1)} · Fase: ${r.fase}`,...ET.map(e=>`• ${e.n}: ${r.sc[e.k].toFixed(1)}`),``,`*Gargalo:* ${g.n}`,
     bons.length?`*Está bom:* ${bons.map(e=>e.n).join(", ")}`:"",ruins.length?`*Precisa melhorar:* ${ruins.map(e=>e.n).join(", ")}`:"",``,
     r.mes&&r.tk&&r.conv?`Fechando 2 a mais de cada 10 contatos, são cerca de ${brl(r.mais2)} a mais por mês (estimativa com os seus números).`:"",
-    f.elements.obs.value.trim(),``,b&&dm?`*Ajuste do contrato*`:`*Proposta*`,...r.it.map(x=>`• ${CAT[x.id].n}${CAT[x.id].u?` (${x.q} ${CAT[x.id].u})`:""}: ${brl(val(x))}${CAT[x.id].m?"/mês":""}`),
+    f.elements.obs.value.trim(),``,b&&dm?`*Ajuste do contrato*`:`*Proposta*`,...r.it.map(x=>`• ${CAT[x.id].n}${CAT[x.id].u?` (${x.q} ${x.q==1?CAT[x.id].u:CAT[x.id].us})`:""}: ${brl(val(x))}${CAT[x.id].m?"/mês":""}`),
     `Opção 1 · Mensal com fidelidade: ${brl(m3(r))}/mês por 3 meses${r.tp?` + ${brl(r.tp)} de entrada`:""} = ${brl(m3(r)*3+r.tp)}`,`Opção 2 · Implantação de 90 dias à vista (−${DV}%): ${brl(imp(r))}`,r.tm?`Depois dos 90 dias: segue no mensal, se quiser continuar.`:"",b&&dm?`Antes: ${brl(b.tm)}/mês · Diferença: ${dm>0?"+":"−"}${brl(Math.abs(dm))}/mês`:""].filter((x,i,a)=>x!==""||a[i-1]!=="").join("\n");
   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast("Copiado. É só colar no WhatsApp"),()=>toast("Não consegui copiar neste aparelho"));
 }
@@ -271,4 +262,5 @@ $("novo").onclick=()=>{cur={id:"d"+Date.now()};f.reset();render();scrollTo({top:
 $("ver").onclick=()=>$("dev").scrollIntoView({behavior:"smooth"});
 lista();render();
 }</script>
+<script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw-diagnostico.js").catch(()=>{}));</script>
 </body></html>
