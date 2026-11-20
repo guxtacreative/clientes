@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#EDEAE6">
+<title>Diagnóstico de vendas · Gustavo Lara</title>
+<link rel="icon" type="image/png" href="icone.png">
+<style>
+/* Devolutiva para o cliente: mesmo visual do site gustavolara.com.br.
+   Os dados vêm no próprio link (depois do #), gerado na ferramenta de diagnóstico do Hub.
+   Nada é enviado a servidor: o que vem depois do # fica só no navegador. */
+:root{--bg:#EDEAE6;--bg2:#F7F5F2;--card:#FFFFFF;--tx:#2B2928;--mu:#5E5B58;--lb:#8A8784;--bd:#E2DDD7;--r:#A8141F;--r2:#8E0F18;--dk:#2B2928;--ok:#1F7A4A;--warn:#B26A00;--zap:#1FAF54}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--tx);font:17px/1.6 Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip;
+  background:radial-gradient(40% 30% at 0% 0%,rgba(168,20,31,.10),transparent 70%),radial-gradient(34% 26% at 100% 100%,rgba(168,20,31,.08),transparent 70%),
+  repeating-linear-gradient(115deg,transparent 0 118px,rgba(43,41,40,.045) 118px 119px),var(--bg);background-attachment:fixed}
+a{color:inherit}
+.w{width:min(1040px,100% - 40px);margin:0 auto}
+header{padding:22px 0}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:14px}
+header img{height:30px;width:auto;display:block}
+.kk{font:700 12px/1.3 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--r)}
+h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3.6vw,38px);font-weight:400;text-transform:uppercase;margin:6px 0 14px}
+h2 b{color:var(--r)}
+h3{font-size:19px}
+p{margin:0 0 12px}
+.mu{color:var(--mu)}
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;background:var(--r);color:#fff;font:700 15px Arial,sans-serif;border-radius:999px;
+  padding:10px 12px 10px 22px;min-height:52px;border:0;cursor:pointer;text-decoration:none;box-shadow:0 12px 28px rgba(168,20,31,.25);
+  background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);background-size:250% 100%;background-position:150% 0;background-repeat:no-repeat;transition:transform .2s,background-color .2s}
+.btn:hover{background-color:var(--r2);background-position:-50% 0;transition:background-position .7s,transform .2s,background-color .2s;transform:translateY(-2px)}
+.btn i{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-style:normal}
+.btn.zap{background-color:var(--zap);box-shadow:0 12px 28px rgba(31,175,84,.28)}
+.btn.zap:hover{background-color:#178F44}
+.btn.gh{background:transparent;color:var(--tx);border:1.5px solid var(--bd);box-shadow:none}
+.btn.gh i{background:var(--bg)}
+.btn:focus-visible{outline:3px solid #E2525C;outline-offset:3px}
+
+/* capa escura, como o cartão do site */
+.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--dk);color:#fff;border-radius:26px;padding:clamp(28px,5vw,56px);margin:6px 0 26px}
+.hero::before{content:"";position:absolute;z-index:-1;width:560px;height:560px;right:-180px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(224,38,47,.45),rgba(224,38,47,0) 65%);animation:pulsa 7s ease-in-out infinite}
+.hero::after{content:"";position:absolute;z-index:-1;inset:0;background:repeating-linear-gradient(115deg,transparent 0 90px,rgba(255,255,255,.05) 90px 91px)}
+.hero .kk{color:#F26B73}
+.hero h1{font-size:clamp(34px,6vw,64px);font-weight:400;text-transform:uppercase;margin:10px 0 16px;line-height:1}
+.hero h1 b{color:#F0434D;font-weight:700;display:block}
+.hero p{color:#D9D4D0;max-width:620px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.meta span{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:7px 14px;font-size:14px;color:#EDEAE6}
+
+.sec{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:clamp(22px,4vw,40px);margin:0 0 22px}
+.sec.cl{background:transparent;border:0;padding-left:0;padding-right:0}
+
+/* resumo em 3 números */
+.res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:8px}
+.res div{background:var(--bg2);border:1px solid var(--bd);border-radius:16px;padding:18px}
+.res small{display:block;color:var(--mu);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.res b{display:block;font-size:30px;line-height:1.1;margin:6px 0 4px}
+.res .gg b{color:var(--r)}
+.res p{font-size:14px;color:var(--mu);margin:0}
+
+/* etapas */
+.et{display:grid;gap:14px;margin-top:10px}
+.e{display:grid;grid-template-columns:200px minmax(0,1fr) 64px;gap:16px;align-items:center;padding:16px 0;border-top:1px solid var(--bd)}
+.e:first-child{border-top:0}
+.e h3{font-size:18px}.e h3 small{display:block;font:400 14px/1.4 Arial,sans-serif;color:var(--mu);margin-top:4px}
+.tr{height:12px;border-radius:99px;background:var(--bg);overflow:hidden}
+.tr i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.e .n{font-size:24px;font-weight:700;text-align:right}
+.e .st{grid-column:2/4;font-size:14px;margin-top:-6px}
+.e.g{background:linear-gradient(90deg,rgba(168,20,31,.06),transparent);border-radius:14px;padding-left:12px;padding-right:12px;border-top-color:transparent}
+.pill{display:inline-block;background:var(--r);color:#fff;font:700 11px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;border-radius:99px;padding:3px 9px;margin-left:8px;vertical-align:middle}
+
+.c2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.lst{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:10px}
+.lst li{display:flex;gap:10px;align-items:flex-start}
+.lst li::before{content:"";flex:0 0 10px;height:10px;margin-top:8px;border-radius:2px;background:var(--r);transform:skewX(-12deg)}
+.lst.ok li::before{background:var(--ok)}
+.box{background:var(--bg2);border:1px solid var(--bd);border-radius:16px;padding:20px}
+
+.contas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:12px 0}
+.contas div{border:1px solid var(--bd);border-radius:16px;padding:18px;background:var(--bg2)}
+.contas small{color:var(--mu);font-size:13px;display:block}
+.contas b{font-size:26px;display:block;margin-top:4px}
+.contas .up b{color:var(--ok)}
+.aviso{font-size:13px;color:var(--lb)}
+.leitura{border-left:4px solid var(--r);padding:4px 0 4px 18px;font-size:18px}
+
+/* 90 dias */
+.tl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:m}
+.tl div{position:relative;border:1px solid var(--bd);border-radius:16px;padding:22px 18px 18px;background:var(--card)}
+.tl div::before{counter-increment:m;content:"Mês " counter(m);display:inline-block;background:var(--dk);color:#fff;font:700 12px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;border-radius:99px;padding:5px 11px;margin-bottom:10px}
+.tl div:first-child::before{background:var(--r)}
+
+/* o que entra */
+.grp{margin-top:18px}
+.grp h3{display:flex;align-items:center;gap:10px;font-size:16px;text-transform:uppercase;letter-spacing:.08em;color:var(--mu)}
+.it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:14px 0;border-top:1px solid var(--bd)}
+.it b{font-size:17px}.it span{color:var(--mu);font-size:15px;grid-column:1}
+.it em{font-style:normal;font-size:13px;font-weight:700;color:var(--r);background:#F9ECEC;border-radius:99px;padding:4px 10px;align-self:start;grid-row:1/3;grid-column:2;white-space:nowrap}
+
+/* investimento */
+.op{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:12px}
+.oc{position:relative;border:1.5px solid var(--bd);border-radius:20px;padding:26px;background:var(--card);display:flex;flex-direction:column;gap:6px}
+.oc.hl{border-color:var(--r);box-shadow:0 24px 50px -30px rgba(168,20,31,.55)}
+.oc .tag{position:absolute;top:-12px;left:22px;background:var(--r);color:#fff;font:700 11px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;border-radius:99px;padding:5px 11px}
+.oc small{font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+.oc h3{font-size:22px;margin-bottom:4px}
+.oc .v{font-size:clamp(30px,4vw,40px);font-weight:700;line-height:1.05;margin:6px 0 2px}
+.oc .v sub{font-size:16px;font-weight:400;color:var(--mu);vertical-align:baseline}
+.oc ul{margin:10px 0 16px;padding:0;list-style:none;display:grid;gap:8px;font-size:15px}
+.oc li{display:flex;gap:8px}.oc li::before{content:"✓";color:var(--ok);font-weight:700}
+.oc .btn{margin-top:auto}
+.ajuste{border:1.5px dashed var(--r);border-radius:16px;padding:16px 18px;margin-top:16px;background:#FBF2F2}
+
+/* passos */
+.ps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;counter-reset:p;margin-top:10px}
+.ps div{border-top:3px solid var(--r);padding-top:14px}
+.ps div::before{counter-increment:p;content:counter(p,decimal-leading-zero);display:block;font-size:28px;font-weight:700;color:var(--r);margin-bottom:4px}
+.ps p{font-size:15px;color:var(--mu)}
+
+.cta{background:var(--dk);color:#fff;text-align:center;position:relative;overflow:hidden;isolation:isolate;border:0}
+.cta::before{content:"";position:absolute;z-index:-1;inset:-40% 20% auto;height:500px;background:radial-gradient(circle,rgba(224,38,47,.35),transparent 65%)}
+.cta h2{color:#fff}.cta h2 b{color:#F0434D}
+.cta p{color:#D9D4D0;max-width:560px;margin:0 auto 22px}
+.cta .bts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta .btn.gh{color:#fff;border-color:rgba(255,255,255,.25)}.cta .btn.gh i{background:rgba(255,255,255,.12)}
+
+footer{padding:24px 0 100px;text-align:center;font-size:13px;color:var(--lb)}
+.fz{position:fixed;right:18px;bottom:18px;z-index:10;width:60px;height:60px;border-radius:50%;background:var(--zap);display:grid;place-items:center;box-shadow:0 14px 30px rgba(31,175,84,.4);animation:onda 2.4s ease-out infinite}
+.fz svg{width:30px;height:30px}
+.vazio{text-align:center;padding:80px 20px}
+
+/* entrada ao rolar */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+@keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes onda{0%{box-shadow:0 0 0 0 rgba(31,175,84,.45),0 14px 30px rgba(31,175,84,.4)}100%{box-shadow:0 0 0 18px rgba(31,175,84,0),0 14px 30px rgba(31,175,84,.4)}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero::before,.fz{animation:none}.tr i{transition:none}}
+
+@media (max-width:820px){
+  header .kk{display:none}
+  .res,.contas,.tl,.op,.c2{grid-template-columns:1fr}
+  .ps{grid-template-columns:1fr 1fr}
+  .e{grid-template-columns:minmax(0,1fr) 54px;gap:8px 12px}
+  .e .tr{grid-column:1/3;grid-row:2}
+  .e .st{grid-column:1/3;margin-top:0}
+  .btn{width:100%}
+}
+@media print{body{background:#fff}.fz,.cta .bts{display:none}.rv{opacity:1;transform:none}.sec,.hero{break-inside:avoid}}
+</style></head>
+<body>
+<header><div class="w"><img src="logo.png" alt="gustavolara"><span class="kk" id="hd">Diagnóstico de vendas</span></div></header>
+<main class="w" id="app"><div class="sec vazio"><p class="mu">Carregando a devolutiva…</p></div></main>
+<footer><div class="w">Gustavo Lara · Assessoria de marketing e vendas · Duque de Caxias/RJ</div></footer>
+<a class="fz" id="fz" href="#" target="_blank" rel="noopener" aria-label="Falar com o Gustavo no WhatsApp" hidden><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></a>
+<script>
+(async function(){
+const WHATS="5521965165370";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const brl=n=>"R$ "+Math.round(n||0).toLocaleString("pt-BR");
+const ETAPAS={
+  mov:{n:"Movimento",q:"Gente nova chegando até a loja",t:"Anúncios, Google, marketplace: quantas pessoas novas descobrem a loja todo mês."},
+  vit:{n:"Vitrine",q:"Como a loja aparece e convence",t:"Instagram, fotos, vídeos, site e marca: o que faz a pessoa confiar e querer comprar."},
+  ate:{n:"Atendimento",q:"Como o contato vira venda",t:"WhatsApp, tempo de resposta, roteiro e fechamento: quanto do interesse vira compra."},
+  vol:{n:"Volta",q:"Cliente que compra de novo e indica",t:"Lista de clientes, datas fortes e pós-venda: o lucro que vem de quem já comprou."}};
+const FASE={Estruturar:"Primeiro arrumar a base. Investir em anúncio agora seria trazer gente para uma estrutura que ainda perde vendas.",
+  Crescer:"A base já existe. É hora de trazer mais gente e fechar mais das conversas que já chegam.",
+  Acelerar:"O processo já funciona. Agora é escalar o que dá resultado, com mais verba e mais canais."};
+const estado=v=>v<4?["Precisa de atenção agora","var(--r)"]:v<7?["Funciona, mas dá para crescer","var(--warn)"]:["Ponto forte","var(--ok)"];
+const SING={visitas:"visita","vídeos":"vídeo",posts:"post","sessões":"sessão"};
+const qtd=x=>{if(!x.u)return x.n;const nm=x.n.replace(/ por mês$/,""),u=x.q==1?(SING[x.u]||x.u):x.u;return `${nm} · ${x.q} ${u}${x.m?" por mês":""}`};
+const wa=t=>`https://wa.me/${WHATS}?text=${encodeURIComponent(t)}`;
+
+async function ler(){
+  const h=location.hash.slice(1);if(!h)return null;
+  const b64=h.replace(/-/g,"+").replace(/_/g,"/");const bin=atob(b64+"===".slice((b64.length+3)%4));
+  const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+  const s=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+  return JSON.parse(await new Response(s).text());
+}
+let d=null;try{d=await ler()}catch(e){}
+if(!d){$("#app").innerHTML=`<div class="sec vazio"><h2>Link <b>incompleto</b></h2><p class="mu">Não consegui abrir esta devolutiva. Confira se o link foi copiado inteiro ou fale comigo.</p><p><a class="btn zap" href="${wa("Olá, Gustavo! Não consegui abrir o link da devolutiva.")}" target="_blank" rel="noopener">Falar no WhatsApp <i>→</i></a></p></div>`;return}
+
+const loja=d.l||"sua loja", nome=(d.re||"").split(" ")[0];
+document.title="Diagnóstico de vendas · "+loja;
+const ord=d.o, g=ord[0], g2=ord[1];
+const dt=new Date(d.d), dataTxt=dt.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"});
+const validade=new Date(dt.getTime()+(d.val||7)*864e5).toLocaleDateString("pt-BR");
+const bons=Object.keys(ETAPAS).filter(k=>d.sc[k]>=7), ruins=ord.filter(k=>d.sc[k]<6);
+const doEt=k=>d.it.filter(x=>x.e===ETAPAS[k].n);
+const m3=d.tm*(1-d.D3/100), m6=d.tm*(1-d.D6/100), cheio=d.tm*3+d.tp, imp=cheio*(1-d.DV/100), tot1=m3*3+d.tp;
+$("#fz").href=wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e queria conversar.`);$("#fz").hidden=false;
+
+const etapasHTML=["mov","vit","ate","vol"].map(k=>{const v=d.sc[k],[st,c]=estado(v),E=ETAPAS[k];
+  return `<div class="e${k===g?" g":""}"><h3>${E.n}${k===g?'<span class="pill">Gargalo</span>':""}<small>${E.q}</small></h3><div class="tr"><i data-w="${v*10}" style="background:${c}"></i></div><div class="n" style="color:${c}">${v.toFixed(1)}</div><p class="st mu"><b style="color:${c}">${st}.</b> ${E.t}</p></div>`}).join("");
+
+const grupos=["mov","vit","ate","vol"].map(k=>{const it=doEt(k);if(!it.length)return"";
+  return `<div class="grp"><h3>${ETAPAS[k].n}${k===g?'<span class="pill">Gargalo</span>':""}</h3>${it.map(x=>`<div class="it"><b>${esc(qtd(x))}</b><span>${esc(x.w)}</span><em>${x.m?"Todo mês":"Feito uma vez"}</em></div>`).join("")}</div>`}).join("");
+
+const temContas=d.c&&d.c.mes&&d.c.tk&&d.c.conv;
+const contas=temContas?`<section class="sec rv"><span class="kk">As contas</span><h2>O que está <b>na mesa</b></h2>
+  <p>Com os números que você me passou: cerca de <b>${Math.round(d.c.mes)} contatos por mês</b>, fechando <b>${d.c.conv} de cada 10</b>, com ticket médio de <b>${brl(d.c.tk)}</b>.</p>
+  <div class="contas"><div><small>Hoje, vindo desses contatos</small><b>${brl(d.c.hoje)}/mês</b></div><div class="up"><small>Fechando 2 a mais de cada 10</small><b>+${brl(d.c.mais2)}/mês</b></div><div class="up"><small>Com 20% mais contatos</small><b>+${brl(d.c.mais20)}/mês</b></div></div>
+  <p class="aviso">Estimativa feita com os números informados por você. Serve para mostrar o tamanho da oportunidade, não é promessa de resultado.</p></section>`:"";
+
+const opcoes=d.tm?`<div class="op">
+  <div class="oc"><small>Opção 1</small><h3>Mensal com fidelidade</h3><div class="v">${brl(m3)}<sub>/mês</sub></div>
+   <p class="mu">por 3 meses${d.tp?` + <b>${brl(d.tp)}</b> de entrada, que cobre o que é feito uma vez`:""}.</p>
+   <ul><li>Total nos 3 meses: ${brl(tot1)}</li><li>Paga mês a mês, sem pesar no caixa</li><li>Com fidelidade de 6 meses: ${brl(m6)}/mês</li><li>Sem fidelidade: ${brl(d.tm)}/mês</li></ul>
+   <a class="btn gh" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero seguir com a Opção 1 (mensal com fidelidade).`)}" target="_blank" rel="noopener">Quero a Opção 1 <i>→</i></a></div>
+  <div class="oc hl"><span class="tag">Menor custo total</span><small>Opção 2</small><h3>Implantação de 90 dias</h3><div class="v">${brl(imp)}</div>
+   <p class="mu">pagamento único à vista, com ${d.DV}% de desconto, pelos 3 meses completos de trabalho.</p>
+   <ul><li>Economia de ${brl(tot1-imp)} em relação à Opção 1</li><li>Tudo o que está na lista acima, durante 90 dias</li><li>Parcelado, vale o valor cheio: ${brl(cheio)}</li></ul>
+   <a class="btn" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero seguir com a Opção 2 (implantação de 90 dias à vista).`)}" target="_blank" rel="noopener">Quero a Opção 2 <i>→</i></a></div></div>
+  <p class="mu" style="margin-top:16px;font-size:15px">Depois dos 90 dias, se fizer sentido continuar, seguimos no mensal: ${brl(m3)}/mês com nova fidelidade de 3 meses, ou ${brl(m6)}/mês com 6 meses. A verba dos anúncios é paga à parte, direto na plataforma (Meta, Google), e fica no seu cartão.</p>`
+ :`<div class="op"><div class="oc hl"><small>Projeto</small><h3>Investimento</h3><div class="v">${brl(d.tp)}</div><p class="mu">pagamento do que é feito uma vez.</p>
+   <a class="btn" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero seguir com o projeto.`)}" target="_blank" rel="noopener">Quero seguir <i>→</i></a></div></div>`;
+
+const ajuste=d.b&&(d.tm!==d.b.tm||d.tp!==d.b.tp)?`<div class="ajuste"><b>Ajuste no seu contrato.</b> Hoje: ${brl(d.b.tm)}/mês${d.b.tp?` + ${brl(d.b.tp)} de projeto`:""}. Com esta versão: ${brl(d.tm)}/mês${d.tp?` + ${brl(d.tp)} de projeto`:""}${d.tm!==d.b.tm?` (${d.tm>d.b.tm?"+":"−"}${brl(Math.abs(d.tm-d.b.tm))} por mês)`:""}.</div>`:"";
+
+$("#app").innerHTML=`
+<section class="hero"><span class="kk">Diagnóstico de vendas</span><h1>${esc(loja)}<b>Por onde a loja vai vender mais</b></h1>
+ <p>${nome?esc(nome)+", aqui":"Aqui"} está o resultado da nossa conversa: como a loja está hoje em cada etapa da venda, o que mais trava, o plano para os próximos 90 dias e quanto custa fazer.</p>
+ <div class="meta"><span>${dataTxt}</span>${d.pr?`<span>${esc(d.pr)}</span>`:""}<span>Preparado por Gustavo Lara</span></div></section>
+
+<section class="sec rv"><span class="kk">Resumo</span><h2>Em uma <b>frase</b></h2>
+ <p style="font-size:19px">Hoje o que mais segura as vendas da ${esc(loja)} é <b style="color:var(--r)">${ETAPAS[g].n.toLowerCase()}</b>: ${ETAPAS[g].q.toLowerCase()}. Resolvendo isso primeiro, o resto do investimento passa a render mais.</p>
+ <div class="res"><div><small>Nota geral</small><b>${d.me.toFixed(1)}<span class="mu" style="font-size:18px"> / 10</span></b><p>Média das 4 etapas</p></div>
+ <div class="gg"><small>Gargalo</small><b>${ETAPAS[g].n}</b><p>Nota ${d.sc[g].toFixed(1)}</p></div>
+ <div><small>Fase</small><b>${esc(d.fa)}</b><p>${FASE[d.fa]||""}</p></div></div></section>
+
+<section class="sec rv"><span class="kk">As 4 etapas da venda</span><h2>Onde a loja <b>está hoje</b></h2>
+ <p class="mu">Toda venda passa por quatro etapas. Dei uma nota de 0 a 10 para cada uma, com base no que você me contou e no que eu vi.</p>
+ <div class="et" id="et">${etapasHTML}</div></section>
+
+<section class="c2 rv" style="margin-bottom:22px">
+ <div class="sec" style="margin:0"><span class="kk" style="color:var(--ok)">O que está bom</span>${bons.length?`<ul class="lst ok">${bons.map(k=>`<li><span><b>${ETAPAS[k].n}</b> · ${ETAPAS[k].q.toLowerCase()}. Vamos aproveitar isso.</span></li>`).join("")}</ul>`:`<p class="mu" style="margin-top:8px">Nenhuma etapa passou de 7 ainda. É normal: a maioria das lojas está assim no começo.</p>`}</div>
+ <div class="sec" style="margin:0"><span class="kk">O que precisa melhorar</span>${ruins.length?`<ul class="lst">${ruins.map(k=>`<li><span><b>${ETAPAS[k].n}</b> · ${ETAPAS[k].q.toLowerCase()}.</span></li>`).join("")}</ul>`:`<p class="mu" style="margin-top:8px">Nenhuma etapa abaixo de 6. O trabalho é de ajuste fino.</p>`}</div></section>
+
+${contas}
+${d.ob?`<section class="sec rv"><span class="kk">Minha leitura</span><h2>O que eu <b>vi</b></h2><p class="leitura">${esc(d.ob).replace(/\n/g,"<br>")}</p></section>`:""}
+
+<section class="sec rv"><span class="kk">Plano</span><h2>Os primeiros <b>90 dias</b></h2>
+ <div class="tl"><div><h3>${ETAPAS[g].n}</h3><p class="mu">Resolver o gargalo: ${ETAPAS[g].q.toLowerCase()}.</p></div>
+ <div><h3>${ETAPAS[g2].n}</h3><p class="mu">Atacar a segunda etapa mais fraca: ${ETAPAS[g2].q.toLowerCase()}.</p></div>
+ <div><h3>Números</h3><p class="mu">Ler os números de venda do período, ver o que funcionou e ajustar o plano.</p></div></div></section>
+
+${d.it.length?`<section class="sec rv"><span class="kk">O que entra no trabalho</span><h2>Só o que a loja <b>precisa</b></h2>
+ <p class="mu">Montei a proposta a partir do diagnóstico: entra o que resolve as etapas fracas, nada de pacote fechado.</p>${grupos}
+ <p class="mu" style="margin-top:16px;font-size:15px">Todo mês você recebe um relatório com os números de venda e fala direto comigo, sem intermediários.</p></section>`:""}
+
+<section class="sec rv" id="investimento"><span class="kk">Investimento</span><h2>Duas formas de <b>começar</b></h2>
+ <p class="mu">O trabalho é o mesmo nas duas. Muda só a forma de pagar.</p>${opcoes}${ajuste}
+ <p class="aviso" style="margin-top:12px">Valores válidos até ${validade}.</p></section>
+
+<section class="sec rv"><span class="kk">Depois do sim</span><h2>Como <b>começa</b></h2>
+ <div class="ps"><div><h3>Escolha</h3><p>Você me diz qual opção prefere pelo WhatsApp.</p></div><div><h3>Contrato</h3><p>Envio o contrato com exatamente o que está nesta página.</p></div><div><h3>Acessos</h3><p>Organizamos os acessos (Instagram, anúncios, Google) numa conversa rápida.</p></div><div><h3>Mão na massa</h3><p>Começo pelo gargalo já na primeira semana.</p></div></div></section>
+
+<section class="sec cta rv"><span class="kk" style="color:#F26B73">Próximo passo</span><h2>Vamos <b>começar?</b></h2>
+ <p>Ficou alguma dúvida ou quer ajustar alguma coisa na proposta? Me chama no WhatsApp que eu respondo.</p>
+ <div class="bts"><a class="btn zap" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e quero começar.`)}" target="_blank" rel="noopener">Quero começar <i>→</i></a>
+ <a class="btn gh" href="${wa(`Olá, Gustavo! Vi a devolutiva da ${loja} e tenho uma dúvida.`)}" target="_blank" rel="noopener">Tenho uma dúvida <i>→</i></a></div></section>`;
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+const ib=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll(".tr i").forEach((i,n)=>setTimeout(()=>i.style.width=i.dataset.w+"%",n*150));ib.unobserve(e.target)}}),{threshold:.3});
+ib.observe($("#et"));
+})();
+</script>
+</body></html>

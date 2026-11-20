@@ -24,7 +24,7 @@
     const plano=Object.keys(lim).length&&cliente.plano_nome?` · plano ${esc(cliente.plano_nome)}`:"";
     const hoje=new Date().toLocaleDateString("pt-BR");
 
-    let h=opt.portal?"":`<div class="brandbar"><img class="logo" src="logo.png" alt="" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logo.svg'}else{this.remove()}"><span class="eyebrow marca-tag">Onde estratégia, criação e gestão se encontram</span></div>`;
+    let h=opt.portal?"":`<div class="brandbar"><img class="logo" src="logo.png" alt="" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logo.svg'}else{this.remove()}"><span class="eyebrow marca-tag">Assessoria de marketing e vendas</span></div>`;
     h+=`
     <header class="hero capa">
       <span class="eyebrow">Relatório mensal · ${esc(MARCA)}</span>

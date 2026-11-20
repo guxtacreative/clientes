@@ -13,23 +13,23 @@
   const ICONES={
     aprovado:["#0F8A4A",'<path d="M20 6 9 17l-5-5"/>'],
     pedido_aprovado:["#0F8A4A",'<path d="M20 6 9 17l-5-5"/>'],
-    ajuste:["#773D20",'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>'],
-    alteracao:["#773D20",'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>'],
+    ajuste:["#991019",'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>'],
+    alteracao:["#991019",'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>'],
     pedido:["#2F6BFF",'<path d="M12 5v14M5 12h14"/>'],
     proposta_vista:["#7A5AF8",'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>'],
     proposta_assinada:["#0F8A4A",'<path d="M3 17c3 0 4-3 6-3s2 3 4 3 3-6 5-6 2 2 3 2"/><path d="M3 21h18"/>'],
-    proposta_recusada:["#864525",'<path d="M18 6 6 18M6 6l12 12"/>'],
-    pagamento_atrasado:["#864525",'<rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/>'],
-    vence_hoje:["#773D20",'<rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/>'],
+    proposta_recusada:["#A8141F",'<path d="M18 6 6 18M6 6l12 12"/>'],
+    pagamento_atrasado:["#A8141F",'<rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/>'],
+    vence_hoje:["#991019",'<rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/>'],
     lembrete:["#2F6BFF",'<path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/>'],
-    lembrete_whatsapp:["#773D20",'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
+    lembrete_whatsapp:["#991019",'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
     relatorio:["#7A5AF8",'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'],
-    boleto_pedido:["#773D20",'<path d="M4 5v14M7 5v14M10 5v14M14 5v14M17 5v14M20 5v14"/>'],
+    boleto_pedido:["#991019",'<path d="M4 5v14M7 5v14M10 5v14M14 5v14M17 5v14M20 5v14"/>'],
     cliente_pagou:["#0F8A4A",'<rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/><path d="m9 15 2 2 4-4"/>'],
     pagamento_recebido:["#0F8A4A",'<rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/><path d="m9 15 2 2 4-4"/>'],
     loja_pedido:["#0F8A4A",'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 7H6"/>'],
-    loja_abandono:["#773D20",'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 7H6"/>'],
-    sistema:["#6B6B6B",'<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/>']
+    loja_abandono:["#991019",'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 7H6"/>'],
+    sistema:["#5E5B58",'<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/>']
   };
   const icone=t=>{const [cor,p]=ICONES[t]||ICONES.sistema;
     return `<i class="av-ico" style="--c:${cor}" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg></i>`};

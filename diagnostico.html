@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnóstico de vendas</title>
+<link rel="icon" type="image/png" href="icone.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: ferramenta de trabalho do Gustavo, direta e calma
+   IDEA: uma ficha de diagnóstico de consultório, com o laudo saindo ao lado
+   PICTURE: o próprio laudo: 4 barras das etapas, gargalo em destaque e a proposta
+   COLOUR and TYPE: claro + grafite + carmim da marca gustavolara; Arial no texto, Montserrat só no logo
+   LAYOUT: ficha numa coluna à esquerda, laudo fixo à direita; no celular o laudo vem depois da ficha */
+:root{color-scheme:light dark;--bg:light-dark(#EDEAE6,#141312);--card:light-dark(#fff,#1F1D1C);--ink:light-dark(#2B2928,#EDEAE6);--mu:light-dark(#5E5B58,#A8A39E);--bd:light-dark(#E2DDD7,#2E2B29);--r:#A8141F;--r2:light-dark(#A8141F,#E2525C);--ok:light-dark(#1F7A4A,#4CC38A);--warn:light-dark(#B26A00,#F0A93B)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Arial,Helvetica,sans-serif;overflow-x:clip}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px max(5vw,16px);border-bottom:1px solid var(--bd)}
+.lg{display:flex;align-items:center;gap:10px;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:20px;letter-spacing:-.03em}.lg svg{width:30px}
+.hb{display:flex;gap:8px;flex-wrap:wrap}
+button,.bt{font:700 14px Arial,sans-serif;border-radius:999px;padding:11px 18px;min-height:44px;border:1px solid var(--bd);background:var(--card);color:var(--ink);cursor:pointer}
+button.p{background:var(--r);border-color:var(--r);color:#fff}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #E2525C;outline-offset:2px}
+.wrap{padding:24px max(5vw,16px) 60px;max-width:1240px;margin:0 auto}.top{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px;align-items:start;margin-bottom:28px}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.05;margin:0 0 6px;text-wrap:balance}h1 b{color:var(--r2)}
+.sub{color:var(--mu);margin:0 0 20px}
+fieldset{border:1px solid var(--bd);background:var(--card);border-radius:16px;padding:20px;margin:0 0 16px}
+legend{font-weight:700;font-size:18px;padding:0 6px}legend small{display:block;font-weight:400;font-size:13px;color:var(--mu)}
+.g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+label{display:grid;gap:6px;font-size:14px;font-weight:700}label span{font-weight:400;color:var(--mu);font-size:13px}
+input,select,textarea{font:16px Arial,sans-serif;padding:11px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--ink);width:100%;min-height:44px}
+textarea{min-height:90px;resize:vertical}
+.res{position:sticky;top:16px;display:grid;gap:14px}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:20px}
+.box h2{font-size:15px;margin:0 0 12px;color:var(--mu)}
+.bar{display:grid;grid-template-columns:110px minmax(0,1fr) 34px;gap:10px;align-items:center;margin:8px 0;font-size:14px}
+.tr{height:12px;border-radius:99px;background:var(--bd);overflow:hidden}.tr i{display:block;height:100%;border-radius:99px;transition:width .5s}
+.bar b{text-align:right}
+.gg{font-size:26px;font-weight:700;line-height:1.1;color:var(--r2);margin:2px 0 4px}
+.fase{display:inline-block;background:var(--r);color:#fff;font-weight:700;font-size:13px;border-radius:99px;padding:5px 12px}
+.tot{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.tot div{background:var(--bg);border-radius:12px;padding:12px}.tot small{display:block;color:var(--mu);font-size:13px}.tot b{font-size:22px;white-space:nowrap}
+.note{font-size:13px;color:var(--mu)}
+
+#dev .box{padding:clamp(20px,4vw,40px)}
+.dh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.dh h2{font-size:clamp(24px,3vw,34px);color:var(--ink);margin:0;line-height:1.1}
+.c3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}
+.c3>div{background:var(--bg);border-radius:14px;padding:16px}.c3 h3{margin:0 0 8px;font-size:15px}
+ul{margin:0;padding-left:18px}li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:8px}td,th{padding:10px 8px;border-bottom:1px solid var(--bd);text-align:left}td.n,th.n{text-align:right;white-space:nowrap}
+.tag{font-size:12px;font-weight:700;color:var(--r2)}
+.calc{background:var(--bg);border-radius:14px;padding:16px;margin:14px 0}.calc b{color:var(--r2);white-space:nowrap}
+.toast{position:fixed;left:50%;bottom:20px;translate:-50% 0;background:#2B2928;color:#fff;padding:12px 18px;border-radius:99px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none}.toast.on{opacity:1}
+@media(max-width:960px){.top{grid-template-columns:minmax(0,1fr)}.res{position:static}.c3{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.g{grid-template-columns:minmax(0,1fr)}.bar{grid-template-columns:92px minmax(0,1fr) 30px}table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:7em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:6.5em;margin-inline-start:-7em;color:var(--mu)}}
+@media(prefers-reduced-motion:reduce){.tr i{transition:none}}
+.q{width:72px;min-height:40px;padding:8px}.x{min-height:36px;padding:4px 12px;font-size:18px;line-height:1}.lk{border:0;background:none;color:var(--r2);text-decoration:underline;padding:0;min-height:0;font-size:13px}
+.add{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.add select{flex:1 1 240px;width:auto}
+.fmt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}.fmt>div{background:var(--bg);border-radius:14px;padding:16px;display:grid;gap:4px}.fmt .hl{outline:2px solid var(--r)}.fmt small{color:var(--mu);font-size:13px;font-weight:700}.fmt b{font-size:24px;white-space:nowrap}.fmt b.sm{font-size:15px;color:var(--ink)}.fmt span{font-size:13px;color:var(--mu)}@media(max-width:600px){.fmt{grid-template-columns:minmax(0,1fr)}}
+.ctr{margin-top:18px;padding-top:16px;border-top:1px dashed var(--bd)}
+</style></head><body>
+<header><div class="lg"><svg viewBox="-54 -42 106 84" aria-hidden="true"><g transform="skewX(-12)" fill="none" stroke-linejoin="round"><mask id="a" maskUnits="userSpaceOnUse" x="-80" y="-60" width="160" height="120"><rect x="-80" y="-60" width="160" height="120" fill="#fff"/><path d="M0,-12H30Q38,-12 38,-4V26Q38,34 30,34H0Q-8,34 -8,26V-4Q-8,-12 0,-12Z" stroke="#000" stroke-width="17.5"/></mask><mask id="b" maskUnits="userSpaceOnUse" x="-80" y="-60" width="160" height="120"><rect x="-80" y="-60" width="160" height="120" fill="#fff"/><path d="M6,-24V-2" stroke="#000" stroke-width="17.5"/></mask><path mask="url(#a)" d="M-32,-34H-2Q6,-34 6,-26V4Q6,12 -2,12H-32Q-40,12 -40,4V-26Q-40,-34 -32,-34Z" stroke="#A8141F" stroke-width="8.5"/><path mask="url(#b)" d="M0,-12H30Q38,-12 38,-4V26Q38,34 30,34H0Q-8,34 -8,26V-4Q-8,-12 0,-12Z" stroke="#A8141F" stroke-width="8.5"/><path d="M6,-24V-2" stroke="#A8141F" stroke-width="8.5"/></g></svg>gustavolara</div>
+<div class="hb"><select id="hist" aria-label="Diagnósticos salvos"><option value="">Diagnósticos salvos</option></select><button type="button" id="novo">Novo</button><button type="button" class="p" id="ver">Ver devolutiva</button></div></header>
+
+<div class="wrap"><div class="top">
+<form id="f" autocomplete="off">
+<h1>Diagnóstico de vendas <b>da loja</b></h1>
+<p class="sub">Preencha durante ou logo depois da conversa. O laudo se atualiza sozinho enquanto você preenche.</p>
+
+<fieldset><legend>Loja</legend><div class="g">
+<label>Nome da loja<input name="loja" placeholder="Ex.: Rei das Capas"></label>
+<label>Responsável<input name="resp" placeholder="Nome de quem decide"></label>
+<label>WhatsApp do cliente<input name="zapcli" inputmode="tel" placeholder="(21) 99999-9999"><span>Para enviar o link da devolutiva</span></label>
+<label>O que vende<input name="prod" placeholder="Ex.: capinhas e acessórios"></label>
+<label>Equipe de vendas<select name="equipe"><option value="0">Só o dono</option><option value="1">1 a 2 pessoas</option><option value="2">3 ou mais</option></select></label>
+<label>Site<select name="site"><option value="0">Não tem</option><option value="1">Tem, desatualizado</option><option value="2">Tem e funciona</option></select></label>
+<label>Marketplace<select name="mkt"><option value="0">Não vende e não quer</option><option value="1">Quer começar</option><option value="2">Já vende</option></select></label>
+</div></fieldset>
+
+<fieldset><legend>Números <small>Mesmo aproximados. São a base das contas.</small></legend><div class="g">
+<label>Faturamento por mês (R$)<input name="fat" inputmode="numeric" placeholder="30000"></label>
+<label>Ticket médio (R$)<input name="ticket" inputmode="numeric" placeholder="150"></label>
+<label>Contatos por semana<span>WhatsApp, Instagram e balcão</span><input name="cont" inputmode="numeric" placeholder="60"></label>
+<label>De cada 10 contatos, quantos compram<input name="conv" inputmode="numeric" placeholder="3"></label>
+<label>% das vendas de quem já comprou<input name="recomp" inputmode="numeric" placeholder="20"></label>
+<label>Investe hoje em marketing (R$/mês)<input name="invest" inputmode="numeric" placeholder="0"></label>
+<label>Quanto faz sentido investir (R$/mês)<span>O que ele respondeu na pergunta 17</span><input name="verba" inputmode="numeric" placeholder="2500"></label>
+<label>Meta de faturamento em 6 meses (R$)<input name="meta" inputmode="numeric" placeholder="45000"></label>
+</div></fieldset>
+
+<fieldset><legend>Movimento <small>Como o cliente chega</small></legend><div class="g">
+<label>Origem dos clientes<select name="m1"><option value="2">Só rua e indicação</option><option value="4">Rua e Instagram sem anúncio</option><option value="6">Instagram com anúncio às vezes</option><option value="9">Vários canais com anúncio constante</option></select></label>
+<label>Anúncios<select name="m2"><option value="1">Não anuncia</option><option value="3">Impulsiona sozinho</option><option value="6">Tem gestor, sem relatório</option><option value="9">Campanhas com relatório</option></select></label>
+<label>Google Meu Negócio<select name="m3"><option value="0">Não tem</option><option value="4">Tem, desatualizado</option><option value="6">Completo, poucas avaliações</option><option value="9">Completo, 50+ avaliações</option></select></label>
+</div></fieldset>
+
+<fieldset><legend>Vitrine <small>Por que comprar dessa loja</small></legend><div class="g">
+<label>Diferencial<select name="v1"><option value="2">Não sabe dizer</option><option value="3">Só preço</option><option value="5">Tem, mas não comunica</option><option value="9">Claro e comunicado</option></select></label>
+<label>Instagram<select name="v2"><option value="1">Parado</option><option value="3">Só promoção, sem padrão</option><option value="6">Posta toda semana</option><option value="9">Planejado, com Reels e destaques</option></select></label>
+<label>Marca<select name="v3"><option value="2">Sem logo ou amadora</option><option value="5">Logo ok, sem padrão</option><option value="9">Marca consistente</option></select></label>
+</div></fieldset>
+
+<fieldset><legend>Atendimento <small>Como o contato vira venda</small></legend><div class="g">
+<label>Tempo de resposta no WhatsApp<select name="a1"><option value="2">Mais de 2 horas</option><option value="5">30 min a 2 horas</option><option value="9">Até 15 minutos</option></select></label>
+<label>Roteiro e treino<select name="a3"><option value="2">Cada um atende do seu jeito</option><option value="5">Algumas mensagens prontas</option><option value="9">Roteiro e treino da equipe</option></select></label>
+</div><p class="note">A conversão (de 10, quantos compram) também entra na nota de atendimento.</p></fieldset>
+
+<fieldset><legend>Volta <small>O cliente compra de novo</small></legend><div class="g">
+<label>Lista de clientes<select name="r1"><option value="1">Não tem</option><option value="3">Tem e não usa</option><option value="6">Usa às vezes</option><option value="9">Usa com frequência</option></select></label>
+<label>Datas fortes<select name="r3"><option value="2">Não faz nada</option><option value="5">Faz em cima da hora</option><option value="9">Planeja com antecedência</option></select></label>
+</div><p class="note">O % de recompra também entra na nota de volta.</p></fieldset>
+
+<fieldset><legend>Sua visão <small>Entra na devolutiva do jeito que você escrever</small></legend>
+<label>Observações<textarea name="obs" placeholder="O que você percebeu na conversa e quer destacar para o cliente"></textarea></label>
+</fieldset>
+</form>
+
+<aside class="res" aria-live="polite">
+<div class="box"><h2>Notas por etapa</h2><div id="bars"></div></div>
+<div class="box"><h2>Gargalo</h2><div class="gg" id="gg">—</div><span class="fase" id="fase">—</span><p class="note" id="ggt"></p></div>
+<div class="box"><h2>Proposta sugerida</h2><div class="tot"><div><small>Mensal</small><b id="tm">R$ 0</b></div><div><small>Projetos</small><b id="tp">R$ 0</b></div></div><p class="note" id="tv"></p></div>
+</aside></div>
+
+<section id="dev" aria-label="Devolutiva"><div class="box" id="devbox"></div></section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>{
+/* ===== CATÁLOGO E PREÇOS (mesma base da calculadora do Hub) ===== */
+const CAT={
+ trafego:{n:"Gestão de anúncios",u:"plataforma",max:2,m:1,et:"Movimento",why:"Trazer gente nova todo mês, com relatório",p:q=>q>=2?1500:900},
+ gmnCfg:{n:"Google Meu Negócio: configuração",m:0,et:"Movimento",why:"Aparecer para quem procura na região",p:()=>350},
+ gmn:{n:"Google Meu Negócio: gestão",m:1,et:"Movimento",why:"Fotos, posts e avaliações em dia",p:()=>250},
+ mkt:{n:"Gestão de marketplace",u:"marketplace",max:3,m:1,et:"Movimento",why:"Anúncios, fotos, preço e reputação",p:q=>800*q},
+ post:{n:"Posts por mês",u:"posts",max:40,m:1,et:"Vitrine",why:"Instagram com padrão e frequência",p:q=>90*q},
+ video:{n:"Reels editados por mês",u:"vídeos",max:30,m:1,et:"Vitrine",why:"Vídeo de produto vende mais que arte parada",p:q=>(q>=4?125:150)*q},
+ capt:{n:"Captação na loja por mês",u:"visitas",max:8,m:1,et:"Vitrine",why:"Material real da loja para os vídeos",p:q=>350*q},
+ identE:{n:"Identidade visual Essencial",m:0,et:"Vitrine",why:"Logo, cores e fontes com padrão",p:()=>1500},
+ identC:{n:"Identidade visual Completa",m:0,et:"Vitrine",why:"Marca com manual e papelaria",p:()=>2800},
+ lp:{n:"Landing page com WhatsApp",m:0,et:"Vitrine",why:"Destino para os anúncios e para o Google",p:()=>1800},
+ site5:{n:"Site com até 5 páginas",m:0,et:"Vitrine",why:"Site institucional completo",p:()=>3200},
+ ecom:{n:"E-commerce próprio",m:0,et:"Vitrine",why:"Loja virtual com pagamento e frete",p:()=>3800},
+ cartao:{n:"Cartão de visita",m:0,et:"Vitrine",why:"Arte pronta para a gráfica",p:()=>250},
+ apres:{n:"Apresentação institucional",m:0,et:"Vitrine",why:"Até 12 slides para vender",p:()=>690},
+ zap:{n:"Estruturação do atendimento no WhatsApp",m:0,et:"Atendimento",why:"Mensagens prontas, listas e roteiro",p:()=>600},
+ trein:{n:"Treinamento de atendimento",u:"sessões",max:6,m:0,et:"Atendimento",why:"Equipe atendendo e fechando do mesmo jeito",p:q=>450*q},
+ analise:{n:"Análise de vendas e campanhas de recompra",m:1,et:"Volta",why:"Lista ativa e datas fortes planejadas",p:()=>400}};
+const D3=5,D6=10,DV=10;
+const ET=[{k:"mov",n:"Movimento",f:["m1","m2","m3"]},{k:"vit",n:"Vitrine",f:["v1","v2","v3"]},{k:"ate",n:"Atendimento",f:["a1","a3"]},{k:"vol",n:"Volta",f:["r1","r3"]}];
+const f=document.getElementById("f"),$=id=>document.getElementById(id);
+const brl=n=>"R$ "+Math.round(n).toLocaleString("pt-BR");
+const num=k=>{const v=String(f.elements[k].value||"").replace(/\./g,"").replace(",",".");return parseFloat(v)||0};
+const sel=k=>+f.elements[k].value;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cor=n=>n<4?"var(--r2)":n<7?"var(--warn)":"var(--ok)";
+const KEY="gl_diag_v1";
+function store(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+function save(d){try{const s=store();s[d.id]=d;localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+let cur={id:"d"+Date.now()};
+const val=x=>CAT[x.id].p(x.q||1);
+const cheio=r=>r.tm*3+r.tp,imp=r=>cheio(r)*(1-DV/100),m3=r=>r.tm*(1-D3/100),m6=r=>r.tm*(1-D6/100);
+
+function scores(){
+  const conv=Math.min(10,num("conv")),rec=num("recomp"),sc={};
+  ET.forEach(e=>{let v=e.f.map(sel);if(e.k==="ate"&&num("conv"))v.push(Math.min(10,conv*2));if(e.k==="vol"&&f.elements.recomp.value!=="")v.push(Math.min(10,rec/5));sc[e.k]=v.reduce((a,b)=>a+b,0)/v.length});
+  return sc;
+}
+function auto(sc){
+  const it=[],add=(id,q)=>it.push({id,q:q||1});
+  if(sc.mov<7){if(sel("m2")<6)add("trafego",1);if(sel("m3")<6){add("gmnCfg");add("gmn")}}
+  if(sc.vit<7){if(sel("v2")<6){add("post",8);add("video",4);add("capt",1)}if(sel("v3")<5)add(sel("v3")<=2?"identC":"identE")}
+  if(+f.elements.site.value<2)add("lp");
+  if(+f.elements.mkt.value>0)add("mkt",1);
+  if(sc.ate<7||sc.vol<6){add("zap");if(+f.elements.equipe.value>0&&sel("a3")<6)add("trein",2)}
+  if(sc.vol<6)add("analise");
+  return it;
+}
+const tot=it=>({m:it.filter(x=>CAT[x.id].m).reduce((a,x)=>a+val(x),0),p:it.filter(x=>!CAT[x.id].m).reduce((a,x)=>a+val(x),0)});
+
+function calc(){
+  const sc=scores(),ord=[...ET].sort((a,b)=>sc[a.k]-sc[b.k]),media=ET.reduce((a,e)=>a+sc[e.k],0)/4;
+  const fase=media<4.5?"Estruturar":media<7?"Crescer":"Acelerar";
+  const it=cur.prop?cur.prop:auto(sc),t=tot(it),g=ord[0].n,en=it.filter(x=>CAT[x.id].et===g),te=tot(en);
+  const conv=Math.min(10,num("conv")),cont=num("cont"),tk=num("ticket"),mes=cont*4.3;
+  const hoje=mes*(conv/10)*tk,mais2=mes*(Math.min(10,conv+2)/10)*tk-hoje,mais20=mes*1.2*(conv/10)*tk-hoje;
+  return {sc,ord,media,fase,it,tm:t.m,tp:t.p,em:te.m,ep:te.p,hoje,mais2,mais20,mes,conv,tk,verba:num("verba")};
+}
+
+function render(){
+  const r=calc(),loja=f.elements.loja.value.trim()||"a loja",g=r.ord[0];
+  $("bars").innerHTML=ET.map(e=>{const v=r.sc[e.k];return `<div class="bar"><span>${e.n}</span><div class="tr"><i style="width:${v*10}%;background:${cor(v)}"></i></div><b>${v.toFixed(1)}</b></div>`}).join("");
+  $("gg").textContent=g.n;$("fase").textContent="Fase: "+r.fase;$("ggt").textContent=`Nota ${r.sc[g.k].toFixed(1)}. Média geral ${r.media.toFixed(1)}.`;
+  $("tm").textContent=brl(r.tm);$("tp").textContent=brl(r.tp);
+  $("tv").textContent=r.verba?(r.tm<=r.verba?`Cabe no que ele disse que faz sentido (${brl(r.verba)}/mês).`:`Acima dos ${brl(r.verba)}/mês que ele citou. Versão enxuta, só o gargalo: ${brl(r.em)}/mês + ${brl(r.ep)} de projeto.`):"Preencha a verba para comparar.";
+  const bons=ET.filter(e=>r.sc[e.k]>=7),ruins=r.ord.filter(e=>r.sc[e.k]<6);
+  const nomes=et=>r.it.filter(x=>CAT[x.id].et===et).map(x=>CAT[x.id].n);
+  const m1=nomes(g.n),m2=nomes(r.ord[1].n);
+  const conta=r.mes&&r.tk&&r.conv?`<div class="calc">Hoje ${esc(loja)} recebe cerca de <b>${Math.round(r.mes)} contatos por mês</b> e fecha <b>${r.conv} de cada 10</b>. Com ticket de <b>${brl(r.tk)}</b>, isso dá perto de <b>${brl(r.hoje)}/mês</b> vindo desses contatos.<br><br>Fechando <b>2 a mais de cada 10</b>, são cerca de <b>${brl(r.mais2)} a mais por mês</b>. Com <b>20% mais contatos</b>, mais <b>${brl(r.mais20)}</b>.${r.tm?` A assessoria mensal proposta é <b>${brl(r.tm)}</b>.`:""}<br><span class="note">Estimativa com os números informados pelo lojista. Não é promessa de resultado.</span></div>`:`<p class="note">Preencha contatos, conversão e ticket para ver as contas.</p>`;
+  const lin=r.it.map((x,i)=>{const c=CAT[x.id];return `<tr><td data-l="Item">${esc(c.n)}</td><td data-l="Etapa"><span class="tag">${c.et}</span></td><td data-l="Qtd">${c.u?`<input class="q" type="number" min="1" max="${c.max}" value="${x.q}" data-i="${i}" aria-label="Quantidade de ${esc(c.u)}"> <span class="note">${c.u}</span>`:"—"}</td><td class="n" data-l="Valor">${brl(val(x))}${c.m?"/mês":""}</td><td data-l=""><button type="button" class="x" data-x="${i}" aria-label="Tirar ${esc(c.n)}">×</button></td></tr>`}).join("");
+  const livres=Object.keys(CAT).filter(k=>!r.it.some(x=>x.id===k));
+  const base=cur.base,dm=base?r.tm-base.tm:0,dp=base?r.tp-base.tp:0;
+  const obs=f.elements.obs.value.trim();
+  $("devbox").innerHTML=`<div class="dh"><h2>Devolutiva: ${esc(loja)}</h2><div class="hb"><button type="button" class="p" id="lk">Link para o cliente</button><button type="button" id="cp">Copiar texto</button><button type="button" id="sv">Salvar</button></div><div id="lkbox"></div></div>
+  <p>Avaliei ${esc(loja)} nas 4 etapas do método Negócio que Vende. A média ficou em <b>${r.media.toFixed(1)}</b>, o que coloca a loja na fase <b>${r.fase}</b>. O ponto que mais trava as vendas hoje é <b>${g.n}</b>.</p>
+  <div class="c3"><div><h3>O que está bom</h3>${bons.length?`<ul>${bons.map(e=>`<li>${e.n} (${r.sc[e.k].toFixed(1)})</li>`).join("")}</ul>`:'<p class="note">Nenhuma etapa acima de 7 ainda.</p>'}</div>
+  <div><h3>O que precisa melhorar</h3>${ruins.length?`<ul>${ruins.map(e=>`<li>${e.n} (${r.sc[e.k].toFixed(1)})</li>`).join("")}</ul>`:'<p class="note">Nenhuma etapa abaixo de 6.</p>'}</div>
+  <div><h3>Primeiros 90 dias</h3><ul><li><b>Mês 1:</b> resolver ${g.n}${m1.length?" ("+m1.join(", ")+")":""}.</li><li><b>Mês 2:</b> atacar ${r.ord[1].n}${m2.length?" ("+m2.join(", ")+")":""}.</li><li><b>Mês 3:</b> ler os números de venda e ajustar.</li></ul></div></div>
+  <h3>As contas</h3>${conta}
+  ${obs?`<h3>Minha leitura</h3><p>${esc(obs).replace(/\n/g,"<br>")}</p>`:""}
+  <div class="dh" style="margin-top:22px"><h3 style="margin:0">Proposta</h3><span class="note">${cur.prop?'Editada por você. <button type="button" class="lk" id="rst">Voltar à sugestão automática</button>':"Sugestão automática pelo diagnóstico. Ajuste à vontade."}</span></div>
+  ${r.it.length?`<div class="scroll"><table class="stack"><thead><tr><th>Item</th><th>Etapa</th><th>Qtd</th><th class="n">Valor</th><th></th></tr></thead><tbody>${lin}</tbody></table></div>`:'<p class="note">Nenhum item na proposta.</p>'}
+  <div class="add"><select id="addsel" aria-label="Serviço para adicionar"><option value="">Adicionar serviço…</option>${livres.map(k=>`<option value="${k}">${esc(CAT[k].n)}</option>`).join("")}</select><button type="button" id="addbt">Adicionar</button></div>
+  ${r.em&&r.em<r.tm?`<p><b>Versão enxuta (só ${g.n}):</b> ${brl(r.em)}/mês + ${brl(r.ep)} de projeto.</p>`:""}
+  ${r.tm||r.tp?`<div class="fmt"><div><small>Opção 1 · Mensal com fidelidade</small><b>${brl(m3(r))}/mês</b><span>por 3 meses${r.tp?` + ${brl(r.tp)} de entrada (projetos)`:""}</span><span><b class="sm">${brl(m3(r)*3+r.tp)}</b> em 3 meses</span><span>Fidelidade de 6 meses: ${brl(m6(r))}/mês (−${D6}%). Sem fidelidade: ${brl(r.tm)}/mês.</span></div>
+  <div class="hl"><small>Opção 2 · Implantação de 90 dias</small><b>${brl(imp(r))}</b><span>pagamento total à vista, com ${DV}% de desconto</span><span><b class="sm">Economia de ${brl(m3(r)*3+r.tp-imp(r))}</b> em relação à Opção 1</span><span>Parcelado, vale o valor cheio: ${brl(cheio(r))}.</span></div></div>
+  ${r.tm?`<p class="note">Depois dos 90 dias, se quiser continuar, segue no mensal: ${brl(m3(r))}/mês com nova fidelidade de 3 meses, ou ${brl(m6(r))}/mês com 6 meses.</p>`:""}
+  <p class="note">Verba de anúncio paga à parte, direto na plataforma.</p>`:""}
+  <div class="ctr">${base?`<p><b>Contratado em ${base.data}:</b> ${brl(base.tm)}/mês + ${brl(base.tp)} de projeto.${dm||dp?` <b>Ajuste agora:</b> ${[dm?`${dm>0?"+":"−"}${brl(Math.abs(dm))}/mês (novo mensal ${brl(r.tm)})`:"",dp?`${dp>0?"+":"−"}${brl(Math.abs(dp))} de projeto`:""].filter(Boolean).join(" e ")}.`:" Sem mudanças desde o contrato."}</p>`:""}
+  <button type="button" id="ct">${base?"Atualizar contrato com esta versão":"Marcar como contratado"}</button></div>`;
+  $("cp").onclick=()=>copiar(r,loja,bons,ruins,g);$("lk").onclick=()=>linkCliente(r,loja);$("sv").onclick=()=>{guardar();toast("Diagnóstico salvo neste aparelho")};
+  guardar(true);
+}
+
+/* ===== LINK DA DEVOLUTIVA PARA O CLIENTE =====
+   Os dados vão comprimidos depois do # do link (não passam por servidor).
+   O cliente vê só os totais e o que entra no trabalho, sem o preço de cada item. */
+const VALIDADE=7;
+const DEV_URL=(location.protocol==="file:"||/claude\.ai|claudeusercontent/.test(location.hostname))?"https://cliente.guxta.com.br/devolutiva.html":new URL("devolutiva.html",location.href).href;
+async function comprime(o){const s=new Blob([JSON.stringify(o)]).stream().pipeThrough(new CompressionStream("deflate-raw"));
+  const b=new Uint8Array(await new Response(s).arrayBuffer());let t="";b.forEach(c=>t+=String.fromCharCode(c));return btoa(t).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+async function linkCliente(r,loja){
+  if(!r.it.length){toast("Coloque ao menos um item na proposta");return}
+  const p={v:1,l:loja,re:f.elements.resp.value.trim(),pr:f.elements.prod.value.trim(),d:new Date().toISOString(),val:VALIDADE,
+    sc:Object.fromEntries(ET.map(e=>[e.k,+r.sc[e.k].toFixed(1)])),me:+r.media.toFixed(1),fa:r.fase,o:r.ord.map(e=>e.k),
+    c:r.mes&&r.tk&&r.conv?{mes:Math.round(r.mes),conv:r.conv,tk:r.tk,hoje:Math.round(r.hoje),mais2:Math.round(r.mais2),mais20:Math.round(r.mais20)}:null,
+    ob:f.elements.obs.value.trim(),it:r.it.map(x=>{const c=CAT[x.id];return {n:c.n,w:c.why,e:c.et,q:x.q||1,u:c.u||"",m:c.m}}),
+    tm:Math.round(r.tm),tp:Math.round(r.tp),D3,D6,DV,b:cur.base?{tm:Math.round(cur.base.tm),tp:Math.round(cur.base.tp)}:null};
+  let url;try{url=DEV_URL+"#"+await comprime(p)}catch(e){toast("Este navegador não gera o link. Use o Chrome atualizado.");return}
+  cur.link=url;guardar(true);
+  const nome=(f.elements.resp.value.trim().split(" ")[0])||"";
+  const msg=`Olá${nome?", "+nome:""}! Aqui está o diagnóstico de vendas da ${loja}, com o que vi, o plano de 90 dias e a proposta:\n${url}\n\nQualquer dúvida, me chama por aqui.`;
+  const tel=String(f.elements.zapcli.value||"").replace(/\D/g,""),n=tel?(tel.length<=11?"55"+tel:tel):"";
+  $("lkbox").innerHTML=`<div class="calc" style="margin-top:12px"><b>Link da devolutiva pronto.</b><br><span class="note">Válido para mostrar os valores até ${new Date(Date.now()+VALIDADE*864e5).toLocaleDateString("pt-BR")}. Se mudar a proposta, gere de novo.</span>
+   <div class="hb" style="margin-top:10px"><a class="bt" href="${url}" target="_blank" rel="noopener" style="text-decoration:none">Ver como o cliente vê</a><button type="button" id="lkcp">Copiar link</button>
+   <a class="bt" style="text-decoration:none;background:#1FAF54;border-color:#1FAF54;color:#fff" href="https://wa.me/${n}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${n?"Enviar no WhatsApp do cliente":"Enviar pelo WhatsApp"}</a></div></div>`;
+  $("lkcp").onclick=()=>(navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(()=>toast("Link copiado"),()=>toast("Não consegui copiar"));
+  (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(()=>toast("Link copiado"),()=>{});
+}
+function editar(fn){if(!cur.prop)cur.prop=calc().it.map(x=>({...x}));fn(cur.prop);render()}
+$("devbox").addEventListener("change",e=>{const q=e.target.closest(".q");if(q)editar(p=>{const c=CAT[p[q.dataset.i].id];p[q.dataset.i].q=Math.max(1,Math.min(c.max,+q.value||1))})});
+$("devbox").addEventListener("click",e=>{const t=e.target;
+  if(t.dataset.x!==undefined)editar(p=>p.splice(+t.dataset.x,1));
+  else if(t.id==="addbt"){const k=$("addsel").value;if(k)editar(p=>p.push({id:k,q:k==="post"?8:k==="video"?4:1}))}
+  else if(t.id==="rst"){cur.prop=null;render()}
+  else if(t.id==="ct"){const r=calc();cur.base={tm:r.tm,tp:r.tp,data:new Date().toLocaleDateString("pt-BR"),it:r.it.map(x=>({...x}))};render();toast("Valor do contrato registrado")}});
+function copiar(r,loja,bons,ruins,g){
+  const b=cur.base,dm=b?r.tm-b.tm:0;
+  const t=[`*Diagnóstico de vendas: ${loja}*`,``,`Média geral: ${r.media.toFixed(1)} · Fase: ${r.fase}`,...ET.map(e=>`• ${e.n}: ${r.sc[e.k].toFixed(1)}`),``,`*Gargalo:* ${g.n}`,
+    bons.length?`*Está bom:* ${bons.map(e=>e.n).join(", ")}`:"",ruins.length?`*Precisa melhorar:* ${ruins.map(e=>e.n).join(", ")}`:"",``,
+    r.mes&&r.tk&&r.conv?`Fechando 2 a mais de cada 10 contatos, são cerca de ${brl(r.mais2)} a mais por mês (estimativa com os seus números).`:"",
+    f.elements.obs.value.trim(),``,b&&dm?`*Ajuste do contrato*`:`*Proposta*`,...r.it.map(x=>`• ${CAT[x.id].n}${CAT[x.id].u?` (${x.q} ${CAT[x.id].u})`:""}: ${brl(val(x))}${CAT[x.id].m?"/mês":""}`),
+    `Opção 1 · Mensal com fidelidade: ${brl(m3(r))}/mês por 3 meses${r.tp?` + ${brl(r.tp)} de entrada`:""} = ${brl(m3(r)*3+r.tp)}`,`Opção 2 · Implantação de 90 dias à vista (−${DV}%): ${brl(imp(r))}`,r.tm?`Depois dos 90 dias: segue no mensal, se quiser continuar.`:"",b&&dm?`Antes: ${brl(b.tm)}/mês · Diferença: ${dm>0?"+":"−"}${brl(Math.abs(dm))}/mês`:""].filter((x,i,a)=>x!==""||a[i-1]!=="").join("\n");
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast("Copiado. É só colar no WhatsApp"),()=>toast("Não consegui copiar neste aparelho"));
+}
+function dados(){const o={};[...f.elements].forEach(e=>{if(e.name)o[e.name]=e.value});return o}
+function guardar(silent){const loja=f.elements.loja.value.trim();if(silent&&!loja)return;cur.loja=loja||"Sem nome";cur.data=new Date().toLocaleDateString("pt-BR");cur.v=dados();save(cur);lista()}
+function lista(){const s=store(),h=$("hist");h.innerHTML='<option value="">Diagnósticos salvos</option>'+Object.values(s).sort((a,b)=>b.id.localeCompare(a.id)).map(d=>`<option value="${d.id}">${esc(d.loja)} · ${d.data}</option>`).join("");h.value=s[cur.id]?cur.id:""}
+function abrir(id){const d=store()[id];if(!d)return;cur=d;f.reset();Object.entries(d.v||{}).forEach(([k,v])=>{if(f.elements[k])f.elements[k].value=v});render()}
+let tt;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200)}
+f.addEventListener("input",render);f.addEventListener("submit",e=>e.preventDefault());
+$("hist").onchange=e=>e.target.value&&abrir(e.target.value);
+$("novo").onclick=()=>{cur={id:"d"+Date.now()};f.reset();render();scrollTo({top:0,behavior:"smooth"})};
+$("ver").onclick=()=>$("dev").scrollIntoView({behavior:"smooth"});
+lista();render();
+}</script>
+</body></html>

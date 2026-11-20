@@ -9,7 +9,7 @@
   const dmy=iso=>{if(!iso)return"";const [y,m,d]=String(iso).slice(0,10).split("-");return d+"/"+m+"/"+y};
   const CANAIS=["Meta Ads (Instagram e Facebook)","Google Ads (pesquisa)","Google Ads (YouTube)","TikTok Ads","LinkedIn Ads","Impulsionamento de posts","Influenciadores","E-mail marketing","Rádio","Outdoor / mídia exterior","Panfletagem / impressos","Outro"];
   const OBJ=["Reconhecimento da marca","Alcance","Tráfego para o site","Mensagens no WhatsApp","Geração de leads","Vendas","Seguidores","Visualizações de vídeo","Engajamento"];
-  const CORES=["#864525","#232222","#7D4022","#2563EB","#16A34A","#8B5CF6","#DB2777","#0D9488","#6B7280","#0EA5E9","#5C3019","#9CA3AF"];
+  const CORES=["#A8141F","#2B2928","#A0121B","#2563EB","#16A34A","#8B5CF6","#DB2777","#0D9488","#6B7280","#0EA5E9","#760D14","#9CA3AF"];
   const corCanal=c=>CORES[Math.max(0,CANAIS.indexOf(c))%CORES.length];
   const linhaVazia=()=>({canal:CANAIS[0],formato:"",objetivo:OBJ[0],publico:"",inicio:"",fim:"",verba:0,meta:""});
 

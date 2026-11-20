@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="icone.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap">
 <link rel="stylesheet" href="estilo.css">
 <link rel="stylesheet" href="tema-claro.css">
 <link rel="stylesheet" href="tema-escuro.css">
@@ -21,7 +21,7 @@
   .status.ativo::before{content:"";width:7px;height:7px;border-radius:50%;background:#1FA750}
   .status.inativo{background:#F1F1F3;color:#6E6E73}
   .icone-lixo{appearance:none;border:1px solid var(--line);background:#FFFFFF;color:#8A8A90;width:36px;height:36px;border-radius:8px;display:grid;place-items:center;cursor:pointer}
-  .icone-lixo:hover{color:#864525;border-color:#EAD4C9;background:#F7EFEB}
+  .icone-lixo:hover{color:#A8141F;border-color:#F1C2C5;background:#F9E9EA}
   .aviso-inativo{margin:0;padding:10px 14px;border-radius:8px;background:#F4F4F6;color:#4A4A4F;font-size:14px}
   .cli small{color:#8A8A90;font-weight:500}
   .wrap{max-width:1240px}
@@ -41,8 +41,8 @@
   .row > div{flex:1 1 160px;min-width:0}
   .acessos{display:flex;flex-direction:column;gap:6px}
   .acesso-bts{display:flex;gap:6px;flex-wrap:wrap}
-  .tag-temp{display:inline-block;font-size:11px;font-weight:700;color:#5C3019;background:#F8EFEB;border:1px solid #E5C9BB;border-radius:999px;padding:2px 8px;margin-left:4px}
-  html[data-tema="escuro"] .tag-temp{background:rgba(111,57,30,.14);color:#8E4927;border-color:rgba(111,57,30,.35)}
+  .tag-temp{display:inline-block;font-size:11px;font-weight:700;color:#760D14;background:#FBE8EA;border:1px solid #EDB3B7;border-radius:999px;padding:2px 8px;margin-left:4px}
+  html[data-tema="escuro"] .tag-temp{background:rgba(142,15,24,.14);color:#B6151F;border-color:rgba(142,15,24,.35)}
   .acesso{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
   .linkbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .linkbox code{background:var(--soft);padding:8px 10px;border-radius:8px;font-size:13px;word-break:break-all;flex:1 1 280px}
@@ -63,14 +63,15 @@
   .pill-sm{font-size:12px}
   .toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--brand);color:var(--on-brand);padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;z-index:20;max-width:90vw}
 </style>
+<link rel="stylesheet" href="visual-site.css">
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div class="brandbar"><img class="logo" src="logo.png" alt="GLARA HUB" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logo.svg'}else{this.remove()}"><span class="eyebrow marca-tag" id="marca">Onde estratégia, criação e gestão se encontram</span></div>
+    <div class="brandbar"><img class="logo" src="logo.png" alt="gustavolara" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logo.svg'}else{this.remove()}"><span class="eyebrow marca-tag" id="marca">Assessoria de marketing e vendas</span></div>
     <div class="actions"><div class="sino-box av-box" id="av-box" hidden></div><button type="button" class="tema-btn" data-tema-btn></button><div class="actions" id="userbox" hidden><span class="note" id="useremail"></span><button class="btn small" id="sair">Sair</button></div></div>
   </div>
-  <header class="hero hero-sm"><span class="hero-tag">Uso interno · GLARA</span><h1>Painel de <mark>gestão</mark></h1><p class="intro" id="hero-sub">Hub de Marketing · clientes, planejamento, aprovações, resultados, anúncios e pedidos num lugar só.</p></header>
+  <header class="hero hero-sm"><span class="hero-tag">Uso interno · gustavolara</span><h1>Painel de <mark>gestão</mark></h1><p class="intro" id="hero-sub">Hub de Marketing · clientes, planejamento, aprovações, resultados, anúncios e pedidos num lugar só.</p></header>
 
   <!-- LOGIN -->
   <form id="login" class="card" style="max-width:420px" hidden>
@@ -95,6 +96,7 @@
       <button class="cli cli-tarefas" id="btn-crm" aria-current="false"><span class="cli-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>CRM · Contatos<span class="badge" id="crm-badge" hidden></span></button>
       <button class="cli cli-tarefas" id="btn-orcamentos" aria-current="false"><span class="cli-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></span>Orçamentos<span class="badge" id="orc-badge" hidden></span></button>
       <button class="cli cli-tarefas" id="btn-calc" aria-current="false"><span class="cli-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15v3M8 18h4"/></svg></span>Calculadora</button>
+      <a class="cli cli-tarefas" id="btn-diag" href="diagnostico.html" target="_blank" rel="noopener" style="text-decoration:none"><span class="cli-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>Diagnóstico de vendas</a>
       <button class="cli cli-tarefas" id="btn-loja" aria-current="false"><span class="cli-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v8h14v-8M10 21v-5h4v5"/></svg></span>Loja</button>
       <button class="cli cli-tarefas" id="btn-midia" aria-current="false"><span class="cli-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l15-6v14L3 13z"/><path d="M7 12.5V18a2 2 0 0 0 4 0v-4"/><path d="M21 9v6"/></svg></span>Vitrine e mídia</button>
       <span class="side-sec">Gestão</span>
@@ -137,7 +139,7 @@
   const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const urlSupabase=u=>{u=String(u||"").trim();let m=u.match(/supabase\.com\/dashboard\/project\/([a-z0-9]+)/i);if(m)return "https://"+m[1]+".supabase.co";m=u.match(/^(?:https?:\/\/)?([a-z0-9-]+\.supabase\.(?:co|in))/i);if(m)return "https://"+m[1].toLowerCase();return u.replace(/\/+$/,"")};
   const cfg=window.GLARA_CONFIG||{};
-  const PADRAO_COR=["","#7E4123","#8A4726","#854524","#7A3F21","#3D4BFF","#0F8A4A","#0866FF","#1877F2","#E10600"];
+  const PADRAO_COR=["","#A2131C","#B1141F","#AB131D","#9D111A","#3D4BFF","#0F8A4A","#0866FF","#1877F2","#E10600"];
   $("#hero-sub").textContent=(cfg.plataforma||"Hub de Marketing")+" · clientes, planejamento, aprovações, resultados, anúncios e pedidos num lugar só.";
   let toastT=null;
   const toast=m=>{const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,3200)};

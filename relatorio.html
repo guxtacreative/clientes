@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="icone.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap">
 <link rel="stylesheet" href="estilo.css">
 <link rel="stylesheet" href="tema-claro.css">
 <link rel="stylesheet" href="componentes.css">
@@ -41,6 +41,7 @@
     .relatorio .sec>h2,h1,h2,h3{line-height:1.15;padding-top:4px}
   }
 </style>
+<link rel="stylesheet" href="visual-site.css">
 </head>
 <body>
 <div class="wrap">
@@ -109,7 +110,7 @@
   }
 
   function montar(D){
-    if(/^#[0-9a-f]{6}$/i.test(D.cliente.cor_destaque||"")&&!["#7E4123","#8A4726","#854524","#7A3F21","#3D4BFF","#0F8A4A","#0866FF","#1877F2","#E10600"].includes(String(D.cliente.cor_destaque).toUpperCase()))document.documentElement.style.setProperty("--accent",D.cliente.cor_destaque);
+    if(/^#[0-9a-f]{6}$/i.test(D.cliente.cor_destaque||"")&&!["#A2131C","#B1141F","#AB131D","#9D111A","#3D4BFF","#0F8A4A","#0866FF","#1877F2","#E10600"].includes(String(D.cliente.cor_destaque).toUpperCase()))document.documentElement.style.setProperty("--accent",D.cliente.cor_destaque);
     document.title=`Relatório ${D.cliente.nome} · ${D.ciclo.titulo}`;
     $("#rel").innerHTML=window.GlaraRelatorio.html(D,{marca:MARCA,plataforma:cfg.plataforma});
     $("#rel").hidden=false;$("#pdf").disabled=false;

@@ -9,12 +9,12 @@
   --accent:#0071E3; --accent-dark:#0058B0; --accent-2:#2997FF; --accent-soft:#EAF3FF; --accent-soft2:#CFE3FB;
   --azul:#0071E3; --azul-hover:#0077ED; --azul-sombra:rgba(0,113,227,.55);
   --alerta:#FF3B30; --ok:#34C759; --ok-txt:#248A3D; --verde-cta:#0071E3; --verde-cta-2:#0077ED;
-  --rosa:#F5F5F7; --warn-bg:#F5EAE5; --warn:#562D18;
+  --rosa:#F5F5F7; --warn-bg:#F8E2E3; --warn:#6E0D13;
   --navy:#2D2C2C; --navy-2:#2C2C2E; --chumbo:#2D2C2C; --brand:#2D2C2C;
   --ink:#2D2C2C; --muted:#6E6E73; --line:#E3E3E8; --soft:#F5F5F7; --bg:#F5F5F7; --surface:#FFFFFF;
   --caixa:#F5F5F7;
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
-  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text",Arial,"Helvetica Neue",Helvetica,"Helvetica Neue",Arial,sans-serif;
+  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,"Helvetica Neue",Helvetica,"Helvetica Neue",Arial,sans-serif;
   --grad:linear-gradient(180deg,#0A7CF0 0%,#0071E3 100%);
   --grad-hero:#FFFFFF;
   --sombra:0 1px 2px rgba(0,0,0,.04),0 12px 32px -24px rgba(0,0,0,.28);
@@ -24,7 +24,7 @@ html[data-tema="escuro"]{
   --accent:#0A84FF; --accent-dark:#0A6FD6; --accent-2:#409CFF; --accent-soft:#0A2540; --accent-soft2:#123A63;
   --azul:#0A84FF; --azul-hover:#2E96FF; --azul-sombra:rgba(10,132,255,.5);
   --alerta:#FF453A; --ok:#30D158; --ok-txt:#30D158; --verde-cta:#0A84FF; --verde-cta-2:#2E96FF;
-  --rosa:#2C2B2B; --warn-bg:#2C170D; --warn:#9B502A;
+  --rosa:#2C2B2B; --warn-bg:#38080B; --warn:#C71622;
   --navy:#F5F5F7; --brand:#F5F5F7; --chumbo:#F5F5F7;
   --ink:#F5F5F7; --muted:#98989D; --line:#38383A; --soft:#2C2C2E; --bg:#161515; --surface:#2C2B2B;
   --caixa:#2C2C2E;

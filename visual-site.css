@@ -1,0 +1,93 @@
+/* =====================================================================
+   Hub · visual do site gustavolara.com.br
+   Fundo areia com riscos diagonais, carmim #A8141F, grafite #2B2928,
+   Arial, botões em pílula com brilho e entrada suave dos blocos.
+   Carregado por último em todas as páginas: tirar este arquivo volta
+   ao visual anterior (as cores já trocadas nos outros arquivos ficam).
+   ===================================================================== */
+:root{
+  --accent:#A8141F; --accent-dark:#8E0F18; --accent-2:#C21A26; --accent-soft:#F9ECEC; --accent-soft2:#F2D6D8;
+  --alerta:#A8141F; --verde-cta:#A8141F; --verde-cta-2:#8E0F18;
+  --navy:#2B2928; --navy-2:#332F2E; --chumbo:#2B2928; --brand:#2B2928;
+  --ink:#2B2928; --muted:#5E5B58; --line:#E2DDD7; --soft:#F7F5F2; --bg:#EDEAE6; --surface:#FFFFFF;
+  --font:Arial,"Helvetica Neue",Helvetica,sans-serif; --display:Arial,"Helvetica Neue",Helvetica,sans-serif;
+  --grad:linear-gradient(135deg,#B81926 0%,#8E0F18 100%);
+  --sombra:0 1px 2px rgba(43,41,40,.05),0 20px 44px -30px rgba(43,41,40,.35);
+}
+html[data-tema="escuro"]{
+  --bg:#151313; --surface:#1F1C1C; --surface-2:#262222; --line:#332E2D; --soft:#221F1F; --ink:#F2EEEC; --muted:#A39D9A;
+  --accent:#E0262F; --accent-dark:#F04049; --alerta:#E0262F; --accent-soft:rgba(224,38,47,.14); --accent-soft2:rgba(224,38,47,.3);
+  --grad:linear-gradient(135deg,#E0262F 0%,#A8141F 100%);
+}
+
+/* fundo areia com riscos diagonais e brilho carmim, igual ao site */
+body{font-family:var(--font);background:
+  radial-gradient(38% 30% at 6% 0%,rgba(168,20,31,.10),transparent 70%),
+  radial-gradient(30% 26% at 100% 100%,rgba(168,20,31,.08),transparent 70%),
+  repeating-linear-gradient(115deg,transparent 0 118px,rgba(43,41,40,.045) 118px 119px),
+  var(--bg);background-attachment:fixed}
+html[data-tema="escuro"] body{background:
+  radial-gradient(40% 32% at 6% 0%,rgba(224,38,47,.20),transparent 70%),
+  radial-gradient(34% 28% at 100% 100%,rgba(224,38,47,.12),transparent 70%),
+  repeating-linear-gradient(115deg,transparent 0 118px,rgba(255,255,255,.035) 118px 119px),
+  var(--bg);background-attachment:fixed}
+::selection{background:#F2D6D8;color:#2B2928}
+
+/* logo de quadrados entrelaçados */
+.brandbar .logo,.pgp-top .logo{height:34px;width:auto;max-width:none}
+.brandbar .marca-tag{color:var(--accent);font:700 11px/1 var(--font);letter-spacing:.16em;text-transform:uppercase}
+.brandbar .marca-tag::before{background:var(--accent)}
+
+/* títulos no estilo do site: caixa alta, segunda parte em carmim */
+h1,h2,h3{font-family:var(--display)}
+.hero h1{text-transform:uppercase;font-weight:400;letter-spacing:-.02em;line-height:1.02}
+.hero h1 mark{font-style:normal;font-weight:700;color:var(--accent)}
+html .hero{position:relative;overflow:hidden;isolation:isolate;border:1px solid var(--line);border-bottom:0;border-radius:22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.78)),var(--surface)}
+html .hero::after{content:"";display:block;position:absolute;inset:auto 0 0 0;height:4px;width:auto;border:0;border-radius:0;box-shadow:none;aspect-ratio:auto;
+  background:linear-gradient(90deg,var(--accent) 0%,#E0262F 50%,var(--accent) 100%);background-size:200% 100%;animation:vs-faixa 6s linear infinite;z-index:1;left:0;bottom:0}
+html .hero::before{content:"";display:block;position:absolute;z-index:-1;width:420px;height:420px;aspect-ratio:auto;right:-120px;top:-200px;left:auto;bottom:auto;inset:auto -120px auto auto;
+  border-radius:50%;border:0;box-shadow:none;filter:blur(10px);background:radial-gradient(circle,rgba(168,20,31,.16) 0%,rgba(168,20,31,0) 65%);animation:vs-brilho 7s ease-in-out infinite}
+html[data-tema="escuro"] .hero{background:linear-gradient(180deg,#221E1E,#1B1818);border-color:#332E2D}
+html[data-tema="escuro"] .hero::before{background:radial-gradient(circle,rgba(224,38,47,.28) 0%,rgba(224,38,47,0) 65%)}
+.hero-tag,.hero .hero-tag{background:transparent;color:var(--accent);border:0;padding:0;font:700 12px/1 var(--font);letter-spacing:.16em;text-transform:uppercase}
+
+/* botões: pílula carmim com brilho passando no hover */
+.btn{font-family:var(--font);border-radius:999px;transition:transform .2s,box-shadow .2s,background-color .2s}
+.btn.primary,html .btn.primary{background:var(--accent);background-image:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);
+  background-size:250% 100%;background-position:150% 0;background-repeat:no-repeat;color:#FFFFFF;border:0;box-shadow:0 12px 26px -12px rgba(168,20,31,.65)}
+.btn.primary:hover{background-color:var(--accent-dark);background-position:-50% 0;transition:background-position .7s,transform .2s,background-color .2s;transform:translateY(-1px)}
+.btn.primary:active{transform:translateY(0) scale(.98)}
+html[data-tema="escuro"] .btn.primary{box-shadow:0 12px 26px -12px rgba(224,38,47,.6)}
+
+/* menu lateral: item ativo em carmim, ícone com fundo claro */
+.side .cli[aria-current="true"],.side .cli.on{background:var(--accent);color:#FFFFFF;border-color:var(--accent);box-shadow:0 10px 22px -14px rgba(168,20,31,.8)}
+.side .cli[aria-current="true"] .cli-ico{background:rgba(255,255,255,.18);color:#FFFFFF}
+.side .cli{transition:background-color .2s,color .2s,transform .2s}
+.side .cli:hover{transform:translateX(3px)}
+.side-sec{color:var(--accent);letter-spacing:.16em}
+.side-av{background:var(--accent)}
+
+/* cartões e campos */
+.card,.cli,.post,.doc{border-radius:18px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)!important;box-shadow:0 0 0 3px rgba(168,20,31,.14)!important}
+.tab[aria-selected="true"]{color:var(--accent);border-color:var(--accent)}
+
+/* entrada suave, como as seções do site */
+@media (prefers-reduced-motion:no-preference){
+  .hero,#login,.side,#main>*,.card{animation:vs-sobe .55s cubic-bezier(.2,.7,.2,1) both}
+  .side{animation-delay:.05s}
+  #main>*:nth-child(2){animation-delay:.08s}
+  #main>*:nth-child(3){animation-delay:.14s}
+  .brandbar .logo{animation:vs-logo .9s cubic-bezier(.2,.7,.2,1) both}
+}
+@media (prefers-reduced-motion:reduce){html .hero::after,html .hero::before{animation:none}}
+@keyframes vs-sobe{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes vs-logo{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@keyframes vs-faixa{to{background-position:-200% 0}}
+@keyframes vs-brilho{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.15);opacity:1}}
+
+@media (max-width:640px){
+  .brandbar .logo,.pgp-top .logo{height:26px}
+  .brandbar .marca-tag{display:none}
+}
